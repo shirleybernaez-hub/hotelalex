@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* BARRA LATERAL FIXED */
+        /* BARRA LATERAL FIXED (Fijada a la izquierda) */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -47,7 +47,7 @@
             width: 100%;
         }
         .avatar-container {
-            width: 80px; /* Tamaño expandido y más visible */
+            width: 80px; /* Tamaño expandido e imponente */
             height: 80px;
             border-radius: 50%;
             background-color: #ffffff;
@@ -110,7 +110,7 @@
             color: #0f172a;
         }
 
-        /* ICONOS GLASSMORPHISM REALES (CSS Puro, Cero Emojis) */
+        /* ICONOS GLASSMORPHISM REALES (CSS Puro, Sin Emojis Genéricos) */
         .glass-icon {
             width: 36px;
             height: 36px;
@@ -141,67 +141,122 @@
             border-color: #0f172a;
         }
         
-        /* Icono Inicio: Cuadrados concéntricos */
+        /* Icono Inicio: Cuadrado abstracto */
         .shape-home { width: 12px; height: 12px; border-width: 2px; }
-        /* Icono Instagram: Círculo e higiénico */
+        /* Icono Instagram: Círculo fino */
         .shape-ig { width: 14px; height: 14px; border-radius: 50%; border-width: 2px; }
-        /* Icono Cronograma: Grilla/Líneas de calendario */
+        /* Icono Cronograma: Líneas de grilla */
         .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
-        /* Icono Presupuesto: Barra geométrica */
+        /* Icono Presupuesto: Marco contenedor */
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
-        /* Icono Pagos: Tarjeta minimalista */
+        /* Icono Pagos: Tarjeta geométrica */
         .shape-payments { width: 15px; height: 10px; border-width: 2px; background: transparent; }
 
-        /* MEDIDOR DE CONTRATO Y PAGO */
+        /* MEDIDOR CIRCULAR DE CONTRATO (Estilo Allie Delgado / Donut Chart) */
         .contract-progress-box {
             margin-top: auto;
-            background: #f8fafc;
+            background: #ffffff; 
             border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px 16px;
+            border-radius: 16px;
+            padding: 24px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
+
+        .chart-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+        }
+
         .progress-circle-svg {
-            width: 80px;
-            height: 80px;
-            transform: rotate(-90deg);
+            width: 100px;
+            height: 100px;
+            transform: rotate(-90deg); /* Inicio vertical arriba */
         }
-        .progress-circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 7; }
+
+        /* Pista sutil de fondo */
+        .progress-circle-bg { 
+            fill: none; 
+            stroke: #f1f5f9; 
+            stroke-width: 10; 
+        }
+
+        /* Barra de carga de progreso gruesa con puntas redondeadas (100% de ejecución) */
         .progress-circle-bar {
             fill: none;
-            stroke: #0f172a;
-            stroke-width: 7;
-            stroke-dasharray: 226;
-            stroke-dashoffset: 0;
-            stroke-linecap: round;
+            stroke: #0284c7; /* Azul eléctrico premium */
+            stroke-width: 10;
+            stroke-linecap: round; /* Bordes circulares como en la referencia */
+            stroke-dasharray: 251.2; /* Circunferencia exacta (2 * PI * r) donde r=40 */
+            stroke-dashoffset: 0; 
+            transition: stroke-dashoffset 1s ease-in-out;
         }
+
+        /* Punto indicador de brillo (Glow Indicator) de la captura de pantalla */
+        .glow-indicator {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            top: 0px; 
+            left: 45px;
+            box-shadow: 0 0 8px rgba(2, 132, 199, 0.8), 0 0 3px rgba(2, 132, 199, 1);
+            z-index: 10;
+        }
+
+        /* Porcentaje interno central */
         .chart-center-text {
             position: absolute;
-            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+        }
+        .chart-center-text .percentage {
+            font-size: 1.25rem;
             font-weight: 700;
             color: #0f172a;
-            margin-top: 28px;
+            letter-spacing: -0.5px;
         }
-        .contract-details { margin-top: 14px; }
-        .contract-details h5 { font-size: 0.8rem; font-weight: 600; color: #334155; }
-        .contract-details p { font-size: 0.7rem; color: #64748b; margin-top: 3px; }
 
-        /* AREA DE CONTENIDO PRINCIPAL */
+        /* Textos inferiores de estatus */
+        .contract-details { 
+            margin-top: 16px; 
+        }
+        .contract-details h5 { 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            color: #0f172a; 
+            margin-bottom: 4px;
+        }
+        .contract-details p { 
+            font-size: 0.75rem; 
+            color: #64748b; 
+            font-weight: 500;
+        }
+
+        /* ÁREA DE CONTENIDO PRINCIPAL (CORREGIDA PARA EVITAR CORTE LATERAL) */
         .main-container {
-            margin-left: 280px;
+            margin-left: 280px; /* Desplaza el contenido para respetar los 280px fijados del sidebar */
             flex-grow: 1;
             padding: 60px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            width: calc(100% - 280px);
+            width: calc(100% - 280px); /* Previene desbordamiento horizontal */
         }
 
-        /* Consulta Centralizada Estilo NetUno */
+        /* Consulta Centralizada Estilo NetUno (Limpio y directo al grano) */
         .hub-title {
             text-align: center;
             font-size: 1.35rem;
@@ -238,7 +293,7 @@
             box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04);
         }
         
-        /* Iconos Glassmorphism Grandes para el Hub Central */
+        /* Iconos Glassmorphism Grandes para las Tarjetas Centrales */
         .hub-card .hub-icon-wrapper {
             width: 56px;
             height: 56px;
@@ -282,7 +337,7 @@
 
     <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar">
-        <!-- Perfil de Usuario con Avatar Circular arriba del Nombre -->
+        <!-- Perfil de Usuario con Avatar Arriba y Nombre Abajo -->
         <div class="user-profile">
             <div class="avatar-container">
                 <img src="img/hotelalex_color.png" alt="Hotel Alex">
@@ -293,7 +348,7 @@
             </div>
         </div>
         
-        <!-- Menú Lateral Izquierdo con Iconos Glassmorphism -->
+        <!-- Menú Lateral con Iconos Glassmorphism Geométricos -->
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
             <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
@@ -302,15 +357,22 @@
             <li><a href="pagos.html"><div class="glass-icon"><div class="icon-shape shape-payments"></div></div><span>Coordenadas de Pago</span></a></li>
         </ul>
 
-        <!-- Medidor Circular de Contrato e Inversión -->
+        <!-- Medidor Circular de Contrato e Inversión (Estilo Allie Delgado) -->
         <div class="contract-progress-box">
-            <div style="position: relative; display: flex; justify-content: center;">
+            <div class="chart-wrapper">
+                <!-- Punto blanco de brillo indicador en la parte superior -->
+                <div class="glow-indicator"></div>
+                
                 <svg class="progress-circle-svg">
-                    <circle class="progress-circle-bg" cx="40" cy="40" r="36"></circle>
-                    <circle class="progress-circle-bar" cx="40" cy="40" r="36"></circle>
+                    <circle class="progress-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="progress-circle-bar" cx="50" cy="50" r="40"></circle>
                 </svg>
-                <div class="chart-center-text">100%</div>
+                
+                <div class="chart-center-text">
+                    <span class="percentage">100%</span>
+                </div>
             </div>
+            
             <div class="contract-details">
                 <h5>Inicio: 15 de Junio</h5>
                 <p>Estatus: Contrato Ejecutado</p>
@@ -318,13 +380,13 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal Higiénico -->
+    <!-- Contenido Principal Higiénico y Centrado -->
     <main class="main-container">
         
-        <!-- Título centralizado directo estilo NetUno -->
+        <!-- Título de Selección Directo -->
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <!-- Módulos Centrales de Autogestión con Iconos Glassmorphism -->
+        <!-- Módulos de Autogestión con Iconografía Esmerilada Estilizada -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
@@ -361,7 +423,7 @@
 
         </div>
 
-        <!-- Footer Completamente Centrado Abajo -->
+        <!-- Footer Centrado Estricto abajo -->
         <footer>
             <p>&copy; 2026 ONSHIFT. Entorno privado de gestión de marca exclusivo para Hotel Alex Caracas.</p>
         </footer>
