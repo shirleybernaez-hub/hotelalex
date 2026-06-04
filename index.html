@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
+    <!-- Cargamos Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
@@ -61,9 +62,25 @@
         .login-card h2 { font-size: 1.2rem; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
         .login-card p { font-size: 0.85rem; color: #64748b; margin-bottom: 28px; }
 
-        .form-group { text-align: left; margin-bottom: 18px; }
+        .form-group { text-align: left; margin-bottom: 18px; position: relative; }
         .form-group label {
             display: block; font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        /* Mini-selector ClickUp superior derecho */
+        .status-select-top-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: auto;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background-color: #f8fafc;
+            outline: none;
+            cursor: pointer;
         }
 
         .form-group input, .form-group textarea, .form-group select {
@@ -95,19 +112,22 @@
         .btn-modal-no { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
         .btn-modal-no:hover { background-color: #e2e8f0; }
 
-        /* MODAL DE TRABAJO DEL CRONOGRAMA DE CONTENIDO (ESTILO CLICKUP EXCLUSIVO) */
+        /* MODAL DE TRABAJO OPTIMIZADO */
         .work-modal-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; width: 100%; max-width: 600px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); animation: fadeInContent 0.25s ease; max-height: 90vh; overflow-y: auto; text-align: left;
         }
-        .work-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; }
-        .work-modal-header h3 { font-size: 1.2rem; font-weight: 700; color: #0f172a; }
+        .work-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; position: relative; }
+        .work-modal-header h3 { font-size: 1.2rem; font-weight: 700; color: #0f172a; padding-right: 140px; }
+        
+        .header-actions-right { display: flex; align-items: center; gap: 12px; position: absolute; right: 0; top: 0; }
         .close-work-modal { background: none; border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center; }
         .close-work-modal:hover { color: #475569; }
 
+        /* Botón de visualización abajo */
         .btn-action-view-art {
-            display: inline-flex; align-items: center; gap: 8px; background-color: #0284c7; color: #ffffff; padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; margin-bottom: 15px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #10b981; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
         }
-        .btn-action-view-art:hover { background-color: #0369a1; }
+        .btn-action-view-art:hover { background-color: #059669; }
 
         /* HEADER MÓVIL */
         .mobile-header {
@@ -187,18 +207,25 @@
             background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease; white-space: nowrap;
         }
 
+        /* LEYENDA ESTILO REFERENCIA FORMATOS */
+        .calendar-legend-bar {
+            display: flex; gap: 16px; padding: 0 24px 16px 24px; background: #ffffff; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #64748b; }
+        .legend-color { width: 24px; height: 8px; border-radius: 4px; }
+
         /* CALENDARIO */
         .calendar-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; width: 100%; overflow-x: auto; }
         .calendar-month-title {
             padding: 20px 24px; font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;
         }
-        .calendar-days-grid { display: grid; grid-template-columns: repeat(7, minmax(100px, 1fr)); background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        .calendar-days-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: center; }
         .calendar-day-label { padding: 14px 4px; font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(100px, 1fr)); grid-auto-rows: minmax(130px, auto); }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); grid-auto-rows: minmax(140px, auto); }
         
         .calendar-cell {
-            border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 10px 8px; display: flex; flex-direction: column; gap: 6px; background: #ffffff; transition: background 0.15s ease; cursor: pointer; position: relative;
+            border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px; display: flex; flex-direction: column; gap: 6px; background: #ffffff; transition: background 0.15s ease; cursor: pointer; position: relative;
         }
         .calendar-cell:hover { background: #f8fafc; }
         .calendar-cell:nth-child(7n) { border-right: none; }
@@ -207,29 +234,44 @@
         .calendar-cell.muted .cell-number { color: #cbd5e1; }
 
         /* CABECERA INTERNA DE CADA CELDA */
-        .cell-top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .cell-number { font-size: 0.8rem; font-weight: 600; color: #64748b; }
+        .cell-top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 2px; }
+        .cell-number { font-size: 0.8rem; font-weight: 700; color: #64748b; }
 
         /* ETIQUETAS DE STATUS (CLICKUP MINIMALISTAS) */
-        .clickup-badge { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .status-not-started { background-color: #ef4444; box-shadow: 0 0 6px #ef4444; }
-        .status-in-progress { background-color: #eab308; box-shadow: 0 0 6px #eab308; }
-        .status-ready { background-color: #22c55e; box-shadow: 0 0 6px #22c55e; }
+        .clickup-badge { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+        .status-not-started { background-color: #ef4444; }
+        .status-in-progress { background-color: #eab308; }
+        .status-ready { background-color: #22c55e; }
 
-        .calendar-cell.project-start { background-color: #f0f9ff; border: 1px solid #bae6fd; }
-        .calendar-cell.project-start .cell-number {
-            color: #0284c7; background: #e0f2fe; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+        .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; flex-grow: 1; }
+
+        /* BLOQUES DE COLOR SÓLIDO (INSPIRADOS EN IMAGEN DE REFERENCIA) */
+        .post-item { 
+            padding: 8px; 
+            border-radius: 8px; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            word-break: break-word; 
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
-        .start-badge { background: #0284c7; color: #ffffff; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; align-self: flex-start; text-transform: uppercase; }
+        .post-item span.format-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            opacity: 0.8;
+        }
 
-        .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; margin-top: 4px; }
-
-        .post-item { padding: 5px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 500; line-height: 1.2; word-break: break-word; }
-        .post-reel { background-color: #e8f5e9; color: #1b5e20; border-left: 3px solid #4caf50; }
-        .post-story { background-color: #ffebee; color: #b71c1c; border-left: 3px solid #f44336; }
-        .post-carrusel { background-color: #e3f2fd; color: #0d47a1; border-left: 3px solid #2196f3; }
-        .post-general { background-color: #f1f5f9; color: #334155; border-left: 3px solid #94a3b8; }
-        .internal-task { background-color: #f3e5f5; color: #4a148c; border-left: 3px solid #9c27b0; font-style: italic; }
+        /* Paleta alegórica Hotel Alex */
+        .post-reel { background-color: #2563eb; color: #ffffff; } /* Azul Eléctrico */
+        .post-story { background-color: #06b6d4; color: #ffffff; } /* Cyan / Celeste */
+        .post-carrusel { background-color: #0f172a; color: #ffffff; } /* Azul Marino Profundo */
+        .post-general { background-color: #64748b; color: #ffffff; }
+        
+        .internal-task { background-color: #f1f5f9; color: #475569; border-left: 3px solid #cbd5e1; font-style: italic; font-weight: 500; }
 
         .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 20px; text-align: center; color: #64748b; }
         footer { margin-top: auto; padding-top: 40px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
@@ -244,7 +286,7 @@
             }
 
             .user-profile-trigger, .sidebar-divider, .sidebar-footer .sidebar-menu button.btn-logout-sidebar { display: none !important; }
-            .sidebar-menu { flex-direction: row; justify-content: space-around; gap: 0; height: 100%; align-items: center; }
+            .sidebar-menu { flex-direction: row; justify-content: space-around; gap: 0; height: 100%; align-items: center; width: 100%; }
             .sidebar-footer { margin-top: 0; width: auto; height: 100%; display: flex; align-items: center; }
 
             .sidebar-menu button { flex-direction: column; align-items: center; gap: 4px; padding: 6px 12px; font-size: 0.68rem; border-radius: 8px; text-align: center; width: auto; }
@@ -262,13 +304,14 @@
         @media (max-width: 480px) {
             .login-card { padding: 24px 16px; border-radius: 16px; }
             .calendar-month-title { flex-direction: column; gap: 8px; align-items: flex-start; padding: 16px; }
-            .post-item { font-size: 0.65rem; padding: 3px 5px; }
+            .post-item { font-size: 0.68rem; padding: 6px; }
             .work-modal-card { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- CONTROL DE ACCESO -->
     <div class="login-overlay" id="login-screen">
         <div class="login-card">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
@@ -290,6 +333,7 @@
         </div>
     </div>
 
+    <!-- HEADER SUPERIOR MÓVIL -->
     <header class="mobile-header" id="app-mobile-header">
         <img src="img/hotelalex_color.png" alt="Hotel Alex" class="mobile-brand-logo">
         <button class="mobile-logout-btn" onclick="openLogoutModal()" title="Salir del Dashboard">
@@ -297,6 +341,7 @@
         </button>
     </header>
 
+    <!-- MODAL DE CONFIRMACIÓN DE SALIDA -->
     <div class="modal-overlay" id="logout-modal">
         <div class="modal-card">
             <h3>¿Cerrar Sesión?</h3>
@@ -308,31 +353,25 @@
         </div>
     </div>
 
+    <!-- MODAL DE FLUJO DE TRABAJO (OPTIMIZADO Y LIMPIO) -->
     <div class="modal-overlay" id="work-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
                 <h3 id="wm-title">Día de Planificación</h3>
-                <button class="close-work-modal" onclick="closeWorkModal()"><i data-lucide="x" size="24"></i></button>
-            </div>
-            
-            <div id="wm-art-link-wrapper" style="display:none;">
-                <a href="#" id="wm-art-btn" target="_blank" class="btn-action-view-art">
-                    <i data-lucide="image" size="18"></i> 👁️ Ver Diseños Creados
-                </a>
-            </div>
-
-            <div class="form-group">
-                <label>Estatus del Diseño (Flujo ClickUp)</label>
-                <select id="wm-status-select">
-                    <option value="not-started">🔴 No iniciado</option>
-                    <option value="in-progress">🟡 En proceso</option>
-                    <option value="ready">🟢 Listo (Diseño Finalizado)</option>
-                </select>
+                <div class="header-actions-right">
+                    <!-- Selector ClickUp sutil a la derecha -->
+                    <select id="wm-status-select" class="status-select-top-right">
+                        <option value="not-started">🔴 No iniciado</option>
+                        <option value="in-progress">🟡 En proceso</option>
+                        <option value="ready">🟢 Listo</option>
+                    </select>
+                    <button class="close-work-modal" onclick="closeWorkModal()"><i data-lucide="x" size="20"></i></button>
+                </div>
             </div>
 
             <div class="form-group">
-                <label>Requerimientos y Objetivos (Verónica / Contenido)</label>
-                <textarea id="wm-req" rows="3" placeholder="Verónica escribe aquí las especificaciones del post..."></textarea>
+                <label>Comentarios de Contenido / Requerimientos</label>
+                <textarea id="wm-req" rows="3" placeholder="Pautas, objetivos o enfoque del post de hoy..."></textarea>
             </div>
 
             <div class="form-group">
@@ -345,6 +384,13 @@
                 <input type="url" id="wm-art-url" placeholder="Ej: https://figma.com/... o enlace de imágenes">
             </div>
 
+            <!-- Botón de visualización estratégica reubicado al fondo -->
+            <div id="wm-art-link-wrapper" style="display:none; margin-top: 15px; margin-bottom: 15px;">
+                <a href="#" id="wm-art-btn" target="_blank" class="btn-action-view-art">
+                    <i data-lucide="image" size="18"></i> 👁️ Ver Diseños Creados
+                </a>
+            </div>
+
             <div class="modal-buttons" style="margin-top:24px;">
                 <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveWorkDayData()">Guardar Cambios</button>
                 <button class="btn-modal btn-modal-no" onclick="closeWorkModal()">Cerrar</button>
@@ -352,6 +398,7 @@
         </div>
     </div>
 
+    <!-- Panel Lateral Izquierdo / Barra Inferior -->
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -401,8 +448,10 @@
         </div>
     </nav>
 
+    <!-- Contenedor Principal Dinámico -->
     <main class="main-container" id="app-content">
         
+        <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -430,11 +479,13 @@
             </div>
         </section>
 
+        <!-- SECCIÓN INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
+        <!-- SECCIÓN CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -455,43 +506,58 @@
             <div class="calendar-container">
                 <div class="calendar-month-title">
                     <span>Junio 2026</span>
-                    <span id="interactive-badge" style="font-size:0.85rem; color:#0284c7; font-weight:600; display:inline;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> Sistema de Control de Producción Activo</span>
+                    <span id="interactive-badge" style="font-size:0.85rem; color:#0284c7; font-weight:600;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> Sistema de Control de Producción Activo</span>
                 </div>
+
+                <!-- Barra de formatos basada en la imagen de referencia -->
+                <div class="calendar-legend-bar">
+                    <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div>reel</div>
+                    <div class="legend-item"><div class="legend-color" style="background:#06b6d4;"></div>stories diarios</div>
+                    <div class="legend-item"><div class="legend-color" style="background:#0f172a;"></div>carrusel / post</div>
+                </div>
+
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
                 <div class="calendar-grid">
+                    <!-- Mayo Muted -->
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">25</span></div></div>
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">26</span></div></div>
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">27</span></div></div>
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">28</span></div></div>
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">29</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">30</span></div></div>
+                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">31</span></div></div>
                     <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">31</span></div></div>
                     
+                    <!-- Junio Interactivo con bloques de color sólido estilo referencia -->
                     <script>
                         for(let i=1; i<=30; i++) {
                             let cellClass = "calendar-cell";
-                            let hitoStart = "";
                             let defaultPosts = "";
                             
                             if (i === 15) {
-                                cellClass = "calendar-cell project-start";
-                                hitoStart = '<span class="start-badge">Inicio</span>';
-                                defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>`;
+                                defaultPosts = `<div class="post-item post-reel" data-type="public"><span class="format-label">🎬 reel</span>ASMR Sonidos de las Habitaciones</div>`;
                             }
-                            if (i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
-                            if (i === 19) defaultPosts = `
-                                <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
-                                <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
-                            `;
-                            if (i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
+                            if (i === 16) {
+                                defaultPosts = `<div class="post-item post-carrusel" data-type="public"><span class="format-label">🎠 carrusel</span>El confort no es solo una cama</div>`;
+                            }
+                            if (i === 17) {
+                                defaultPosts = `<div class="post-item post-story" data-type="public"><span class="format-label">📸 story</span>Stories de Huéspedes</div>`;
+                            }
+                            if (i === 19) {
+                                defaultPosts = `
+                                    <div class="post-item post-carrusel" data-type="public"><span class="format-label">🎠 post</span>Conoce al equipo del Alex</div>
+                                    <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
+                                `;
+                            }
+                            if (i === 22) {
+                                defaultPosts = `<div class="post-item post-reel" data-type="public"><span class="format-label">🎬 reel</span>Un día conmigo en el Rooftop</div>`;
+                            }
                             
                             document.write(`
-                                <div class="${cellClass}" id="day-cell-${i}" onclick="openWorkModal(${i})">
+                                <div class="${cellClass}" id="day-cell-${i}" onclick="handleCellClick(${i})">
                                     <div class="cell-top-bar">
                                         <span class="cell-number">${i}</span>
-                                        ${hitoStart}
                                         <span class="clickup-badge status-not-started" id="status-badge-${i}"></span>
                                     </div>
                                     <div class="posts-container" id="posts-container-${i}">${defaultPosts}</div>
@@ -503,11 +569,13 @@
             </div>
         </section>
 
+        <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas.</p></div>
         </section>
 
+        <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
             <div class="budget-grid-wrapper">
@@ -537,13 +605,13 @@
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // Base de Datos en Memoria para almacenar requerimientos de Verónica y enlaces de Shirley
+        // Base de Datos en Memoria para almacenar requerimientos y enlaces de Shirley
         const calendarDatabase = {};
         for(let i = 1; i <= 30; i++) {
             calendarDatabase[i] = {
                 status: 'not-started',
-                requirement: i === 15 ? 'Verónica: Necesito un Reel cinematográfico de alto impacto que anuncie la apertura de la autogestión.' : '',
-                copy: i === 15 ? '¡Bienvenidos a la nueva era del Hotel Alex! 🏨✨ Ahora puedes gestionar tus solicitudes de forma inmediata...' : '',
+                requirement: i === 15 ? 'Necesito un Reel cinematográfico de alto impacto que muestre la experiencia premium del hotel.' : '',
+                copy: i === 15 ? '¡Bienvenidos al Hotel Alex! 🏨✨ Redefiniendo el confort en Caracas...' : '',
                 artUrl: i === 15 ? 'https://google.com' : ''
             };
         }
@@ -592,7 +660,21 @@
             navigateTo('inicio-section');
         }
 
-        // CONTROL DEL MODAL DE TRABAJO (CLICKUP-FLOW)
+        // CONTROL DE CLIC SEGÚN ROL
+        function handleCellClick(day) {
+            // El despliegue y edición completa solo está permitido para el rol Master
+            if (currentUserRole === 'master') {
+                openWorkModal(day);
+            } else {
+                // Si es el cliente, solo ve los datos en modo lectura si ya tienen información relevante
+                const data = calendarDatabase[day];
+                if(data.requirement || data.copy || data.artUrl) {
+                    openWorkModal(day);
+                }
+            }
+        }
+
+        // CONTROL DEL MODAL DE TRABAJO
         function openWorkModal(day) {
             activeDaySelected = day;
             const data = calendarDatabase[day];
@@ -603,7 +685,7 @@
             document.getElementById('wm-copy').value = data.copy;
             document.getElementById('wm-art-url').value = data.artUrl;
 
-            // Mostrar u ocultar botón de previsualización si existe link
+            // Mostrar u ocultar botón de previsualización al final si existe link
             const wrapper = document.getElementById('wm-art-link-wrapper');
             const btn = document.getElementById('wm-art-btn');
             if(data.artUrl && data.artUrl.trim() !== "") {
@@ -613,7 +695,7 @@
                 wrapper.style.display = "none";
             }
 
-            // Restricción si el usuario es el Cliente (Admin)
+            // Restricciones de lectura si el usuario es el Cliente (Admin)
             if (currentUserRole !== 'master') {
                 document.getElementById('wm-status-select').disabled = true;
                 document.getElementById('wm-req').disabled = true;
