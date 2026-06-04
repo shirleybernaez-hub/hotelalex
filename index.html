@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* BARRA LATERAL FIXED (Fijada a la izquierda) */
+        /* BARRA LATERAL FIXED */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -35,52 +35,107 @@
             z-index: 100;
         }
 
-        /* Perfil de Usuario Premium (Logo arriba, nombre abajo) */
-        .user-profile {
+        /* Perfil de Usuario Limpio (Sin círculo fatal, interactivo para desplegar opciones) */
+        .user-profile-trigger {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding-bottom: 30px;
+            padding-bottom: 25px;
             border-bottom: 1px solid #f1f5f9;
             margin-bottom: 30px;
             width: 100%;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
         }
-        .avatar-container {
-            width: 80px; /* Tamaño expandido e imponente */
-            height: 80px;
-            border-radius: 50%;
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-bottom: 14px;
-        }
-        .avatar-container img {
-            width: 85%;
-            height: 85%;
+        
+        /* Logo limpio y libre */
+        .brand-logo {
+            width: auto;
+            height: 55px; /* Altura ideal e imponente sin distorsión */
             object-fit: contain;
+            margin-bottom: 12px;
+            transition: transform 0.2s ease;
         }
+        
+        .user-profile-trigger:hover .brand-logo {
+            transform: scale(1.02);
+        }
+
         .user-info h4 {
             font-size: 1rem;
             font-weight: 600;
             color: #0f172a;
             margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
         .user-info p {
             font-size: 0.75rem;
             color: #64748b;
+        }
+        .switch-brand-arrow { 
+            font-size: 0.65rem; 
+            color: #94a3b8; 
+            transition: transform 0.2s ease;
+        }
+        
+        /* Rotación de la flecha al abrir menú */
+        .user-profile-trigger.active .switch-brand-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* MENÚ DESPLEGABLE PREMIUM (Glassmorphism oculto por defecto) */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 8px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            display: none; /* Se activa con JS abajo */
+            z-index: 110;
+            text-align: left;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        .dropdown-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 4px;
+            gap: 10px;
+            padding: 12px;
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
-        .switch-brand-arrow { font-size: 0.65rem; color: #94a3b8; }
+        
+        .dropdown-item:hover {
+            background-color: rgba(15, 23, 42, 0.05);
+            color: #0f172a;
+        }
 
-        /* Navegación Principal */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navegación Principal Limpia (Sin pagos aquí) */
         .sidebar-menu {
             list-style: none;
             display: flex;
@@ -110,7 +165,7 @@
             color: #0f172a;
         }
 
-        /* ICONOS GLASSMORPHISM REALES (CSS Puro, Sin Emojis Genéricos) */
+        /* ICONOS GLASSMORPHISM REALES (Geométricos, sin emojis genéricos) */
         .glass-icon {
             width: 36px;
             height: 36px;
@@ -131,26 +186,20 @@
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.03);
         }
 
-        /* Formas geométricas minimalistas internas para los iconos */
         .icon-shape {
             border: 2px solid #64748b;
             border-radius: 2px;
             transition: all 0.2s ease;
         }
-        .sidebar-menu a.active .icon-shape {
+        .sidebar-menu a.active .icon-shape, .dropdown-item:hover .icon-shape {
             border-color: #0f172a;
         }
         
-        /* Icono Inicio: Cuadrado abstracto */
         .shape-home { width: 12px; height: 12px; border-width: 2px; }
-        /* Icono Instagram: Círculo fino */
         .shape-ig { width: 14px; height: 14px; border-radius: 50%; border-width: 2px; }
-        /* Icono Cronograma: Líneas de grilla */
         .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
-        /* Icono Presupuesto: Marco contenedor */
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
-        /* Icono Pagos: Tarjeta geométrica */
-        .shape-payments { width: 15px; height: 10px; border-width: 2px; background: transparent; }
+        .shape-payments { width: 14px; height: 10px; border-width: 2px; background: transparent; }
 
         /* MEDIDOR CIRCULAR DE CONTRATO (Estilo Allie Delgado / Donut Chart) */
         .contract-progress-box {
@@ -166,7 +215,6 @@
             width: 100%;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
-
         .chart-wrapper {
             position: relative;
             display: flex;
@@ -175,32 +223,20 @@
             width: 100px;
             height: 100px;
         }
-
         .progress-circle-svg {
             width: 100px;
             height: 100px;
-            transform: rotate(-90deg); /* Inicio vertical arriba */
+            transform: rotate(-90deg);
         }
-
-        /* Pista sutil de fondo */
-        .progress-circle-bg { 
-            fill: none; 
-            stroke: #f1f5f9; 
-            stroke-width: 10; 
-        }
-
-        /* Barra de carga de progreso gruesa con puntas redondeadas (100% de ejecución) */
+        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 10; }
         .progress-circle-bar {
             fill: none;
-            stroke: #0284c7; /* Azul eléctrico premium */
+            stroke: #0284c7; 
             stroke-width: 10;
-            stroke-linecap: round; /* Bordes circulares como en la referencia */
-            stroke-dasharray: 251.2; /* Circunferencia exacta (2 * PI * r) donde r=40 */
+            stroke-linecap: round; 
+            stroke-dasharray: 251.2; 
             stroke-dashoffset: 0; 
-            transition: stroke-dashoffset 1s ease-in-out;
         }
-
-        /* Punto indicador de brillo (Glow Indicator) de la captura de pantalla */
         .glow-indicator {
             position: absolute;
             width: 10px;
@@ -212,8 +248,6 @@
             box-shadow: 0 0 8px rgba(2, 132, 199, 0.8), 0 0 3px rgba(2, 132, 199, 1);
             z-index: 10;
         }
-
-        /* Porcentaje interno central */
         .chart-center-text {
             position: absolute;
             display: flex;
@@ -228,35 +262,22 @@
             color: #0f172a;
             letter-spacing: -0.5px;
         }
+        .contract-details { margin-top: 16px; }
+        .contract-details h5 { font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
+        .contract-details p { font-size: 0.75rem; color: #64748b; font-weight: 500; }
 
-        /* Textos inferiores de estatus */
-        .contract-details { 
-            margin-top: 16px; 
-        }
-        .contract-details h5 { 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            color: #0f172a; 
-            margin-bottom: 4px;
-        }
-        .contract-details p { 
-            font-size: 0.75rem; 
-            color: #64748b; 
-            font-weight: 500;
-        }
-
-        /* ÁREA DE CONTENIDO PRINCIPAL (CORREGIDA PARA EVITAR CORTE LATERAL) */
+        /* ÁREA DE CONTENIDO PRINCIPAL */
         .main-container {
-            margin-left: 280px; /* Desplaza el contenido para respetar los 280px fijados del sidebar */
+            margin-left: 280px; 
             flex-grow: 1;
             padding: 60px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            width: calc(100% - 280px); /* Previene desbordamiento horizontal */
+            width: calc(100% - 280px);
         }
 
-        /* Consulta Centralizada Estilo NetUno (Limpio y directo al grano) */
+        /* Consulta Centralizada Estilo NetUno */
         .hub-title {
             text-align: center;
             font-size: 1.35rem;
@@ -293,7 +314,6 @@
             box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04);
         }
         
-        /* Iconos Glassmorphism Grandes para las Tarjetas Centrales */
         .hub-card .hub-icon-wrapper {
             width: 56px;
             height: 56px;
@@ -310,19 +330,10 @@
             border-color: #0f172a;
         }
         
-        .hub-card h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 8px;
-        }
-        .hub-card p {
-            font-size: 0.85rem;
-            color: #64748b;
-            line-height: 1.4;
-        }
+        .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
+        .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
-        /* FOOTER TOTALMENTE CENTRADO */
+        /* FOOTER CENTRADO */
         footer {
             margin-top: auto;
             padding-top: 60px;
@@ -337,42 +348,43 @@
 
     <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar">
-        <!-- Perfil de Usuario con Avatar Arriba y Nombre Abajo -->
-        <div class="user-profile">
-            <div class="avatar-container">
-                <img src="img/hotelalex_color.png" alt="Hotel Alex">
-            </div>
+        <!-- Disparador del Menú Desplegable de Marca -->
+        <div class="user-profile-trigger" id="profileTrigger">
+            <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
             <div class="user-info">
-                <h4>Hotel Alex</h4>
-                <p>Cliente Activo <span class="switch-brand-arrow">▼</span></p>
+                <h4>Hotel Alex <span class="switch-brand-arrow">▼</span></h4>
+                <p>Cliente Activo</p>
+            </div>
+            
+            <!-- Menú Desplegable con Coordenadas de Pago -->
+            <div class="dropdown-menu" id="brandDropdown">
+                <a href="pagos.html" class="dropdown-item">
+                    <div class="glass-icon"><div class="icon-shape shape-payments"></div></div>
+                    <span>Coordenadas de Pago</span>
+                </a>
             </div>
         </div>
         
-        <!-- Menú Lateral con Iconos Glassmorphism Geométricos -->
+        <!-- Menú Lateral Operativo Limpio -->
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
             <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
             <li><a href="cronograma.html"><div class="glass-icon"><div class="icon-shape shape-calendar"></div></div><span>Cronograma</span></a></li>
             <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
-            <li><a href="pagos.html"><div class="glass-icon"><div class="icon-shape shape-payments"></div></div><span>Coordenadas de Pago</span></a></li>
         </ul>
 
-        <!-- Medidor Circular de Contrato e Inversión (Estilo Allie Delgado) -->
+        <!-- Medidor Circular (Estilo Allie Delgado / Donut Chart de Referencia) -->
         <div class="contract-progress-box">
             <div class="chart-wrapper">
-                <!-- Punto blanco de brillo indicador en la parte superior -->
                 <div class="glow-indicator"></div>
-                
                 <svg class="progress-circle-svg">
                     <circle class="progress-circle-bg" cx="50" cy="50" r="40"></circle>
                     <circle class="progress-circle-bar" cx="50" cy="50" r="40"></circle>
                 </svg>
-                
                 <div class="chart-center-text">
                     <span class="percentage">100%</span>
                 </div>
             </div>
-            
             <div class="contract-details">
                 <h5>Inicio: 15 de Junio</h5>
                 <p>Estatus: Contrato Ejecutado</p>
@@ -380,13 +392,11 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal Higiénico y Centrado -->
+    <!-- Contenido Principal -->
     <main class="main-container">
         
-        <!-- Título de Selección Directo -->
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <!-- Módulos de Autogestión con Iconografía Esmerilada Estilizada -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
@@ -423,12 +433,29 @@
 
         </div>
 
-        <!-- Footer Centrado Estricto abajo -->
         <footer>
             <p>&copy; 2026 ONSHIFT. Entorno privado de gestión de marca exclusivo para Hotel Alex Caracas.</p>
         </footer>
 
     </main>
+
+    <!-- Lógica de Interacción para el Desplegable Premium -->
+    <script>
+        const trigger = document.getElementById('profileTrigger');
+        const dropdown = document.getElementById('brandDropdown');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            trigger.classList.toggle('active');
+            dropdown.classList.toggle('show');
+        });
+
+        // Cerrar el menú si se hace clic en cualquier otra parte de la pantalla
+        document.addEventListener('click', () => {
+            trigger.classList.remove('active');
+            dropdown.classList.remove('show');
+        });
+    </script>
 
 </body>
 </html>
