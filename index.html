@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
     
-    <!-- CAMBIO CLAVE: CDN oficial completo y específico de Lucide para evitar fallos de carga -->
+    <!-- CDN oficial estable de Lucide -->
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.435.0/dist/umd/lucide.min.js"></script>
     
     <style>
@@ -73,7 +73,7 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Espaciado de 12px entre items */
+            gap: 12px;
             width: 100%;
         }
         .sidebar-menu button {
@@ -84,7 +84,7 @@
             align-items: center;
             gap: 16px;
             padding: 12px 14px;
-            color: #78828c; /* Gris corporativo del Hotel Alex */
+            color: #78828c;
             font-size: 0.95rem;
             font-weight: 500;
             border-radius: 12px;
@@ -111,15 +111,11 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            color: #78828c; /* Color de marca */
+            color: #78828c;
             transition: color 0.2s ease;
         }
-        .sidebar-menu button.active .sidebar-icon {
-            color: #000000;
-        }
-        .sidebar-menu button:hover:not(.active) .sidebar-icon {
-            color: #0f172a;
-        }
+        .sidebar-menu button.active .sidebar-icon { color: #000000; }
+        .sidebar-menu button:hover:not(.active) .sidebar-icon { color: #0f172a; }
 
         /* CONTENEDOR PRINCIPAL */
         .main-container {
@@ -342,7 +338,9 @@
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
-                <div class="calendar-grid">
+                
+                <!-- El grid se rellena dinámicamente de forma limpia por JS -->
+                <div id="calendar-grid-target" class="calendar-grid">
                     <!-- Mayo Muted -->
                     <div class="calendar-cell muted"><span class="cell-number">25</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">26</span></div>
@@ -351,47 +349,6 @@
                     <div class="calendar-cell muted"><span class="cell-number">29</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">30</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">31</span></div>
-                    
-                    <!-- Junio Interactivo (Días 1 al 14) -->
-                    <script>
-                        for(let i=1; i<=14; i++) {
-                            document.write(`
-                                <div class="calendar-cell" onclick="addPostManual(this)">
-                                    <span class="cell-number">${i}</span>
-                                    <div class="posts-container"></div>
-                                </div>
-                            `);
-                        }
-                    </script>
-
-                    <!-- Hito 15 de Junio: Inicio -->
-                    <div class="calendar-cell project-start" onclick="addPostManual(this)">
-                        <span class="cell-number">15</span>
-                        <span class="start-badge">Inicio</span>
-                        <div class="posts-container">
-                            <div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>
-                        </div>
-                    </div>
-
-                    <!-- Resto de Junio (Días 16 al 30) -->
-                    <script>
-                        for(let i=16; i<=30; i++) {
-                            let defaultPosts = '';
-                            if(i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
-                            if(i === 19) defaultPosts = `
-                                <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
-                                <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
-                            `;
-                            if(i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
-                            
-                            document.write(`
-                                <div class="calendar-cell" onclick="addPostManual(this)">
-                                    <span class="cell-number">${i}</span>
-                                    <div class="posts-container">${defaultPosts}</div>
-                                </div>
-                            `);
-                        }
-                    </script>
                 </div>
             </div>
         </section>
@@ -414,15 +371,56 @@
     </main>
 
     <script>
-        // CAMBIO EN SCRIPT: Función de renderizado seguro con temporizador para dar tiempo al CDN
-        window.addEventListener('DOMContentLoaded', () => {
+        // ORDEN CORRECTO: 1. Generar celdas -> 2. Disparar Lucide
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridTarget = document.getElementById('calendar-grid-target');
+            
+            if (gridTarget) {
+                let htmlContent = '';
+                
+                for (let i = 1; i <= 30; i++) {
+                    if (i === 15) {
+                        htmlContent += `
+                            <div class="calendar-cell project-start" onclick="addPostManual(this)">
+                                <span class="cell-number">15</span>
+                                <span class="start-badge">Inicio</span>
+                                <div class="posts-container">
+                                    <div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        let defaultPosts = '';
+                        if (i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
+                        if (i === 19) defaultPosts = `
+                            <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
+                            <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
+                        `;
+                        if (i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
+                        
+                        htmlContent += `
+                            <div class="calendar-cell" onclick="addPostManual(this)">
+                                <span class="cell-number">${i}</span>
+                                <div class="posts-container">${defaultPosts}</div>
+                            </div>
+                        `;
+                    }
+                }
+                gridTarget.insertAdjacentHTML('beforeend', htmlContent);
+            }
+
+            // AHORA SÍ: Lucide se inicializa cuando TODO el DOM (estático y dinámico) está listo
+            initializeLucideSafe();
+        });
+
+        function initializeLucideSafe() {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             } else {
-                console.error("Lucide no se cargó correctamente a través del CDN. Reintentando...");
-                setTimeout(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); }, 1000);
+                console.error("Lucide no detectado en primera instancia. Reintentando...");
+                setTimeout(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); }, 500);
             }
-        });
+        }
 
         // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
