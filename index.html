@@ -163,11 +163,17 @@
             color: #0f172a;
         }
 
+        /* SECCIÓN ANCLADA EN LA PARTE INFERIOR IZQUIERDA */
+        .sidebar-footer {
+            margin-top: auto; /* Empuja todo este bloque hacia abajo */
+            width: 100%;
+        }
+
         /* LÍNEA DIVISORA PREMIUM */
         .sidebar-divider {
             height: 1px;
             background-color: #e2e8f0;
-            margin: 16px 14px;
+            margin: 0 14px 16px 14px;
             border: none;
         }
 
@@ -334,7 +340,7 @@
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo Con Nueva Jerarquía -->
+    <!-- Panel Lateral Izquierdo Modernizado -->
     <nav class="sidebar">
         <div class="user-profile-trigger" id="profileTrigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -359,13 +365,13 @@
             <li><a href="metricas.html"><div class="glass-icon"><div class="icon-shape shape-metrics"></div></div><span>Métricas</span></a></li>
         </ul>
 
-        <!-- Línea Divisora Estricta -->
-        <hr class="sidebar-divider">
-
-        <!-- Bloque Financiero Aislado -->
-        <ul class="sidebar-menu">
-            <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
-        </ul>
+        <!-- Bloque Financiero Anclado Abajo a la Izquierda -->
+        <div class="sidebar-footer">
+            <hr class="sidebar-divider">
+            <ul class="sidebar-menu">
+                <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Contenido Principal -->
@@ -375,7 +381,7 @@
 
         <div class="hub-grid">
             
-            <!-- Tarjeta 1: Instagram (Auditoría / Lo que se va a mejorar) -->
+            <!-- Tarjeta 1: Instagram (Diagnóstico y Mejoras) -->
             <a href="instagram.html" class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="icon-shape shape-analysis" style="width:18px; height:18px;"></div>
