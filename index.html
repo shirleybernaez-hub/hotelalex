@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* BARRA LATERAL FIXED */
+        /* BARRA LATERAL FIXED (Más limpia y ligera) */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -35,7 +35,7 @@
             z-index: 100;
         }
 
-        /* Perfil de Usuario Limpio (Sin círculo fatal, interactivo para desplegar opciones) */
+        /* Perfil de Usuario Limpio e Interactivo */
         .user-profile-trigger {
             display: flex;
             flex-direction: column;
@@ -50,10 +50,9 @@
             user-select: none;
         }
         
-        /* Logo limpio y libre */
         .brand-logo {
             width: auto;
-            height: 55px; /* Altura ideal sin distorsión */
+            height: 55px; 
             object-fit: contain;
             margin-bottom: 12px;
             transition: transform 0.2s ease;
@@ -83,12 +82,11 @@
             transition: transform 0.2s ease;
         }
         
-        /* Rotación de la flecha al abrir menú */
         .user-profile-trigger.active .switch-brand-arrow {
             transform: rotate(180deg);
         }
 
-        /* MENÚ DESPLEGABLE PREMIUM (Glassmorphism oculto por defecto) */
+        /* MENÚ DESPLEGABLE PREMIUM */
         .dropdown-menu {
             position: absolute;
             top: 100%;
@@ -135,7 +133,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Navegación Principal Limpia (Sin pagos aquí) */
+        /* Navegación Principal */
         .sidebar-menu {
             list-style: none;
             display: flex;
@@ -165,7 +163,7 @@
             color: #0f172a;
         }
 
-        /* ICONOS GLASSMORPHISM REALES (Geométricos, sin emojis genéricos) */
+        /* ICONOS GLASSMORPHISM */
         .glass-icon {
             width: 36px;
             height: 36px;
@@ -201,71 +199,6 @@
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
         .shape-payments { width: 14px; height: 10px; border-width: 2px; background: transparent; }
 
-        /* MEDIDOR CIRCULAR DE CONTRATO (Estilo Allie Delgado / Donut Chart de Referencia) */
-        .contract-progress-box {
-            margin-top: auto;
-            background: #ffffff; 
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-        .chart-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100px;
-            height: 100px;
-        }
-        .progress-circle-svg {
-            width: 100px;
-            height: 100px;
-            transform: rotate(-90deg);
-        }
-        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 10; }
-        .progress-circle-bar {
-            fill: none;
-            stroke: #0284c7; 
-            stroke-width: 10;
-            stroke-linecap: round; 
-            stroke-dasharray: 251.2; 
-            stroke-dashoffset: 0; 
-        }
-        .glow-indicator {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            top: 0px; 
-            left: 45px;
-            box-shadow: 0 0 8px rgba(2, 132, 199, 0.8), 0 0 3px rgba(2, 132, 199, 1);
-            z-index: 10;
-        }
-        .chart-center-text {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-        }
-        .chart-center-text .percentage {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: -0.5px;
-        }
-        .contract-details { margin-top: 16px; }
-        .contract-details h5 { font-size: 0.85rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
-        .contract-details p { font-size: 0.75rem; color: #64748b; font-weight: 500; }
-
         /* ÁREA DE CONTENIDO PRINCIPAL */
         .main-container {
             margin-left: 280px; 
@@ -277,17 +210,81 @@
             width: calc(100% - 280px);
         }
 
-        /* Consulta Centralizada Estilo NetUno */
+        /* NUEVA UBICACIÓN: MEDIDOR DE CONTRATO EN INICIO */
+        .contract-progress-box {
+            background: #ffffff; 
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            max-width: 450px; /* Tamaño controlado para que no flote gigante */
+            margin: 0 auto 30px auto; /* Centrado en la cabecera */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .chart-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+        }
+        .progress-circle-svg {
+            width: 70px;
+            height: 70px;
+            transform: rotate(-90deg);
+        }
+        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 8; }
+        .progress-circle-bar {
+            fill: none;
+            stroke: #0284c7; 
+            stroke-width: 8;
+            stroke-linecap: round; 
+            stroke-dasharray: 251.2; /* Ajustado visualmente */
+            stroke-dashoffset: 0; 
+        }
+        .glow-indicator {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            top: 0px; 
+            left: 31px;
+            box-shadow: 0 0 8px rgba(2, 132, 199, 0.8);
+            z-index: 10;
+        }
+        .chart-center-text {
+            position: absolute;
+            display: flex;
+            z-index: 5;
+        }
+        .chart-center-text .percentage {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .contract-details { 
+            text-align: left; 
+        }
+        .contract-details h5 { font-size: 0.95rem; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
+        .contract-details p { font-size: 0.8rem; color: #64748b; font-weight: 500; }
+
+        /* Título del Hub */
         .hub-title {
             text-align: center;
             font-size: 1.35rem;
             font-weight: 500;
             color: #0f172a;
-            margin: 40px 0 40px 0;
+            margin: 20px 0 40px 0;
             letter-spacing: -0.3px;
         }
 
-        /* Módulos Centrales de Autogestión (Corregidos a 3 columnas perfectas) */
+        /* Módulos Centrales de Autogestión */
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -346,9 +343,8 @@
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo -->
+    <!-- Panel Lateral Izquierdo Limpio (Sin el bloque abajo) -->
     <nav class="sidebar">
-        <!-- Disparador del Menú Desplegable de Marca (Despliega Pagos al hacer clic) -->
         <div class="user-profile-trigger" id="profileTrigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
             <div class="user-info">
@@ -356,7 +352,6 @@
                 <p>Cliente Activo</p>
             </div>
             
-            <!-- Único lugar donde vive Coordenadas de Pago -->
             <div class="dropdown-menu" id="brandDropdown">
                 <a href="pagos.html" class="dropdown-item">
                     <div class="glass-icon"><div class="icon-shape shape-payments"></div></div>
@@ -365,21 +360,24 @@
             </div>
         </div>
         
-        <!-- Menú Lateral Operativo Estricto -->
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
             <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
             <li><a href="cronograma.html"><div class="glass-icon"><div class="icon-shape shape-calendar"></div></div><span>Cronograma</span></a></li>
             <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
         </ul>
+    </nav>
 
-        <!-- Medidor Circular de Contrato e Inversión (Estilo Allie Delgado / Donut Chart) -->
+    <!-- Contenido Principal -->
+    <main class="main-container">
+        
+        <!-- Bloque de Estatus del Contrato reubicado horizontalmente en la cabecera de Inicio -->
         <div class="contract-progress-box">
             <div class="chart-wrapper">
                 <div class="glow-indicator"></div>
                 <svg class="progress-circle-svg">
-                    <circle class="progress-circle-bg" cx="50" cy="50" r="40"></circle>
-                    <circle class="progress-circle-bar" cx="50" cy="50" r="40"></circle>
+                    <circle class="progress-circle-bg" cx="35" cy="35" r="30"></circle>
+                    <circle class="progress-circle-bar" cx="35" cy="35" r="30"></circle>
                 </svg>
                 <div class="chart-center-text">
                     <span class="percentage">100%</span>
@@ -390,14 +388,9 @@
                 <p>Estatus: Contrato Ejecutado</p>
             </div>
         </div>
-    </nav>
-
-    <!-- Contenido Principal Higiénico -->
-    <main class="main-container">
         
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <!-- Módulos de Autogestión Purgados (Ya no hay duplicados de pagos aquí) -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
@@ -432,7 +425,7 @@
 
     </main>
 
-    <!-- Lógica de Interacción para el Desplegable -->
+    <!-- Lógica de Interacción -->
     <script>
         const trigger = document.getElementById('profileTrigger');
         const dropdown = document.getElementById('brandDropdown');
