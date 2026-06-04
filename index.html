@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Estratégica - Hotel Alex | Onshift</title>
+    <style>
+        /* Estilos Base y Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header Negro Grueso con Logo Centrado */
+        .hero-header {
+            background-color: #000000;
+            min-height: 35vh; /* Le da un grosor imponente a la pantalla sin cubrirla toda */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .hero-header img {
+            max-width: 220px; /* Tamaño ideal para el logo */
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .hero-header p {
+            color: #8c8c8c;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Contenedor Principal de la Propuesta */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+        .intro-text h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #111;
+            margin-bottom: 15px;
+        }
+        .intro-text p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        /* Rejilla de Tarjetas (Cards) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas medianas/grandes */
+            }
+        }
+
+        /* Estilo de los Enlaces/Cards */
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            cursor: pointer;
+        }
+        /* Efecto sutil al pasar el mouse */
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #000000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Negro con el Logo Blanco Centrado -->
+    <header class="hero-header">
+        <!-- El logo estará apuntando a tu carpeta local de imágenes -->
+        <img src="img/hotelalex_blanco.png" alt="Hotel Alex">
+        <p>Propuesta Estratégica de Marca</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- Breve introducción de bienvenida -->
+        <div class="intro-text">
+            <h1>Evolución Digital</h1>
+            <p>Selecciona una de las secciones a continuación para revisar los detalles del análisis, planificación e inversión propuestos para el despliegue de la marca.</p>
+        </div>
+
+        <!-- Sección de Tarjetas de Navegación -->
+        <div class="cards-grid">
+            
+            <!-- Card 1: Recursos (Llevará a recursos.html) -->
+            <a href="recursos.html" class="card-link">
+                <div class="card">
+                    <h2>Recursos</h2>
+                    <p>Estudio de identidad, auditoría de redes sociales y recursos visuales (Antes y Después).</p>
+                </div>
+            </a>
+
+            <!-- Card 2: Cronograma de Contenido (Llevará a cronograma.html) -->
+            <a href="cronograma.html" class="card-link">
+                <div class="card">
+                    <h2>Cronograma de Contenido</h2>
+                    <p>Planificación de publicaciones, frecuencias y despliegue de estrategias para los próximos meses.</p>
+                </div>
+            </a>
+
+            <!-- Card 3: Presupuesto (Llevará a presupuesto.html) -->
+            <a href="presupuesto.html" class="card-link">
+                <div class="card">
+                    <h2>Presupuesto</h2>
+                    <p>Detalle del plan de inversión, justificación de costos y beneficios del servicio mínimo de 3 meses.</p>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Onshift. Propuesta Confidencial para Hotel Alex.</p>
+    </footer>
+
+</body>
+</html>
