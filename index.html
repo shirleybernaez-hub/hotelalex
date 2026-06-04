@@ -23,6 +23,110 @@
             overflow-x: hidden;
         }
 
+        /* PANTALLA DE LOGIN (VISIBLE POR DEFECTO) */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            text-align: center;
+            animation: fadeInContent 0.4s ease;
+        }
+
+        .login-logo {
+            height: 60px;
+            margin-bottom: 24px;
+            object-fit: contain;
+        }
+
+        .login-card h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .login-card p {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #0f172a;
+            background-color: #f8fafc;
+            outline: none;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #0284c7;
+            background-color: #ffffff;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #1e293b;
+        }
+
+        .login-error {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            display: none;
+            font-weight: 500;
+        }
+
         /* BARRA LATERAL FIXED CLEAN */
         .sidebar {
             width: 280px;
@@ -119,12 +223,12 @@
             color: #0f172a;
         }
 
-        /* CONTENEDOR PRINCIPAL */
+        /* CONTENEDOR PRINCIPAL (Invisible hasta loguearse) */
         .main-container {
             margin-left: 280px; 
             flex-grow: 1;
             padding: 60px;
-            display: flex;
+            display: none; /* Se maneja por JS al autenticar */
             flex-direction: column;
             min-height: 100vh;
             width: calc(100% - 280px);
@@ -177,7 +281,8 @@
         .header-info h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
         .header-info p { font-size: 0.9rem; color: #64748b; }
 
-        .calendar-controls { display: flex; gap: 16px; align-items: center; }
+        /* Controles invisibles por defecto para el cliente */
+        .calendar-controls { display: none; gap: 16px; align-items: center; }
         
         .view-switch { background: #e2e8f0; padding: 4px; border-radius: 10px; display: flex; gap: 4px; }
         .switch-btn {
@@ -231,17 +336,43 @@
 
         .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b; }
         footer { margin-top: auto; padding-top: 60px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
+        
+        /* Ocultar barra lateral hasta loguearse */
+        .sidebar { display: none; }
     </style>
 </head>
 <body>
 
+    <!-- CONTROL DE ACCESO (MÓDULO DE INGRESO) -->
+    <div class="login-overlay" id="login-screen">
+        <div class="login-card">
+            <!-- Si tienes un logo para el login puedes usarlo aquí, por ahora usamos el del hotel -->
+            <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
+            <h2>Portal de Autogestión</h2>
+            <p>Ingresa tus credenciales para acceder</p>
+            
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" placeholder="Ej: admin" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="••••">
+            </div>
+            
+            <button class="btn-login" onclick="validateAuth()">Ingresar al Sistema</button>
+            <div class="login-error" id="login-error-msg">Usuario o contraseña incorrectos.</div>
+        </div>
+    </div>
+
     <!-- Panel Lateral Izquierdo Fijo -->
-    <nav class="sidebar">
+    <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
             <div class="user-info">
                 <h4>Hotel Alex</h4>
-                <p>Cliente Activo</p>
+                <p id="user-role-badge">Cliente Activo</p>
             </div>
         </div>
         
@@ -255,7 +386,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                        <line x1="17.5" x2="17.51 y1="6.5" y2="6.5"/>
                     </svg>
                 </div>
                 <span>Instagram</span>
@@ -282,7 +413,7 @@
     </nav>
 
     <!-- Contenedor Principal Dinámico -->
-    <main class="main-container">
+    <main class="main-container" id="app-content">
         
         <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
@@ -323,11 +454,12 @@
             <div class="section-header">
                 <div class="header-info">
                     <h2>Cronograma de Contenidos</h2>
-                    <p>Haz clic en cualquier día válido para añadir o editar actividades manualmente.</p>
+                    <p id="cronograma-desc-text">Planificación mensual de publicaciones.</p>
                 </div>
-                <div class="calendar-controls">
+                <!-- Controles del calendario (Switch de vistas e importación) -->
+                <div class="calendar-controls" id="admin-calendar-controls">
                     <div class="view-switch">
-                        <button class="switch-btn active" onclick="setCalendarView('client')">Vista Cliente</button>
+                        <button class="switch-btn active" id="btn-view-client" onclick="setCalendarView('client')">Vista Cliente</button>
                         <button class="switch-btn" onclick="setCalendarView('internal')">Vista Interna (Equipo)</button>
                     </div>
                     <button class="btn-import" onclick="alert('Funcionalidad de carga de Excel simulada con éxito. ¡Listo para conectar al backend!')">
@@ -339,7 +471,7 @@
             <div class="calendar-container">
                 <div class="calendar-month-title">
                     <span>Junio 2026</span>
-                    <span style="font-size:0.85rem; color:#0284c7; font-weight:600;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> ¡Interactividad Activada!</span>
+                    <span id="interactive-badge" style="font-size:0.85rem; color:#0284c7; font-weight:600; display:none;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> ¡Interactividad Activada!</span>
                 </div>
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
@@ -358,7 +490,7 @@
                     <script>
                         for(let i=1; i<=14; i++) {
                             document.write(`
-                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                <div class="calendar-cell" onclick="handleCellClick(this)">
                                     <span class="cell-number">${i}</span>
                                     <div class="posts-container"></div>
                                 </div>
@@ -367,7 +499,7 @@
                     </script>
 
                     <!-- Hito 15 de Junio: Inicio -->
-                    <div class="calendar-cell project-start" onclick="addPostManual(this)">
+                    <div class="calendar-cell project-start" onclick="handleCellClick(this)">
                         <span class="cell-number">15</span>
                         <span class="start-badge">Inicio</span>
                         <div class="posts-container">
@@ -387,7 +519,7 @@
                             if(i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
                             
                             document.write(`
-                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                <div class="calendar-cell" onclick="handleCellClick(this)">
                                     <span class="cell-number">${i}</span>
                                     <div class="posts-container">${defaultPosts}</div>
                                 </div>
@@ -426,15 +558,81 @@
             </div>
         </section>
 
-        <!-- CAMBIO: Footer actualizado con co-branding de la alianza comercial -->
         <footer>
-            <p>&copy; 2026 desarrollado por ONSHIFT - THINKPHANT Privado para Hotel Alex Caracas.</p>
+            <p>&copy; 2026 desarrollado por ONSHIFT - THINKPHANT. Privado para Hotel Alex Caracas.</p>
         </footer>
     </main>
 
     <script>
-        // Inicialización nativa de los iconos Lucide existentes
+        // Inicialización nativa de los iconos Lucide
         lucide.createIcons();
+
+        // Variable global para almacenar el rol logueado ('admin' o 'master')
+        let currentUserRole = '';
+        let currentView = 'client';
+
+        // Lógica de Autenticación
+        function validateAuth() {
+            const userIn = document.getElementById('username').value.trim();
+            const passIn = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('login-error-msg');
+
+            if (userIn === 'admin' && passIn === '1234') {
+                setupSession('admin', 'Cliente Activo');
+            } else if (userIn === 'master' && passIn === '4321') {
+                setupSession('master', 'Agencia (Master)');
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // Permite loguearse presionando Enter
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') validateAuth();
+        });
+
+        function setupSession(role, badgeText) {
+            currentUserRole = role;
+            
+            // Ocultar Login y Revelar App
+            document.getElementById('login-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('login-screen').style.display = 'none';
+            }, 300);
+
+            document.getElementById('app-sidebar').style.display = 'flex';
+            document.getElementById('app-content').style.display = 'flex';
+            document.getElementById('user-role-badge').textContent = badgeText;
+
+            // CONFIGURACIÓN DE PERMISOS POR ROL
+            const controls = document.getElementById('admin-calendar-controls');
+            const descText = document.getElementById('cronograma-desc-text');
+            const badge = document.getElementById('interactive-badge');
+
+            if (role === 'master') {
+                // El rol master ve los switches y la interactividad completa
+                controls.style.display = 'flex';
+                badge.style.display = 'inline';
+                descText.textContent = "Haz clic en cualquier día válido para añadir o editar actividades manualmente.";
+            } else {
+                // Al rol admin se le restringe el panel de equipo e interactividad directa
+                controls.style.display = 'none';
+                badge.style.display = 'none';
+                descText.textContent = "Planificación mensual de publicaciones aprobadas.";
+                setCalendarView('client'); // Asegura que empiece bloqueado en modo cliente
+            }
+
+            // Forzar refresco de layouts
+            window.scrollTo({ top: 0 });
+        }
+
+        // Bloqueo de clics en celdas para el Cliente
+        function handleCellClick(cellElement) {
+            if (currentUserRole === 'master') {
+                addPostManual(cellElement);
+            }
+            // Si es 'admin' no hace absolutamente nada al clickear (solo lectura)
+        }
 
         // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
@@ -455,15 +653,19 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        let currentView = 'client';
-
         function setCalendarView(viewType) {
             currentView = viewType;
             const switchBtns = document.querySelectorAll('.switch-btn');
             const internalTasks = document.querySelectorAll('.internal-task, [data-type="internal"]');
             
             switchBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // Validamos que el evento exista antes de aplicar estilos al target para evitar errores al cargar en admin
+            if(window.event && window.event.target && window.event.target.classList) {
+                window.event.target.classList.add('active');
+            } else {
+                document.getElementById('btn-view-client').classList.add('active');
+            }
             
             if(viewType === 'client') {
                 internalTasks.forEach(task => task.style.display = 'none');
