@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
-    <!-- Cargamos Lucide Icons para una iconografía vectorial ultra limpia -->
+    <!-- Cargamos Lucide Icons para la iconografía limpia -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* BARRA LATERAL FIXED */
+        /* BARRA LATERAL FIXED CLEAN */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -71,7 +71,7 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
             width: 100%;
         }
         .sidebar-menu button {
@@ -80,9 +80,9 @@
             border: none;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px; /* Ajuste de espacio al quitar el contenedor */
             padding: 12px 14px;
-            color: #475569;
+            color: #78828c; /* Gris corporativo del Hotel Alex para ítems inactivos */
             font-size: 0.95rem;
             font-weight: 500;
             border-radius: 12px;
@@ -92,7 +92,7 @@
         }
         .sidebar-menu button.active {
             background-color: #f1f5f9;
-            color: #000000;
+            color: #000000; /* Resalta en negro puro al estar activo */
             font-weight: 600;
         }
         .sidebar-menu button:hover:not(.active) {
@@ -103,27 +103,19 @@
         .sidebar-footer { margin-top: auto; width: 100%; }
         .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
 
-        /* CONTENEDOR DE ICONO PREMIUM */
-        .glass-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(248, 250, 252, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+        /* ICONOS PUROS Y DIRECTOS (Sin cuadros de empaque) */
+        .sidebar-icon {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            color: #64748b; /* Color desactivado por defecto */
-            transition: all 0.2s ease;
+            color: #78828c; /* Color gris de marca del Hotel Alex */
+            transition: color 0.2s ease;
         }
-        .sidebar-menu button.active .glass-icon {
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(15, 23, 42, 0.15);
-            color: #000000; /* Color activo */
+        .sidebar-menu button.active .sidebar-icon {
+            color: #000000; /* Negro puro para el icono activo */
         }
-        .sidebar-menu button:hover:not(.active) .glass-icon {
+        .sidebar-menu button:hover:not(.active) .sidebar-icon {
             color: #0f172a;
         }
 
@@ -161,7 +153,7 @@
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px 24px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: all 0.2s ease;
         }
         .hub-card:hover { transform: translateY(-2px); border-color: #cbd5e1; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04); }
-        .hub-icon-wrapper { width: 56px; height: 56px; border-radius: 14px; background: #ffffff; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #475569; }
+        .hub-icon-wrapper { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #78828c; }
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
@@ -252,19 +244,19 @@
         
         <div class="sidebar-menu">
             <button class="menu-btn active" data-target="inicio-section">
-                <div class="glass-icon"><i data-lucide="layout-dashboard" stroke-width="2" size="18"></i></div>
+                <div class="sidebar-icon"><i data-lucide="layout-dashboard" stroke-width="1.8" size="20"></i></div>
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
-                <div class="glass-icon"><i data-lucide="instagram" stroke-width="2" size="18"></i></div>
+                <div class="sidebar-icon"><i data-lucide="instagram" stroke-width="1.8" size="20"></i></div>
                 <span>Instagram</span>
             </button>
             <button class="menu-btn" data-target="cronograma-section">
-                <div class="glass-icon"><i data-lucide="calendar" stroke-width="2" size="18"></i></div>
+                <div class="sidebar-icon"><i data-lucide="calendar" stroke-width="1.8" size="20"></i></div>
                 <span>Cronograma</span>
             </button>
             <button class="menu-btn" data-target="metricas-section">
-                <div class="glass-icon"><i data-lucide="bar-chart-3" stroke-width="2" size="18"></i></div>
+                <div class="sidebar-icon"><i data-lucide="bar-chart-3" stroke-width="1.8" size="20"></i></div>
                 <span>Métricas</span>
             </button>
         </div>
@@ -273,7 +265,7 @@
             <hr class="sidebar-divider">
             <div class="sidebar-menu">
                 <button class="menu-btn" data-target="presupuesto-section">
-                    <div class="glass-icon"><i data-lucide="wallet" stroke-width="2" size="18"></i></div>
+                    <div class="sidebar-icon"><i data-lucide="wallet" stroke-width="1.8" size="20"></i></div>
                     <span>Presupuesto</span>
                 </button>
             </div>
@@ -288,17 +280,17 @@
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
                 <div class="hub-card" onclick="navigateTo('instagram-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="instagram" stroke-width="1.5" size="28"></i></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="instagram" stroke-width="1.5" size="32"></i></div>
                     <h3>Instagram: Diagnóstico</h3>
                     <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
                 </div>
                 <div class="hub-card" onclick="navigateTo('cronograma-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="calendar" stroke-width="1.5" size="28"></i></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="calendar" stroke-width="1.5" size="32"></i></div>
                     <h3>Cronograma</h3>
                     <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
                 </div>
                 <div class="hub-card" onclick="navigateTo('metricas-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="bar-chart-3" stroke-width="1.5" size="28"></i></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="bar-chart-3" stroke-width="1.5" size="32"></i></div>
                     <h3>Métricas de Rendimiento</h3>
                     <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
                 </div>
@@ -420,10 +412,10 @@
     </main>
 
     <script>
-        // Inicializar los iconos de Lucide al cargar la página
+        // Inicializar iconos Lucide
         lucide.createIcons();
 
-        // Control de Navegación SPA
+        // Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
         const sections = document.querySelectorAll('.app-section');
 
