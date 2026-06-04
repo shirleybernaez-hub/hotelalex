@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
-    
-    <!-- CDN oficial estable de Lucide -->
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.435.0/dist/umd/lucide.min.js"></script>
-    
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
         * {
@@ -114,8 +111,12 @@
             color: #78828c;
             transition: color 0.2s ease;
         }
-        .sidebar-menu button.active .sidebar-icon { color: #000000; }
-        .sidebar-menu button:hover:not(.active) .sidebar-icon { color: #0f172a; }
+        .sidebar-menu button.active .sidebar-icon {
+            color: #000000;
+        }
+        .sidebar-menu button:hover:not(.active) .sidebar-icon {
+            color: #0f172a;
+        }
 
         /* CONTENEDOR PRINCIPAL */
         .main-container {
@@ -230,7 +231,6 @@
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo Fijo -->
     <nav class="sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -270,10 +270,8 @@
         </div>
     </nav>
 
-    <!-- Contenedor Principal Dinámico -->
     <main class="main-container">
         
-        <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -306,13 +304,11 @@
             </div>
         </section>
 
-        <!-- SECCIÓN INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
-        <!-- SECCIÓN CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -338,10 +334,7 @@
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
-                
-                <!-- El grid se rellena dinámicamente de forma limpia por JS -->
-                <div id="calendar-grid-target" class="calendar-grid">
-                    <!-- Mayo Muted -->
+                <div class="calendar-grid">
                     <div class="calendar-cell muted"><span class="cell-number">25</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">26</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">27</span></div>
@@ -349,17 +342,53 @@
                     <div class="calendar-cell muted"><span class="cell-number">29</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">30</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">31</span></div>
+                    
+                    <script>
+                        for(let i=1; i<=14; i++) {
+                            document.write(`
+                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                    <span class="cell-number">${i}</span>
+                                    <div class="posts-container"></div>
+                                </div>
+                            `);
+                        }
+                    </script>
+
+                    <div class="calendar-cell project-start" onclick="addPostManual(this)">
+                        <span class="cell-number">15</span>
+                        <span class="start-badge">Inicio</span>
+                        <div class="posts-container">
+                            <div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>
+                        </div>
+                    </div>
+
+                    <script>
+                        for(let i=16; i<=30; i++) {
+                            let defaultPosts = '';
+                            if(i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
+                            if(i === 19) defaultPosts = `
+                                <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
+                                <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
+                            `;
+                            if(i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
+                            
+                            document.write(`
+                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                    <span class="cell-number">${i}</span>
+                                    <div class="posts-container">${defaultPosts}</div>
+                                </div>
+                            `);
+                        }
+                    </script>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas.</p></div>
         </section>
 
-        <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
             <div class="placeholder-box"><p>Tabla financiera.</p></div>
@@ -371,56 +400,8 @@
     </main>
 
     <script>
-        // ORDEN CORRECTO: 1. Generar celdas -> 2. Disparar Lucide
-        document.addEventListener('DOMContentLoaded', () => {
-            const gridTarget = document.getElementById('calendar-grid-target');
-            
-            if (gridTarget) {
-                let htmlContent = '';
-                
-                for (let i = 1; i <= 30; i++) {
-                    if (i === 15) {
-                        htmlContent += `
-                            <div class="calendar-cell project-start" onclick="addPostManual(this)">
-                                <span class="cell-number">15</span>
-                                <span class="start-badge">Inicio</span>
-                                <div class="posts-container">
-                                    <div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        let defaultPosts = '';
-                        if (i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
-                        if (i === 19) defaultPosts = `
-                            <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
-                            <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
-                        `;
-                        if (i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
-                        
-                        htmlContent += `
-                            <div class="calendar-cell" onclick="addPostManual(this)">
-                                <span class="cell-number">${i}</span>
-                                <div class="posts-container">${defaultPosts}</div>
-                            </div>
-                        `;
-                    }
-                }
-                gridTarget.insertAdjacentHTML('beforeend', htmlContent);
-            }
-
-            // AHORA SÍ: Lucide se inicializa cuando TODO el DOM (estático y dinámico) está listo
-            initializeLucideSafe();
-        });
-
-        function initializeLucideSafe() {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            } else {
-                console.error("Lucide no detectado en primera instancia. Reintentando...");
-                setTimeout(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); }, 500);
-            }
-        }
+        // Inicialización nativa y directa de los iconos
+        lucide.createIcons();
 
         // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
