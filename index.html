@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
+    <!-- Cargamos Lucide Icons para una iconografía vectorial ultra limpia -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
         * {
@@ -101,6 +103,7 @@
         .sidebar-footer { margin-top: auto; width: 100%; }
         .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
 
+        /* CONTENEDOR DE ICONO PREMIUM */
         .glass-icon {
             width: 36px;
             height: 36px;
@@ -112,22 +115,17 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            color: #64748b; /* Color desactivado por defecto */
+            transition: all 0.2s ease;
         }
         .sidebar-menu button.active .glass-icon {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(15, 23, 42, 0.15);
+            color: #000000; /* Color activo */
         }
-
-        .icon-shape { border: 2px solid #64748b; border-radius: 2px; }
-        .sidebar-menu button.active .icon-shape { border-color: #0f172a; }
-        
-        .shape-home { width: 12px; height: 12px; border-width: 2px; }
-        .shape-analysis { width: 14px; height: 14px; border-radius: 2px; border-width: 2px; position: relative; }
-        .shape-analysis::after { content: ''; position: absolute; width: 4px; height: 4px; background: #64748b; left: 3px; top: 3px; }
-        .sidebar-menu button.active .shape-analysis::after { background: #0f172a; }
-        .shape-metrics { width: 14px; height: 14px; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px; }
-        .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
-        .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
+        .sidebar-menu button:hover:not(.active) .glass-icon {
+            color: #0f172a;
+        }
 
         /* CONTENEDOR PRINCIPAL */
         .main-container {
@@ -163,7 +161,7 @@
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px 24px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: all 0.2s ease;
         }
         .hub-card:hover { transform: translateY(-2px); border-color: #cbd5e1; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04); }
-        .hub-icon-wrapper { width: 56px; height: 56px; border-radius: 14px; background: #ffffff; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .hub-icon-wrapper { width: 56px; height: 56px; border-radius: 14px; background: #ffffff; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #475569; }
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
@@ -225,7 +223,6 @@
         }
         .start-badge { background: #0284c7; color: #ffffff; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; align-self: flex-start; text-transform: uppercase; }
 
-        /* Contenedor interno de posts de cada celda */
         .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; margin-top: 4px; }
 
         /* Estilos de los Bloques de Post */
@@ -235,7 +232,6 @@
         .post-carrusel { background-color: #e3f2fd; color: #0d47a1; border-left: 3px solid #2196f3; }
         .post-general { background-color: #f1f5f9; color: #334155; border-left: 3px solid #94a3b8; }
         
-        /* Bloque Operativo Interno */
         .internal-task { background-color: #f3e5f5; color: #4a148c; border-left: 3px solid #9c27b0; font-style: italic; }
 
         .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b; }
@@ -244,6 +240,7 @@
 </head>
 <body>
 
+    <!-- Panel Lateral Izquierdo Fijo -->
     <nav class="sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -255,19 +252,19 @@
         
         <div class="sidebar-menu">
             <button class="menu-btn active" data-target="inicio-section">
-                <div class="glass-icon"><div class="icon-shape shape-home"></div></div>
+                <div class="glass-icon"><i data-lucide="layout-dashboard" stroke-width="2" size="18"></i></div>
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
-                <div class="glass-icon"><div class="icon-shape shape-analysis"></div></div>
+                <div class="glass-icon"><i data-lucide="instagram" stroke-width="2" size="18"></i></div>
                 <span>Instagram</span>
             </button>
             <button class="menu-btn" data-target="cronograma-section">
-                <div class="glass-icon"><div class="icon-shape shape-calendar"></div></div>
+                <div class="glass-icon"><i data-lucide="calendar" stroke-width="2" size="18"></i></div>
                 <span>Cronograma</span>
             </button>
             <button class="menu-btn" data-target="metricas-section">
-                <div class="glass-icon"><div class="icon-shape shape-metrics"></div></div>
+                <div class="glass-icon"><i data-lucide="bar-chart-3" stroke-width="2" size="18"></i></div>
                 <span>Métricas</span>
             </button>
         </div>
@@ -276,13 +273,14 @@
             <hr class="sidebar-divider">
             <div class="sidebar-menu">
                 <button class="menu-btn" data-target="presupuesto-section">
-                    <div class="glass-icon"><div class="icon-shape shape-budget"></div></div>
+                    <div class="glass-icon"><i data-lucide="wallet" stroke-width="2" size="18"></i></div>
                     <span>Presupuesto</span>
                 </button>
             </div>
         </div>
     </nav>
 
+    <!-- Contenedor Principal Dinámico -->
     <main class="main-container">
         
         <!-- SECCIÓN INICIO -->
@@ -290,17 +288,17 @@
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
                 <div class="hub-card" onclick="navigateTo('instagram-section')">
-                    <div class="hub-icon-wrapper"><div class="icon-shape shape-analysis" style="width:18px; height:18px;"></div></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="instagram" stroke-width="1.5" size="28"></i></div>
                     <h3>Instagram: Diagnóstico</h3>
                     <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
                 </div>
                 <div class="hub-card" onclick="navigateTo('cronograma-section')">
-                    <div class="hub-icon-wrapper"><div class="icon-shape shape-calendar" style="width:18px; height:12px;"></div></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="calendar" stroke-width="1.5" size="28"></i></div>
                     <h3>Cronograma</h3>
                     <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
                 </div>
                 <div class="hub-card" onclick="navigateTo('metricas-section')">
-                    <div class="hub-icon-wrapper"><div class="icon-shape shape-metrics" style="width:14px; height:14px;"></div></div>
+                    <div class="hub-icon-wrapper"><i data-lucide="bar-chart-3" stroke-width="1.5" size="28"></i></div>
                     <h3>Métricas de Rendimiento</h3>
                     <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
                 </div>
@@ -337,7 +335,7 @@
                         <button class="switch-btn" onclick="setCalendarView('internal')">Vista Interna (Equipo)</button>
                     </div>
                     <button class="btn-import" onclick="alert('Funcionalidad de carga de Excel simulada con éxito. ¡Listo para conectar al backend!')">
-                        📁 Importar Excel / CSV
+                        <i data-lucide="upload-cloud" stroke-width="2" size="16"></i> Importar Excel / CSV
                     </button>
                 </div>
             </div>
@@ -345,7 +343,7 @@
             <div class="calendar-container">
                 <div class="calendar-month-title">
                     <span>Junio 2026</span>
-                    <span style="font-size:0.85rem; color:#0284c7; font-weight:600;">✨ ¡Interactividad Activada!</span>
+                    <span style="font-size:0.85rem; color:#0284c7; font-weight:600;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> ¡Interactividad Activada!</span>
                 </div>
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
@@ -422,6 +420,9 @@
     </main>
 
     <script>
+        // Inicializar los iconos de Lucide al cargar la página
+        lucide.createIcons();
+
         // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
         const sections = document.querySelectorAll('.app-section');
@@ -441,10 +442,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Variable global para saber en qué vista estamos ('client' o 'internal')
         let currentView = 'client';
 
-        // Alternar visualización entre Vista Cliente e Interna
         function setCalendarView(viewType) {
             currentView = viewType;
             const switchBtns = document.querySelectorAll('.switch-btn');
@@ -460,7 +459,6 @@
             }
         }
 
-        // FUNCIÓN CLAVE: Añadir contenido manualmente mediante clic
         function addPostManual(cellElement) {
             const promptText = prompt("Escribe la actividad o tipo de post para este día:\n\n💡 Tip: Si empieza con el emoji ⚙️ o la palabra 'interno', se ocultará automáticamente en la Vista del Cliente.");
             
@@ -468,15 +466,12 @@
                 const container = cellElement.querySelector('.posts-container');
                 const cleanText = promptText.trim();
                 
-                // Crear el nuevo elemento visual
                 const postDiv = document.createElement('div');
                 postDiv.classList.add('post-item');
                 
-                // Determinar si es una tarea interna o pública
                 if (cleanText.startsWith('⚙️') || cleanText.toLowerCase().includes('interno')) {
                     postDiv.classList.add('internal-task');
                     postDiv.setAttribute('data-type', 'internal');
-                    // Si estamos en vista cliente, el elemento nuevo nace oculto
                     if (currentView === 'client') {
                         postDiv.style.display = 'none';
                     }
