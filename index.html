@@ -53,7 +53,7 @@
         /* Logo limpio y libre */
         .brand-logo {
             width: auto;
-            height: 55px; /* Altura ideal e imponente sin distorsión */
+            height: 55px; /* Altura ideal sin distorsión */
             object-fit: contain;
             margin-bottom: 12px;
             transition: transform 0.2s ease;
@@ -102,7 +102,7 @@
             border-radius: 12px;
             padding: 8px;
             box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            display: none; /* Se activa con JS abajo */
+            display: none; 
             z-index: 110;
             text-align: left;
         }
@@ -201,7 +201,7 @@
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
         .shape-payments { width: 14px; height: 10px; border-width: 2px; background: transparent; }
 
-        /* MEDIDOR CIRCULAR DE CONTRATO (Estilo Allie Delgado / Donut Chart) */
+        /* MEDIDOR CIRCULAR DE CONTRATO (Estilo Allie Delgado / Donut Chart de Referencia) */
         .contract-progress-box {
             margin-top: auto;
             background: #ffffff; 
@@ -287,10 +287,10 @@
             letter-spacing: -0.3px;
         }
 
-        /* Módulos Centrales de Autogestión */
+        /* Módulos Centrales de Autogestión (Corregidos a 3 columnas perfectas) */
         .hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 24px;
             margin-bottom: 40px;
             width: 100%;
@@ -348,7 +348,7 @@
 
     <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar">
-        <!-- Disparador del Menú Desplegable de Marca -->
+        <!-- Disparador del Menú Desplegable de Marca (Despliega Pagos al hacer clic) -->
         <div class="user-profile-trigger" id="profileTrigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
             <div class="user-info">
@@ -356,7 +356,7 @@
                 <p>Cliente Activo</p>
             </div>
             
-            <!-- Menú Desplegable con Coordenadas de Pago -->
+            <!-- Único lugar donde vive Coordenadas de Pago -->
             <div class="dropdown-menu" id="brandDropdown">
                 <a href="pagos.html" class="dropdown-item">
                     <div class="glass-icon"><div class="icon-shape shape-payments"></div></div>
@@ -365,7 +365,7 @@
             </div>
         </div>
         
-        <!-- Menú Lateral Operativo Limpio -->
+        <!-- Menú Lateral Operativo Estricto -->
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
             <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
@@ -373,7 +373,7 @@
             <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
         </ul>
 
-        <!-- Medidor Circular (Estilo Allie Delgado / Donut Chart de Referencia) -->
+        <!-- Medidor Circular de Contrato e Inversión (Estilo Allie Delgado / Donut Chart) -->
         <div class="contract-progress-box">
             <div class="chart-wrapper">
                 <div class="glow-indicator"></div>
@@ -392,11 +392,12 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
+    <!-- Contenido Principal Higiénico -->
     <main class="main-container">
         
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
+        <!-- Módulos de Autogestión Purgados (Ya no hay duplicados de pagos aquí) -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
@@ -423,14 +424,6 @@
                 <p>Revisión detallada de planes financieros, alcances de inversión y entregables estipulados.</p>
             </a>
 
-            <a href="pagos.html" class="hub-card">
-                <div class="hub-icon-wrapper">
-                    <div class="icon-shape shape-payments" style="width:20px; height:14px;"></div>
-                </div>
-                <h3>Gestión de Pagos</h3>
-                <p>Consulta cuentas bancarias de la agencia, reporta transferencias y descarga soportes.</p>
-            </a>
-
         </div>
 
         <footer>
@@ -439,7 +432,7 @@
 
     </main>
 
-    <!-- Lógica de Interacción para el Desplegable Premium -->
+    <!-- Lógica de Interacción para el Desplegable -->
     <script>
         const trigger = document.getElementById('profileTrigger');
         const dropdown = document.getElementById('brandDropdown');
@@ -450,7 +443,6 @@
             dropdown.classList.toggle('show');
         });
 
-        // Cerrar el menú si se hace clic en cualquier otra parte de la pantalla
         document.addEventListener('click', () => {
             trigger.classList.remove('active');
             dropdown.classList.remove('show');
