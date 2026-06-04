@@ -46,9 +46,6 @@
             border-bottom: 1px solid #f1f5f9;
             margin-bottom: 30px;
             width: 100%;
-            cursor: pointer;
-            position: relative;
-            user-select: none;
         }
         
         .brand-logo {
@@ -56,11 +53,6 @@
             height: 55px; 
             object-fit: contain;
             margin-bottom: 12px;
-            transition: transform 0.2s ease;
-        }
-        
-        .user-profile-trigger:hover .brand-logo {
-            transform: scale(1.02);
         }
 
         .user-info h4 {
@@ -68,58 +60,11 @@
             font-weight: 600;
             color: #0f172a;
             margin-bottom: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
         }
         .user-info p {
             font-size: 0.75rem;
             color: #64748b;
         }
-        .switch-brand-arrow { 
-            font-size: 0.65rem; 
-            color: #94a3b8; 
-            transition: transform 0.2s ease;
-        }
-        
-        .user-profile-trigger.active .switch-brand-arrow {
-            transform: rotate(180deg);
-        }
-
-        /* MENÚ DESPLEGABLE */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            margin-top: 8px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            border-radius: 12px;
-            padding: 8px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            display: none; 
-            z-index: 110;
-            text-align: left;
-        }
-        .dropdown-menu.show { display: block; animation: fadeIn 0.2s ease; }
-        
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            color: #475569;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-        .dropdown-item:hover { background-color: rgba(15, 23, 42, 0.05); color: #0f172a; }
 
         /* Navegación */
         .sidebar-menu {
@@ -138,7 +83,6 @@
             gap: 14px;
             padding: 12px 14px;
             color: #475569;
-            text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
             border-radius: 12px;
@@ -178,7 +122,7 @@
             border-color: rgba(15, 23, 42, 0.15);
         }
 
-        .icon-shape { border: 2px solid #64748b; border-radius: 2px; transition: all 0.2s ease; }
+        .icon-shape { border: 2px solid #64748b; border-radius: 2px; }
         .sidebar-menu button.active .icon-shape { border-color: #0f172a; }
         
         .shape-home { width: 12px; height: 12px; border-width: 2px; }
@@ -200,7 +144,6 @@
             width: calc(100% - 280px);
         }
 
-        /* Control de secciones SPA */
         .app-section {
             display: none;
             width: 100%;
@@ -236,14 +179,69 @@
         .glow-indicator { position: absolute; width: 8px; height: 8px; background-color: #ffffff; border-radius: 50%; top: 0px; left: 26px; box-shadow: 0 0 8px rgba(2, 132, 199, 0.8); }
         .chart-center-text { position: absolute; display: flex; font-size: 1rem; font-weight: 700; color: #0f172a; }
 
-        /* VISTA: ESTRUCTURA DEL CRONOGRAMA (CALENDARIO) */
+        /* VISTA: CRONOGRAMA */
         .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 32px;
         }
-        .section-header h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
-        .section-header p { font-size: 0.9rem; color: #64748b; }
+        .header-info h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
+        .header-info p { font-size: 0.9rem; color: #64748b; }
 
-        /* Contenedor del Calendario Semanal/Mensual */
+        /* Controles Superiores del Calendario (Filtros y Excel) */
+        .calendar-controls {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        /* Switch Premium de Vistas (Cliente / Interno) */
+        .view-switch {
+            background: #e2e8f0;
+            padding: 4px;
+            border-radius: 10px;
+            display: flex;
+            gap: 4px;
+        }
+        .switch-btn {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: #64748b;
+            transition: all 0.15s ease;
+        }
+        .switch-btn.active {
+            background: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Botón de Importar Archivo Excel/CSV */
+        .btn-import {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .btn-import:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        /* Estructura del Calendario */
         .calendar-container {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -251,6 +249,16 @@
             width: 100%;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+        }
+        .calendar-month-title {
+            padding: 20px 24px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .calendar-days-grid {
             display: grid;
@@ -271,7 +279,7 @@
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            grid-auto-rows: minmax(130px, auto);
+            grid-auto-rows: minmax(120px, auto);
         }
         .calendar-cell {
             border-right: 1px solid #e2e8f0;
@@ -279,18 +287,37 @@
             padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             background: #ffffff;
+            transition: background 0.15s ease;
+            cursor: pointer;
+        }
+        .calendar-cell:hover {
+            background: #f8fafc; /* Efecto hover para denotar que es editable manualmente */
         }
         .calendar-cell:nth-child(7n) { border-right: none; }
         
+        /* Celdas vacías del mes anterior */
+        .calendar-cell.muted {
+            background: #fcfdfe;
+            cursor: default;
+        }
+        .calendar-cell.muted .cell-number {
+            color: #cbd5e1;
+        }
+
         .cell-number {
             font-size: 0.8rem;
             font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 4px;
+            color: #64748b;
         }
-        .cell-number.current-day {
+
+        /* Hito: Marca de Inicio de Proyecto (15 de Junio) */
+        .calendar-cell.project-start {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+        }
+        .calendar-cell.project-start .cell-number {
             color: #0284c7;
             background: #e0f2fe;
             width: 22px;
@@ -300,44 +327,53 @@
             justify-content: center;
             border-radius: 50%;
         }
+        .start-badge {
+            background: #0284c7;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            align-self: flex-start;
+            text-transform: uppercase;
+        }
 
-        /* Items de contenido dentro del día */
+        /* Bloques de Post Simulados */
         .post-item {
             padding: 6px 10px;
             border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 500;
             line-height: 1.3;
-            cursor: pointer;
-            transition: opacity 0.15s ease;
         }
-        .post-item:hover { opacity: 0.85; }
-        .post-reel { background-color: #f0fdf4; color: #166534; border-left: 3px solid #22c55e; }
-        .post-story { background-color: #fef2f2; color: #991b1b; border-left: 3px solid #ef4444; }
-        .post-carrusel { background-color: #eff6ff; color: #1e40af; border-left: 3px solid #3b82f6; }
-
-        /* Pantallas en construcción temporal */
-        .placeholder-box {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b;
+        .post-reel { background-color: #e8f5e9; color: #1b5e20; border-left: 3px solid #4caf50; }
+        .post-story { background-color: #ffebee; color: #b71c1c; border-left: 3px solid #f44336; }
+        .post-carrusel { background-color: #e3f2fd; color: #0d47a1; border-left: 3px solid #2196f3; }
+        
+        /* Bloque Interno Ocultable (Solo para el equipo) */
+        .internal-task {
+            background-color: #f3e5f5;
+            color: #4a148c;
+            border-left: 3px solid #9c27b0;
+            font-style: italic;
         }
 
-        /* FOOTER CENTRADO */
+        /* Pantallas Marcadoras de Posición */
+        .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b; }
         footer { margin-top: auto; padding-top: 60px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
     </style>
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo Fijo -->
     <nav class="sidebar">
-        <div class="user-profile-trigger" id="profileTrigger">
+        <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
             <div class="user-info">
-                <h4>Hotel Alex <span class="switch-brand-arrow">▼</span></h4>
+                <h4>Hotel Alex</h4>
                 <p>Cliente Activo</p>
             </div>
         </div>
         
-        <!-- Navegación por botones SPA -->
         <div class="sidebar-menu">
             <button class="menu-btn active" data-target="inicio-section">
                 <div class="glass-icon"><div class="icon-shape shape-home"></div></div>
@@ -357,7 +393,6 @@
             </button>
         </div>
 
-        <!-- Bloque Financiero Fijo Abajo -->
         <div class="sidebar-footer">
             <hr class="sidebar-divider">
             <div class="sidebar-menu">
@@ -369,10 +404,8 @@
         </div>
     </nav>
 
-    <!-- Contenedor Dinámico Principal -->
     <main class="main-container">
         
-        <!-- VISTA 1: INICIO (HUB PRINCIPAL) -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -408,26 +441,41 @@
             </div>
         </section>
 
-        <!-- VISTA 2: INSTAGRAM DIAGNÓSTICO -->
         <section id="instagram-section" class="app-section">
             <div class="section-header">
-                <h2>Instagram: Diagnóstico & Plan de Evolución</h2>
-                <p>Auditoría de la línea de comunicación actual y estrategias estéticas inmediatas.</p>
+                <div class="header-info">
+                    <h2>Instagram: Diagnóstico & Plan de Evolución</h2>
+                    <p>Auditoría de la línea de comunicación actual y estrategias estéticas inmediatas.</p>
+                </div>
             </div>
             <div class="placeholder-box">
                 <p>Aquí se desplegará el análisis de la cuenta actual y las oportunidades clave de mejora visual y de engagement.</p>
             </div>
         </section>
 
-        <!-- VISTA 3: CRONOGRAMA (CALENDARIO INTERACTIVO) -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
-                <h2>Cronograma de Contenidos</h2>
-                <p>Planificación de publicaciones y estatus de aprobación de piezas.</p>
+                <div class="header-info">
+                    <h2>Cronograma de Contenidos</h2>
+                    <p>Planificación de publicaciones, edición manual y estatus de aprobación de piezas.</p>
+                </div>
+                
+                <div class="calendar-controls">
+                    <div class="view-switch">
+                        <button class="switch-btn active" onclick="setCalendarView('client')">Vista Cliente</button>
+                        <button class="switch-btn" onclick="setCalendarView('internal')">Vista Interna (Equipo)</button>
+                    </div>
+                    <button class="btn-import">
+                        📁 Importar Excel / CSV
+                    </button>
+                </div>
             </div>
             
-            <!-- Calendario In-App -->
             <div class="calendar-container">
+                <div class="calendar-month-title">
+                    <span>Junio 2026</span>
+                    <span style="font-size:0.85rem; color:#64748b; font-weight:500;">Haz clic en cualquier celda para editar manualmente</span>
+                </div>
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div>
                     <div class="calendar-day-label">Mar</div>
@@ -438,18 +486,52 @@
                     <div class="calendar-day-label">Dom</div>
                 </div>
                 <div class="calendar-grid">
-                    <!-- Fila de ejemplo con datos simulados del flujo mensual -->
-                    <div class="calendar-cell"><span class="cell-number">15</span><div class="post-item post-reel">🎬 Reel: Apertura</div></div>
-                    <div class="calendar-cell"><span class="cell-number">16</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">25</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">26</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">27</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">28</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">29</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">30</span></div>
+                    <div class="calendar-cell muted"><span class="cell-number">31</span></div>
+                    
+                    <div class="calendar-cell"><span class="cell-number">1</span></div>
+                    <div class="calendar-cell"><span class="cell-number">2</span></div>
+                    <div class="calendar-cell"><span class="cell-number">3</span></div>
+                    <div class="calendar-cell"><span class="cell-number">4</span></div>
+                    <div class="calendar-cell"><span class="cell-number">5</span></div>
+                    <div class="calendar-cell"><span class="cell-number">6</span></div>
+                    <div class="calendar-cell"><span class="cell-number">7</span></div>
+
+                    <div class="calendar-cell"><span class="cell-number">8</span></div>
+                    <div class="calendar-cell"><span class="cell-number">9</span></div>
+                    <div class="calendar-cell"><span class="cell-number">10</span></div>
+                    <div class="calendar-cell"><span class="cell-number">11</span></div>
+                    <div class="calendar-cell"><span class="cell-number">12</span></div>
+                    <div class="calendar-cell"><span class="cell-number">13</span></div>
+                    <div class="calendar-cell"><span class="cell-number">14</span></div>
+
+                    <div class="calendar-cell project-start">
+                        <span class="cell-number">15</span>
+                        <span class="start-badge">Inicio</span>
+                        <div class="post-item post-reel">🎬 Reel: Lanzamiento</div>
+                    </div>
+                    <div class="calendar-cell">
+                        <span class="cell-number">16</span>
+                        <div class="post-item internal-task" style="display:none;">⚙️ Grabar cápsula 1</div>
+                    </div>
                     <div class="calendar-cell"><span class="cell-number">17</span><div class="post-item post-story">📸 Story: Espacios</div></div>
                     <div class="calendar-cell"><span class="cell-number">18</span></div>
-                    <div class="calendar-cell"><span class="cell-number">19</span><div class="post-item post-carrusel">🎠 Carrusel: Servicios</div></div>
+                    <div class="calendar-cell">
+                        <span class="cell-number">19</span>
+                        <div class="post-item post-carrusel">🎠 Carrusel: Menú</div>
+                        <div class="post-item internal-task" style="display:none;">⚙️ Pautar Ads</div>
+                    </div>
                     <div class="calendar-cell"><span class="cell-number">20</span></div>
                     <div class="calendar-cell"><span class="cell-number">21</span></div>
                     
-                    <div class="calendar-cell"><span class="cell-number">22</span><div class="post-item post-reel">🎬 Reel: Experiencia</div></div>
+                    <div class="calendar-cell"><span class="cell-number">22</span><div class="post-item post-reel">🎬 Reel: Concepto</div></div>
                     <div class="calendar-cell"><span class="cell-number">23</span></div>
-                    <div class="calendar-cell"><span class="cell-number">24</span><div class="post-item post-story">📸 Story: Gastronomía</div></div>
+                    <div class="calendar-cell"><span class="cell-number">24</span><div class="post-item post-story">📸 Story: Desayunos</div></div>
                     <div class="calendar-cell"><span class="cell-number">25</span></div>
                     <div class="calendar-cell"><span class="cell-number">26</span></div>
                     <div class="calendar-cell"><span class="cell-number">27</span></div>
@@ -458,22 +540,24 @@
             </div>
         </section>
 
-        <!-- VISTA 4: MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header">
-                <h2>Métricas e Informes</h2>
-                <p>Resultados analíticos y rendimiento del ecosistema digital.</p>
+                <div class="header-info">
+                    <h2>Métricas e Informes</h2>
+                    <p>Resultados analíticos y rendimiento del ecosistema digital.</p>
+                </div>
             </div>
             <div class="placeholder-box">
                 <p>Módulo de métricas en desarrollo. Próximamente se conectarán los reportes automatizados de rendimiento.</p>
             </div>
         </section>
 
-        <!-- VISTA 5: PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header">
-                <h2>Presupuesto y Alcance</h2>
-                <p>Control financiero de los entregables acordados.</p>
+                <div class="header-info">
+                    <h2>Presupuesto y Alcance</h2>
+                    <p>Control financiero de los entregables acordados.</p>
+                </div>
             </div>
             <div class="placeholder-box">
                 <p>Aquí se integrará la tabla financiera limpia con los costos e inversiones aprobados.</p>
@@ -486,12 +570,10 @@
 
     </main>
 
-    <!-- Lógica SPA Dinámica -->
     <script>
         const buttons = document.querySelectorAll('.menu-btn');
         const sections = document.querySelectorAll('.app-section');
 
-        // Navegación mediante clics en la barra lateral
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetSectionId = button.getAttribute('data-target');
@@ -499,24 +581,32 @@
             });
         });
 
-        // Función global para cambiar de sección dinámicamente
         function navigateTo(sectionId) {
-            // Ocultar todas las secciones
             sections.forEach(section => section.classList.remove('active-section'));
-            // Remover estado activo de los botones
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Activar la sección destino
             document.getElementById(sectionId).classList.add('active-section');
 
-            // Activar el botón correspondiente en el menú lateral
             const matchingButton = document.querySelector(`.menu-btn[data-target="${sectionId}"]`);
-            if (matchingButton) {
-                matchingButton.classList.add('active');
-            }
+            if (matchingButton) matchingButton.classList.add('active');
             
-            // Hacer scroll hacia arriba por suavidad visual
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lógica para alternar vistas (Cliente vs Interna)
+        function setCalendarView(viewType) {
+            const switchBtns = document.querySelectorAll('.switch-btn');
+            const internalTasks = document.querySelectorAll('.internal-task');
+            
+            switchBtns.forEach(btn => btn.classList.remove('active'));
+            
+            if(viewType === 'client') {
+                event.target.classList.add('active');
+                internalTasks.forEach(task => task.style.display = 'none');
+            } else {
+                event.target.classList.add('active');
+                internalTasks.forEach(task => task.style.display = 'block');
+            }
         }
     </script>
 
