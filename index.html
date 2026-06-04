@@ -3,290 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onshift // Portal Colaborativo - Hotel Alex</title>
+    <title>Onshift // Portal de Autogestión - Hotel Alex</title>
     <style>
-        /* Reset y Variables de Diseño - Modo Claro */
+        /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         
         body {
-            background-color: #f8f9fa; /* Gris muy claro de fondo (como tus ejemplos) */
-            color: #212529;
+            background-color: #f4f6f8; /* Gris corporativo higiénico */
+            color: #2b2f33;
             display: flex;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* BARRA LATERAL (Sidebar) */
+        /* BARRA LATERAL FIXED */
         .sidebar {
-            width: 260px;
+            width: 280px;
             background-color: #ffffff;
-            border-right: 1px solid #e9ecef;
+            border-right: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
             position: fixed;
             top: 0;
             bottom: 0;
             left: 0;
-            transition: all 0.3s ease;
+            padding: 30px 20px;
             z-index: 100;
         }
 
-        /* Contenedor del Logo en el Sidebar */
-        .sidebar-brand {
-            padding: 30px 24px;
-            border-bottom: 1px solid #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .sidebar-brand img {
-            max-width: 180px;
-            height: auto;
-        }
-
-        /* Menú de Navegación */
-        .sidebar-menu {
-            list-style: none;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        
-        .sidebar-menu a {
+        /* Sección de Perfil/Avatar de Usuario Activo (Estilo NetUno) */
+        .user-profile {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 16px;
-            color: #495057;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .avatar-container {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .avatar-container img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+        .user-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .user-info p {
+            font-size: 0.75rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .switch-brand-arrow { font-size: 0.7rem; color: #94a3b8; }
+
+        /* Navegación Principal */
+        .sidebar-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            color: #475569;
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            border-radius: 8px;
+            border-radius: 10px;
             transition: all 0.2s ease;
         }
-
-        /* Estado Activo (Donde está parado el usuario) */
         .sidebar-menu a.active {
-            background-color: #f1f3f5;
+            background-color: #f1f5f9;
             color: #000000;
             font-weight: 600;
         }
-
         .sidebar-menu a:hover:not(.active) {
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: #f8fafc;
+            color: #0f172a;
         }
 
-        .menu-icon {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-            color: #adb5bd;
-        }
-        .sidebar-menu a.active .menu-icon {
-            color: #495057;
-        }
-
-        /* CONTENIDO PRINCIPAL (Main Content Area) */
-        .main-content {
-            margin-left: 260px; /* Desplazamiento por el ancho del sidebar */
-            flex-grow: 1;
-            padding: 40px;
-            transition: all 0.3s ease;
-        }
-
-        /* Barra Superior Interna (Top Navigation Bar) */
-        .top-bar {
+        /* Iconos Estilo Glassmorphism */
+        .glass-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e9ecef;
+            justify-content: center;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .top-bar .page-title h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-        .top-bar .page-title p {
-            font-size: 0.85rem;
-            color: #86868b;
-            margin-top: 20px;
-        }
-        .badge-onshift {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        .sidebar-menu a.active .glass-icon {
+            background: rgba(15, 23, 42, 0.05);
+            border-color: rgba(15, 23, 42, 0.1);
         }
 
-        /* Tarjetas de Resumen KPI (Estilo tus ejemplos adjuntos) */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 35px;
-        }
-        .kpi-card {
-            background-color: #ffffff;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 24px;
-        }
-        .kpi-card .kpi-label {
-            font-size: 0.85rem;
-            color: #8a8a8f;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .kpi-card .kpi-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #000000;
-        }
-
-        /* Grilla del Dashboard - Accesos Rápidos Directos */
-        .dashboard-sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .section-card {
-            background-color: #ffffff;
-            border: 1px solid #e9ecef;
+        /* MEDIDOR DE CONTRATO Y PAGO (Estilo Allie Delgado Circular) */
+        .contract-progress-box {
+            margin-top: auto; /* Lo empuja al fondo del sidebar */
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 30px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        .progress-circle-svg {
+            width: 80px;
+            height: 80px;
+            transform: rotate(-90deg);
+        }
+        .progress-circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 8; }
+        .progress-circle-bar {
+            fill: none;
+            stroke: #0f172a; /* Negro sólido minimalista */
+            stroke-width: 8;
+            stroke-dasharray: 226;
+            stroke-dashoffset: 0; /* 100% de ejecución */
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+        }
+        .chart-center-text {
+            position: absolute;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 28px;
+        }
+        .contract-details {
+            margin-top: 12px;
+        }
+        .contract-details h5 { font-size: 0.8rem; font-weight: 600; color: #334155; }
+        .contract-details p { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+
+        /* AREA DE CONTENIDO PRINCIPAL */
+        .main-container {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Bienvenida Centralizada */
+        .dashboard-welcome {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .dashboard-welcome h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        .dashboard-welcome p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Sección "¿Qué tipo de consulta deseas realizar?" al estilo NetUno */
+        .hub-title {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 20px 0 30px 0;
+        }
+
+        /* Módulos de Autogestión Centrales */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .hub-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 30px 20px;
+            text-align: center;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .section-card:hover {
-            border-color: #adb5bd;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        .hub-card:hover {
+            transform: translateY(-2px);
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
-        .section-card h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #1a1a1a;
-        }
-        .section-card p {
-            font-size: 0.9rem;
-            color: #6c757d;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .btn-access {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #000000;
+        .hub-card .hub-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+        }
+        .hub-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        .hub-card p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
         }
 
-        /* Footer Integrado */
+        /* FOOTER TOTALMENTE CENTRADO */
         footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid #e9ecef;
+            margin-top: auto;
+            padding-top: 40px;
+            text-align: center;
             font-size: 0.8rem;
-            color: #adb5bd;
-            text-align: left;
-        }
-
-        /* Ajustes Responsivos */
-        @media (max-width: 768px) {
-            .sidebar { width: 70px; }
-            .sidebar-brand img { display: none; }
-            .sidebar-menu span { display: none; }
-            .main-content { margin-left: 70px; padding: 20px; }
+            color: #94a3b8;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
+    <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar">
-        <div class="sidebar-brand">
-            <img src="img/hotelalex_color.png" alt="Hotel Alex" id="brandLogo">
+        <!-- Perfil de Usuario con Avatar Circular -->
+        <div class="user-profile">
+            <div class="avatar-container">
+                <img src="img/hotelalex_color.png" alt="Hotel Alex">
+            </div>
+            <div class="user-info">
+                <h4>Hotel Alex</h4>
+                <p>Cliente Activo <span class="switch-brand-arrow">▼</span></p>
+            </div>
         </div>
         
+        <!-- Menú Lateral Izquierdo -->
         <ul class="sidebar-menu">
-            <li><a href="index.html" class="active"><span class="menu-icon">🎛</span><span>Inicio</span></a></li>
-            <li><a href="recursos.html"><span class="menu-icon">📸</span><span>Instagram</span></a></li>
-            <li><a href="cronograma.html"><span class="menu-icon">🗓</span><span>Cronograma</span></a></li>
-            <li><a href="presupuesto.html"><span class="menu-icon">📊</span><span>Presupuesto</span></a></li>
+            <li><a href="index.html" class="active"><div class="glass-icon">🎛</div><span>Inicio</span></a></li>
+            <li><a href="recursos.html"><div class="glass-icon">📊</div><span>Instagram</span></a></li>
+            <li><a href="cronograma.html"><div class="glass-icon">🗓</div><span>Cronograma</span></a></li>
+            <li><a href="presupuesto.html"><div class="glass-icon">💼</div><span>Presupuesto</span></a></li>
+            <li><a href="pagos.html"><div class="glass-icon">💳</div><span>Coordenadas de Pago</span></a></li>
         </ul>
+
+        <!-- Medidor Circular de Contrato e Inversión -->
+        <div class="contract-progress-box">
+            <div style="position: relative; display: flex; justify-content: center;">
+                <svg class="progress-circle-svg">
+                    <circle class="progress-circle-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="progress-circle-bar" cx="40" cy="40" r="36"></circle>
+                </svg>
+                <div class="chart-center-text">100%</div>
+            </div>
+            <div class="contract-details">
+                <h5>Inicio: 15 de Junio</h5>
+                <p>Estatus: Contrato Ejecutado</p>
+            </div>
+        </div>
     </nav>
 
+    <!-- Contenido Principal -->
     <main class="main-content">
         
-        <div class="top-bar">
-            <div class="page-title">
-                <h1>Panel de Control de Marca</h1>
-                <p>Evolución Estratégica & Contenido Colaborativo</p>
-            </div>
-            <div class="badge-onshift">ONSHIFT</div>
+        <!-- Bloque de Bienvenida Integrado -->
+        <div class="dashboard-welcome">
+            <h2>Bienvenido al Portal Onshift</h2>
+            <p>Control de mando unificado para la estrategia digital, finanzas y evolución de marca de Hotel Alex Caracas.</p>
         </div>
 
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="kpi-label">Comunidad IG</div>
-                <div class="kpi-value">54.2K</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Fase del Plan</div>
-                <div class="kpi-value">Auditoría</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Estatus Global</div>
-                <div class="kpi-value" style="color: #fd7e14;">Propuesta</div>
-            </div>
-        </div>
+        <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <div class="dashboard-sections">
+        <!-- Módulos Centrales de Autogestión (Estructura Limpia) -->
+        <div class="hub-grid">
             
-            <a href="recursos.html" class="section-card">
-                <div>
-                    <h3>Estudio de Identidad (Instagram)</h3>
-                    <p>Visualiza el análisis visual del perfil actual frente a la transformación estética propuesta por Onshift (Antes vs. Después).</p>
-                </div>
-                <div class="btn-access">Ver Análisis →</div>
+            <a href="recursos.html" class="hub-card">
+                <div class="hub-icon-wrapper">📈</div>
+                <h3>Métricas e Instagram</h3>
+                <p>Monitoreo de comunidad, audiencias y desempeño analítico del ecosistema digital.</p>
             </a>
 
-            <a href="cronograma.html" class="section-card">
-                <div>
-                    <h3>Cronograma de Contenido</h3>
-                    <p>Grilla de publicaciones planificadas, frecuencia de publicaciones e hilos de aprobación de artes y copys.</p>
-                </div>
-                <div class="btn-access">Abrir Calendario →</div>
+            <a href="cronograma.html" class="hub-card">
+                <div class="hub-icon-wrapper">📅</div>
+                <h3>Cronograma</h3>
+                <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
             </a>
 
-            <a href="presupuesto.html" class="section-card">
-                <div>
-                    <h3>Plan de Inversión</h3>
-                    <p>Detalle de costos del plan mínimo de 3 meses, alcances técnicos, entregables y beneficios comerciales directos.</p>
-                </div>
-                <div class="btn-access">Ver Presupuesto →</div>
+            <a href="presupuesto.html" class="hub-card">
+                <div class="hub-icon-wrapper">💰</div>
+                <h3>Presupuesto</h3>
+                <p>Revisión detallada de planes financieros, alcances de inversión y entregables estipulados.</p>
+            </a>
+
+            <a href="pagos.html" class="hub-card">
+                <div class="hub-icon-wrapper">💳</div>
+                <h3>Gestión de Pagos</h3>
+                <p>Consulta cuentas bancarias de la agencia, reporta transferencias y descarga soportes.</p>
             </a>
 
         </div>
 
+        <!-- Footer Centrado Abajo -->
         <footer>
             <p>&copy; 2026 ONSHIFT. Entorno privado de gestión de marca exclusivo para Hotel Alex Caracas.</p>
         </footer>
