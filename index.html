@@ -14,7 +14,7 @@
         }
         
         body {
-            background-color: #f4f6f8; /* Gris corporativo higiénico */
+            background-color: #f4f6f8;
             color: #2b2f33;
             display: flex;
             min-height: 100vh;
@@ -36,7 +36,6 @@
             z-index: 100;
         }
 
-        /* Perfil de Usuario */
         .user-profile-trigger {
             display: flex;
             flex-direction: column;
@@ -66,7 +65,6 @@
             color: #64748b;
         }
 
-        /* Navegación */
         .sidebar-menu {
             list-style: none;
             display: flex;
@@ -103,7 +101,6 @@
         .sidebar-footer { margin-top: auto; width: 100%; }
         .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
 
-        /* ICONOS GLASSMORPHISM */
         .glass-icon {
             width: 36px;
             height: 36px;
@@ -114,7 +111,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
             flex-shrink: 0;
         }
         .sidebar-menu button.active .glass-icon {
@@ -133,7 +129,7 @@
         .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
 
-        /* CONTENEDOR DE CONTENIDO DINÁMICO */
+        /* CONTENEDOR PRINCIPAL */
         .main-container {
             margin-left: 280px; 
             flex-grow: 1;
@@ -160,8 +156,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* VISTA: INICIO (HUB) */
-        .hub-title { text-align: center; font-size: 1.35rem; font-weight: 500; color: #0f172a; margin: 40px 0; letter-spacing: -0.3px; }
+        /* HUB DE INICIO */
+        .hub-title { text-align: center; font-size: 1.35rem; font-weight: 500; color: #0f172a; margin: 40px 0; }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; width: 100%; }
         .hub-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px 24px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: all 0.2s ease;
@@ -171,7 +167,6 @@
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
-        /* Donut Chart de Contrato */
         .chart-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 60px; height: 60px; }
         .progress-circle-svg { width: 60px; height: 60px; transform: rotate(-90deg); }
         .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 7; }
@@ -179,7 +174,7 @@
         .glow-indicator { position: absolute; width: 8px; height: 8px; background-color: #ffffff; border-radius: 50%; top: 0px; left: 26px; box-shadow: 0 0 8px rgba(2, 132, 199, 0.8); }
         .chart-center-text { position: absolute; display: flex; font-size: 1rem; font-weight: 700; color: #0f172a; }
 
-        /* VISTA: CRONOGRAMA */
+        /* CRONOGRAMA */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -189,176 +184,60 @@
         .header-info h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
         .header-info p { font-size: 0.9rem; color: #64748b; }
 
-        /* Controles Superiores del Calendario (Filtros y Excel) */
-        .calendar-controls {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
+        .calendar-controls { display: flex; gap: 16px; align-items: center; }
         
-        /* Switch Premium de Vistas (Cliente / Interno) */
-        .view-switch {
-            background: #e2e8f0;
-            padding: 4px;
-            border-radius: 10px;
-            display: flex;
-            gap: 4px;
-        }
+        .view-switch { background: #e2e8f0; padding: 4px; border-radius: 10px; display: flex; gap: 4px; }
         .switch-btn {
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            background: transparent;
-            color: #64748b;
-            transition: all 0.15s ease;
+            padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; background: transparent; color: #64748b; transition: all 0.15s ease;
         }
-        .switch-btn.active {
-            background: #ffffff;
-            color: #0f172a;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+        .switch-btn.active { background: #ffffff; color: #0f172a; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
-        /* Botón de Importar Archivo Excel/CSV */
         .btn-import {
-            background-color: #ffffff;
-            border: 1px solid #cbd5e1;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #334155;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            background-color: #ffffff; border: 1px solid #cbd5e1; padding: 10px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s ease;
         }
-        .btn-import:hover {
-            background-color: #f8fafc;
-            border-color: #94a3b8;
-        }
+        .btn-import:hover { background-color: #f8fafc; border-color: #94a3b8; }
 
-        /* Estructura del Calendario */
-        .calendar-container {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            width: 100%;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
-        }
+        /* CALENDARIO */
+        .calendar-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; width: 100%; overflow: hidden; }
         .calendar-month-title {
-            padding: 20px 24px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0f172a;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 20px 24px; font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;
         }
-        .calendar-days-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            background: #f8fafc;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .calendar-day-label {
-            padding: 14px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #475569;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .calendar-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        .calendar-day-label { padding: 14px; font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-auto-rows: minmax(120px, auto);
-        }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: minmax(130px, auto); }
+        
         .calendar-cell {
-            border-right: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            background: #ffffff;
-            transition: background 0.15s ease;
-            cursor: pointer;
+            border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 12px; display: flex; flex-direction: column; gap: 6px; background: #ffffff; transition: background 0.15s ease; cursor: pointer; position: relative;
         }
-        .calendar-cell:hover {
-            background: #f8fafc; /* Efecto hover para denotar que es editable manualmente */
-        }
+        .calendar-cell:hover { background: #f8fafc; }
         .calendar-cell:nth-child(7n) { border-right: none; }
         
-        /* Celdas vacías del mes anterior */
-        .calendar-cell.muted {
-            background: #fcfdfe;
-            cursor: default;
-        }
-        .calendar-cell.muted .cell-number {
-            color: #cbd5e1;
-        }
+        .calendar-cell.muted { background: #fcfdfe; cursor: default; }
+        .calendar-cell.muted .cell-number { color: #cbd5e1; }
 
-        .cell-number {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #64748b;
-        }
+        .cell-number { font-size: 0.8rem; font-weight: 600; color: #64748b; }
 
-        /* Hito: Marca de Inicio de Proyecto (15 de Junio) */
-        .calendar-cell.project-start {
-            background-color: #f0f9ff;
-            border: 1px solid #bae6fd;
-        }
+        /* Hito: Marca de Inicio de Proyecto */
+        .calendar-cell.project-start { background-color: #f0f9ff; border: 2px solid #bae6fd; }
         .calendar-cell.project-start .cell-number {
-            color: #0284c7;
-            background: #e0f2fe;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            color: #0284c7; background: #e0f2fe; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
         }
-        .start-badge {
-            background: #0284c7;
-            color: #ffffff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
-            align-self: flex-start;
-            text-transform: uppercase;
-        }
+        .start-badge { background: #0284c7; color: #ffffff; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; align-self: flex-start; text-transform: uppercase; }
 
-        /* Bloques de Post Simulados */
-        .post-item {
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            line-height: 1.3;
-        }
+        /* Contenedor interno de posts de cada celda */
+        .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; margin-top: 4px; }
+
+        /* Estilos de los Bloques de Post */
+        .post-item { padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 500; line-height: 1.3; word-break: break-word; }
         .post-reel { background-color: #e8f5e9; color: #1b5e20; border-left: 3px solid #4caf50; }
         .post-story { background-color: #ffebee; color: #b71c1c; border-left: 3px solid #f44336; }
         .post-carrusel { background-color: #e3f2fd; color: #0d47a1; border-left: 3px solid #2196f3; }
+        .post-general { background-color: #f1f5f9; color: #334155; border-left: 3px solid #94a3b8; }
         
-        /* Bloque Interno Ocultable (Solo para el equipo) */
-        .internal-task {
-            background-color: #f3e5f5;
-            color: #4a148c;
-            border-left: 3px solid #9c27b0;
-            font-style: italic;
-        }
+        /* Bloque Operativo Interno */
+        .internal-task { background-color: #f3e5f5; color: #4a148c; border-left: 3px solid #9c27b0; font-style: italic; }
 
-        /* Pantallas Marcadoras de Posición */
         .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b; }
         footer { margin-top: auto; padding-top: 60px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
     </style>
@@ -406,6 +285,7 @@
 
     <main class="main-container">
         
+        <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -414,19 +294,16 @@
                     <h3>Instagram: Diagnóstico</h3>
                     <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
                 </div>
-
                 <div class="hub-card" onclick="navigateTo('cronograma-section')">
                     <div class="hub-icon-wrapper"><div class="icon-shape shape-calendar" style="width:18px; height:12px;"></div></div>
                     <h3>Cronograma</h3>
                     <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
                 </div>
-
                 <div class="hub-card" onclick="navigateTo('metricas-section')">
                     <div class="hub-icon-wrapper"><div class="icon-shape shape-metrics" style="width:14px; height:14px;"></div></div>
                     <h3>Métricas de Rendimiento</h3>
                     <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
                 </div>
-
                 <div class="hub-card" style="cursor: default;">
                     <div class="hub-icon-wrapper">
                         <div class="chart-wrapper">
@@ -441,31 +318,25 @@
             </div>
         </section>
 
+        <!-- SECCIÓN INSTAGRAM -->
         <section id="instagram-section" class="app-section">
-            <div class="section-header">
-                <div class="header-info">
-                    <h2>Instagram: Diagnóstico & Plan de Evolución</h2>
-                    <p>Auditoría de la línea de comunicación actual y estrategias estéticas inmediatas.</p>
-                </div>
-            </div>
-            <div class="placeholder-box">
-                <p>Aquí se desplegará el análisis de la cuenta actual y las oportunidades clave de mejora visual y de engagement.</p>
-            </div>
+            <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
+            <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
+        <!-- SECCIÓN CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
                     <h2>Cronograma de Contenidos</h2>
-                    <p>Planificación de publicaciones, edición manual y estatus de aprobación de piezas.</p>
+                    <p>Haz clic en cualquier día válido para añadir o editar actividades manualmente.</p>
                 </div>
-                
                 <div class="calendar-controls">
                     <div class="view-switch">
                         <button class="switch-btn active" onclick="setCalendarView('client')">Vista Cliente</button>
                         <button class="switch-btn" onclick="setCalendarView('internal')">Vista Interna (Equipo)</button>
                     </div>
-                    <button class="btn-import">
+                    <button class="btn-import" onclick="alert('Funcionalidad de carga de Excel simulada con éxito. ¡Listo para conectar al backend!')">
                         📁 Importar Excel / CSV
                     </button>
                 </div>
@@ -474,18 +345,13 @@
             <div class="calendar-container">
                 <div class="calendar-month-title">
                     <span>Junio 2026</span>
-                    <span style="font-size:0.85rem; color:#64748b; font-weight:500;">Haz clic en cualquier celda para editar manualmente</span>
+                    <span style="font-size:0.85rem; color:#0284c7; font-weight:600;">✨ ¡Interactividad Activada!</span>
                 </div>
                 <div class="calendar-days-grid">
-                    <div class="calendar-day-label">Lun</div>
-                    <div class="calendar-day-label">Mar</div>
-                    <div class="calendar-day-label">Mié</div>
-                    <div class="calendar-day-label">Jue</div>
-                    <div class="calendar-day-label">Vie</div>
-                    <div class="calendar-day-label">Sáb</div>
-                    <div class="calendar-day-label">Dom</div>
+                    <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
                 <div class="calendar-grid">
+                    <!-- Mayo Muted -->
                     <div class="calendar-cell muted"><span class="cell-number">25</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">26</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">27</span></div>
@@ -494,121 +360,144 @@
                     <div class="calendar-cell muted"><span class="cell-number">30</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">31</span></div>
                     
-                    <div class="calendar-cell"><span class="cell-number">1</span></div>
-                    <div class="calendar-cell"><span class="cell-number">2</span></div>
-                    <div class="calendar-cell"><span class="cell-number">3</span></div>
-                    <div class="calendar-cell"><span class="cell-number">4</span></div>
-                    <div class="calendar-cell"><span class="cell-number">5</span></div>
-                    <div class="calendar-cell"><span class="cell-number">6</span></div>
-                    <div class="calendar-cell"><span class="cell-number">7</span></div>
+                    <!-- Junio Interactivo (Días 1 al 14) -->
+                    <script>
+                        for(let i=1; i<=14; i++) {
+                            document.write(`
+                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                    <span class="cell-number">${i}</span>
+                                    <div class="posts-container"></div>
+                                </div>
+                            `);
+                        }
+                    </script>
 
-                    <div class="calendar-cell"><span class="cell-number">8</span></div>
-                    <div class="calendar-cell"><span class="cell-number">9</span></div>
-                    <div class="calendar-cell"><span class="cell-number">10</span></div>
-                    <div class="calendar-cell"><span class="cell-number">11</span></div>
-                    <div class="calendar-cell"><span class="cell-number">12</span></div>
-                    <div class="calendar-cell"><span class="cell-number">13</span></div>
-                    <div class="calendar-cell"><span class="cell-number">14</span></div>
-
-                    <div class="calendar-cell project-start">
+                    <!-- Hito 15 de Junio: Inicio -->
+                    <div class="calendar-cell project-start" onclick="addPostManual(this)">
                         <span class="cell-number">15</span>
                         <span class="start-badge">Inicio</span>
-                        <div class="post-item post-reel">🎬 Reel: Lanzamiento</div>
+                        <div class="posts-container">
+                            <div class="post-item post-reel" data-type="public">🎬 Reel: Lanzamiento</div>
+                        </div>
                     </div>
-                    <div class="calendar-cell">
-                        <span class="cell-number">16</span>
-                        <div class="post-item internal-task" style="display:none;">⚙️ Grabar cápsula 1</div>
-                    </div>
-                    <div class="calendar-cell"><span class="cell-number">17</span><div class="post-item post-story">📸 Story: Espacios</div></div>
-                    <div class="calendar-cell"><span class="cell-number">18</span></div>
-                    <div class="calendar-cell">
-                        <span class="cell-number">19</span>
-                        <div class="post-item post-carrusel">🎠 Carrusel: Menú</div>
-                        <div class="post-item internal-task" style="display:none;">⚙️ Pautar Ads</div>
-                    </div>
-                    <div class="calendar-cell"><span class="cell-number">20</span></div>
-                    <div class="calendar-cell"><span class="cell-number">21</span></div>
-                    
-                    <div class="calendar-cell"><span class="cell-number">22</span><div class="post-item post-reel">🎬 Reel: Concepto</div></div>
-                    <div class="calendar-cell"><span class="cell-number">23</span></div>
-                    <div class="calendar-cell"><span class="cell-number">24</span><div class="post-item post-story">📸 Story: Desayunos</div></div>
-                    <div class="calendar-cell"><span class="cell-number">25</span></div>
-                    <div class="calendar-cell"><span class="cell-number">26</span></div>
-                    <div class="calendar-cell"><span class="cell-number">27</span></div>
-                    <div class="calendar-cell"><span class="cell-number">28</span></div>
+
+                    <!-- Resto de Junio (Días 16 al 30) -->
+                    <script>
+                        for(let i=16; i<=30; i++) {
+                            let defaultPosts = '';
+                            if(i === 17) defaultPosts = `<div class="post-item post-story" data-type="public">📸 Story: Espacios</div>`;
+                            if(i === 19) defaultPosts = `
+                                <div class="post-item post-carrusel" data-type="public">🎠 Carrusel: Menú</div>
+                                <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
+                            `;
+                            if(i === 22) defaultPosts = `<div class="post-item post-reel" data-type="public">🎬 Reel: Concepto</div>`;
+                            
+                            document.write(`
+                                <div class="calendar-cell" onclick="addPostManual(this)">
+                                    <span class="cell-number">${i}</span>
+                                    <div class="posts-container">${defaultPosts}</div>
+                                </div>
+                            `);
+                        }
+                    </script>
                 </div>
             </div>
         </section>
 
+        <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
-            <div class="section-header">
-                <div class="header-info">
-                    <h2>Métricas e Informes</h2>
-                    <p>Resultados analíticos y rendimiento del ecosistema digital.</p>
-                </div>
-            </div>
-            <div class="placeholder-box">
-                <p>Módulo de métricas en desarrollo. Próximamente se conectarán los reportes automatizados de rendimiento.</p>
-            </div>
+            <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
+            <div class="placeholder-box"><p>Módulo de métricas.</p></div>
         </section>
 
+        <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
-            <div class="section-header">
-                <div class="header-info">
-                    <h2>Presupuesto y Alcance</h2>
-                    <p>Control financiero de los entregables acordados.</p>
-                </div>
-            </div>
-            <div class="placeholder-box">
-                <p>Aquí se integrará la tabla financiera limpia con los costos e inversiones aprobados.</p>
-            </div>
+            <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
+            <div class="placeholder-box"><p>Tabla financiera.</p></div>
         </section>
 
         <footer>
-            <p>&copy; 2026 ONSHIFT. Entorno privado de gestión de marca exclusivo para Hotel Alex Caracas.</p>
+            <p>&copy; 2026 ONSHIFT. Privado para Hotel Alex Caracas.</p>
         </footer>
-
     </main>
 
     <script>
+        // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
         const sections = document.querySelectorAll('.app-section');
 
         buttons.forEach(button => {
             button.addEventListener('click', () => {
-                const targetSectionId = button.getAttribute('data-target');
-                navigateTo(targetSectionId);
+                navigateTo(button.getAttribute('data-target'));
             });
         });
 
         function navigateTo(sectionId) {
             sections.forEach(section => section.classList.remove('active-section'));
             buttons.forEach(btn => btn.classList.remove('active'));
-
             document.getElementById(sectionId).classList.add('active-section');
-
             const matchingButton = document.querySelector(`.menu-btn[data-target="${sectionId}"]`);
             if (matchingButton) matchingButton.classList.add('active');
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Lógica para alternar vistas (Cliente vs Interna)
+        // Variable global para saber en qué vista estamos ('client' o 'internal')
+        let currentView = 'client';
+
+        // Alternar visualización entre Vista Cliente e Interna
         function setCalendarView(viewType) {
+            currentView = viewType;
             const switchBtns = document.querySelectorAll('.switch-btn');
-            const internalTasks = document.querySelectorAll('.internal-task');
+            const internalTasks = document.querySelectorAll('.internal-task, [data-type="internal"]');
             
             switchBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
             if(viewType === 'client') {
-                event.target.classList.add('active');
                 internalTasks.forEach(task => task.style.display = 'none');
             } else {
-                event.target.classList.add('active');
                 internalTasks.forEach(task => task.style.display = 'block');
             }
         }
-    </script>
 
+        // FUNCIÓN CLAVE: Añadir contenido manualmente mediante clic
+        function addPostManual(cellElement) {
+            const promptText = prompt("Escribe la actividad o tipo de post para este día:\n\n💡 Tip: Si empieza con el emoji ⚙️ o la palabra 'interno', se ocultará automáticamente en la Vista del Cliente.");
+            
+            if (promptText && promptText.trim() !== "") {
+                const container = cellElement.querySelector('.posts-container');
+                const cleanText = promptText.trim();
+                
+                // Crear el nuevo elemento visual
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post-item');
+                
+                // Determinar si es una tarea interna o pública
+                if (cleanText.startsWith('⚙️') || cleanText.toLowerCase().includes('interno')) {
+                    postDiv.classList.add('internal-task');
+                    postDiv.setAttribute('data-type', 'internal');
+                    // Si estamos en vista cliente, el elemento nuevo nace oculto
+                    if (currentView === 'client') {
+                        postDiv.style.display = 'none';
+                    }
+                } else if (cleanText.toLowerCase().includes('reel')) {
+                    postDiv.classList.add('post-reel');
+                    postDiv.setAttribute('data-type', 'public');
+                } else if (cleanText.toLowerCase().includes('story') || cleanText.toLowerCase().includes('historia')) {
+                    postDiv.classList.add('post-story');
+                    postDiv.setAttribute('data-type', 'public');
+                } else if (cleanText.toLowerCase().includes('carrusel')) {
+                    postDiv.classList.add('post-carrusel');
+                    postDiv.setAttribute('data-type', 'public');
+                } else {
+                    postDiv.classList.add('post-general');
+                    postDiv.setAttribute('data-type', 'public');
+                }
+                
+                postDiv.textContent = cleanText;
+                container.appendChild(postDiv);
+            }
+        }
+    </script>
 </body>
 </html>
