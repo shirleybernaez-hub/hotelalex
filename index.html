@@ -41,29 +41,22 @@
             padding: 20px;
         }
 
-       <style>
-    /* ... otros estilos previos ... */
+       .login-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+    text-align: center;
+}
 
-    .login-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 20px;
-        padding: 40px;
-        width: 100%;
-        max-width: 400px;
-        box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
-        text-align: center;
-        animation: fadeInContent 0.4s ease;
-    }
-
-    .login-logo {
-        height: 100px;
-        margin-bottom: 24px;
-        object-fit: contain;
-    }
-
-    /* ... resto de tus estilos ... */
-</style>
+.login-logo {
+    height: 100px; /* Aquí aumentas el tamaño */
+    margin-bottom: 24px;
+    object-fit: contain;
+}
 
         <div class="login-card">
     <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
@@ -326,25 +319,24 @@
 <body>
 
     <div class="login-overlay" id="login-screen">
-        <div class="login-card">
-            <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
-            <h2>Portal de Autogestión</h2>
-            <p>Ingresa tus credenciales para acceder</p>
-            
-            <div class="form-group">
-                <label for="username">Usuario</label>
-                <input type="text" id="username" placeholder="Ej: admin" autocomplete="off">
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" placeholder="••••">
-            </div>
-            
-            <button class="btn-login" onclick="validateAuth()">Ingresar al Sistema</button>
-            <div class="login-error" id="login-error-msg">Usuario o contraseña incorrectos.</div>
+    <div class="login-card">
+        <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
+        <p>Ingresa tus credenciales para acceder</p>
+        
+        <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" id="username" placeholder="Ej: admin" autocomplete="off">
         </div>
+        
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="••••">
+        </div>
+        
+        <button class="btn-login" onclick="validateAuth()">Ingresa al Sistema</button>
+        <div class="login-error" id="login-error-msg">Usuario o contraseña incorrectos.</div>
     </div>
+</div>
 
     <header class="mobile-header" id="app-mobile-header">
         <img src="img/hotelalex_color.png" alt="Hotel Alex" class="mobile-brand-logo">
