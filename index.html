@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
+    <!-- Cargamos Lucide Icons exactamente como lo tenías -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
@@ -231,6 +232,7 @@
 </head>
 <body>
 
+    <!-- Panel Lateral Izquierdo Fijo -->
     <nav class="sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -246,7 +248,14 @@
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
-                <div class="sidebar-icon"><i data-lucide="instagram" stroke-width="1.8" size="20"></i></div>
+                <!-- INTEGRACIÓN OPCIÓN 1: SVG inline puro con clases y transiciones nativas -->
+                <div class="sidebar-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                </div>
                 <span>Instagram</span>
             </button>
             <button class="menu-btn" data-target="cronograma-section">
@@ -270,13 +279,22 @@
         </div>
     </nav>
 
+    <!-- Contenedor Principal Dinámico -->
     <main class="main-container">
         
+        <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
                 <div class="hub-card" onclick="navigateTo('instagram-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="instagram" stroke-width="1.5" size="32"></i></div>
+                    <!-- INTEGRACIÓN OPCIÓN 1: SVG inline puro adaptado al Hub central -->
+                    <div class="hub-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                        </svg>
+                    </div>
                     <h3>Instagram: Diagnóstico</h3>
                     <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
                 </div>
@@ -304,11 +322,13 @@
             </div>
         </section>
 
+        <!-- SECCIÓN INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
+        <!-- SECCIÓN CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -335,6 +355,7 @@
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
                 <div class="calendar-grid">
+                    <!-- Mayo Muted -->
                     <div class="calendar-cell muted"><span class="cell-number">25</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">26</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">27</span></div>
@@ -343,6 +364,7 @@
                     <div class="calendar-cell muted"><span class="cell-number">30</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">31</span></div>
                     
+                    <!-- Junio Interactivo (Días 1 al 14) -->
                     <script>
                         for(let i=1; i<=14; i++) {
                             document.write(`
@@ -354,6 +376,7 @@
                         }
                     </script>
 
+                    <!-- Hito 15 de Junio: Inicio -->
                     <div class="calendar-cell project-start" onclick="addPostManual(this)">
                         <span class="cell-number">15</span>
                         <span class="start-badge">Inicio</span>
@@ -362,6 +385,7 @@
                         </div>
                     </div>
 
+                    <!-- Resto de Junio (Días 16 al 30) -->
                     <script>
                         for(let i=16; i<=30; i++) {
                             let defaultPosts = '';
@@ -384,11 +408,13 @@
             </div>
         </section>
 
+        <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas.</p></div>
         </section>
 
+        <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
             <div class="placeholder-box"><p>Tabla financiera.</p></div>
@@ -400,7 +426,7 @@
     </main>
 
     <script>
-        // Inicialización nativa y directa de los iconos
+        // Inicialización nativa de los iconos Lucide existentes
         lucide.createIcons();
 
         // Control de Navegación SPA
