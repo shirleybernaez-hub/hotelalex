@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
-    <!-- Cargamos Lucide Icons exactamente como lo tenías -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
@@ -127,6 +126,80 @@
             font-weight: 500;
         }
 
+        /* MODAL DE CONFIRMACIÓN DE SALIDA */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            animation: fadeInContent 0.25s ease;
+        }
+
+        .modal-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .modal-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            flex: 1;
+        }
+
+        .btn-modal-yes {
+            background-color: #ef4444;
+            color: #ffffff;
+        }
+        .btn-modal-yes:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-modal-no {
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+        .btn-modal-no:hover {
+            background-color: #e2e8f0;
+        }
+
         /* BARRA LATERAL FIXED CLEAN */
         .sidebar {
             width: 280px;
@@ -204,6 +277,18 @@
             color: #0f172a;
         }
 
+        /* Estilo destructivo o de alerta leve para el botón Salir */
+        .sidebar-menu button.btn-logout-sidebar {
+            color: #94a3b8;
+        }
+        .sidebar-menu button.btn-logout-sidebar:hover {
+            background-color: #fef2f2;
+            color: #ef4444;
+        }
+        .sidebar-menu button.btn-logout-sidebar:hover .sidebar-icon {
+            color: #ef4444;
+        }
+
         .sidebar-footer { margin-top: auto; width: 100%; }
         .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
 
@@ -223,12 +308,12 @@
             color: #0f172a;
         }
 
-        /* CONTENEDOR PRINCIPAL (Invisible hasta loguearse) */
+        /* CONTENEDOR PRINCIPAL */
         .main-container {
             margin-left: 280px; 
             flex-grow: 1;
             padding: 60px;
-            display: none; /* Se maneja por JS al autenticar */
+            display: none; 
             flex-direction: column;
             min-height: 100vh;
             width: calc(100% - 280px);
@@ -281,7 +366,6 @@
         .header-info h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
         .header-info p { font-size: 0.9rem; color: #64748b; }
 
-        /* Controles invisibles por defecto para el cliente */
         .calendar-controls { display: none; gap: 16px; align-items: center; }
         
         .view-switch { background: #e2e8f0; padding: 4px; border-radius: 10px; display: flex; gap: 4px; }
@@ -337,16 +421,13 @@
         .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 60px; text-align: center; color: #64748b; }
         footer { margin-top: auto; padding-top: 60px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
         
-        /* Ocultar barra lateral hasta loguearse */
         .sidebar { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- CONTROL DE ACCESO (MÓDULO DE INGRESO) -->
     <div class="login-overlay" id="login-screen">
         <div class="login-card">
-            <!-- Si tienes un logo para el login puedes usarlo aquí, por ahora usamos el del hotel -->
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
             <h2>Portal de Autogestión</h2>
             <p>Ingresa tus credenciales para acceder</p>
@@ -366,7 +447,17 @@
         </div>
     </div>
 
-    <!-- Panel Lateral Izquierdo Fijo -->
+    <div class="modal-overlay" id="logout-modal">
+        <div class="modal-card">
+            <h3>¿Cerrar Sesión?</h3>
+            <p>¿Está seguro que desea salir del dashboard?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-modal-yes" onclick="confirmLogout()">Sí, salir</button>
+                <button class="btn-modal btn-modal-no" onclick="closeLogoutModal()">No</button>
+            </div>
+        </div>
+    </div>
+
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -408,14 +499,16 @@
                     <div class="sidebar-icon"><i data-lucide="wallet" stroke-width="1.8" size="20"></i></div>
                     <span>Presupuesto</span>
                 </button>
+                <button class="btn-logout-sidebar" onclick="openLogoutModal()">
+                    <div class="sidebar-icon"><i data-lucide="log-out" stroke-width="1.8" size="20"></i></div>
+                    <span>Salir</span>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Contenedor Principal Dinámico -->
     <main class="main-container" id="app-content">
         
-        <!-- SECCIÓN INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -443,20 +536,17 @@
             </div>
         </section>
 
-        <!-- SECCIÓN INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
-        <!-- SECCIÓN CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
                     <h2>Cronograma de Contenidos</h2>
                     <p id="cronograma-desc-text">Planificación mensual de publicaciones.</p>
                 </div>
-                <!-- Controles del calendario (Switch de vistas e importación) -->
                 <div class="calendar-controls" id="admin-calendar-controls">
                     <div class="view-switch">
                         <button class="switch-btn active" id="btn-view-client" onclick="setCalendarView('client')">Vista Cliente</button>
@@ -477,7 +567,6 @@
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
                 <div class="calendar-grid">
-                    <!-- Mayo Muted -->
                     <div class="calendar-cell muted"><span class="cell-number">25</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">26</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">27</span></div>
@@ -486,7 +575,6 @@
                     <div class="calendar-cell muted"><span class="cell-number">30</span></div>
                     <div class="calendar-cell muted"><span class="cell-number">31</span></div>
                     
-                    <!-- Junio Interactivo (Días 1 al 14) -->
                     <script>
                         for(let i=1; i<=14; i++) {
                             document.write(`
@@ -498,7 +586,6 @@
                         }
                     </script>
 
-                    <!-- Hito 15 de Junio: Inicio -->
                     <div class="calendar-cell project-start" onclick="handleCellClick(this)">
                         <span class="cell-number">15</span>
                         <span class="start-badge">Inicio</span>
@@ -507,7 +594,6 @@
                         </div>
                     </div>
 
-                    <!-- Resto de Junio (Días 16 al 30) -->
                     <script>
                         for(let i=16; i<=30; i++) {
                             let defaultPosts = '';
@@ -530,13 +616,11 @@
             </div>
         </section>
 
-        <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas.</p></div>
         </section>
 
-        <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -567,7 +651,6 @@
         // Inicialización nativa de los iconos Lucide
         lucide.createIcons();
 
-        // Variable global para almacenar el rol logueado ('admin' o 'master')
         let currentUserRole = '';
         let currentView = 'client';
 
@@ -586,13 +669,13 @@
             }
         }
 
-        // Permite loguearse presionando Enter
         document.getElementById('password').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') validateAuth();
         });
 
         function setupSession(role, badgeText) {
             currentUserRole = role;
+            document.getElementById('login-error-msg').style.display = 'none';
             
             // Ocultar Login y Revelar App
             document.getElementById('login-screen').style.opacity = '0';
@@ -610,20 +693,45 @@
             const badge = document.getElementById('interactive-badge');
 
             if (role === 'master') {
-                // El rol master ve los switches y la interactividad completa
                 controls.style.display = 'flex';
                 badge.style.display = 'inline';
                 descText.textContent = "Haz clic en cualquier día válido para añadir o editar actividades manualmente.";
             } else {
-                // Al rol admin se le restringe el panel de equipo e interactividad directa
                 controls.style.display = 'none';
                 badge.style.display = 'none';
                 descText.textContent = "Planificación mensual de publicaciones aprobadas.";
-                setCalendarView('client'); // Asegura que empiece bloqueado en modo cliente
+                setCalendarView('client'); 
             }
 
-            // Forzar refresco de layouts
-            window.scrollTo({ top: 0 });
+            navigateTo('inicio-section');
+        }
+
+        // CONTROL DE MODAL DE SALIDA
+        function openLogoutModal() {
+            document.getElementById('logout-modal').style.display = 'flex';
+        }
+
+        function closeLogoutModal() {
+            document.getElementById('logout-modal').style.display = 'none';
+        }
+
+        function confirmLogout() {
+            closeLogoutModal();
+            currentUserRole = '';
+            
+            // Limpiar inputs
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
+            // Revertir pantallas
+            document.getElementById('app-sidebar').style.display = 'none';
+            document.getElementById('app-content').style.display = 'none';
+            
+            const loginScreen = document.getElementById('login-screen');
+            loginScreen.style.display = 'flex';
+            setTimeout(() => {
+                loginScreen.style.opacity = '1';
+            }, 50);
         }
 
         // Bloqueo de clics en celdas para el Cliente
@@ -631,7 +739,6 @@
             if (currentUserRole === 'master') {
                 addPostManual(cellElement);
             }
-            // Si es 'admin' no hace absolutamente nada al clickear (solo lectura)
         }
 
         // Control de Navegación SPA
@@ -660,7 +767,6 @@
             
             switchBtns.forEach(btn => btn.classList.remove('active'));
             
-            // Validamos que el evento exista antes de aplicar estilos al target para evitar errores al cargar en admin
             if(window.event && window.event.target && window.event.target.classList) {
                 window.event.target.classList.add('active');
             } else {
