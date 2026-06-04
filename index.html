@@ -54,13 +54,21 @@
         }
 
         .login-logo {
-            height: 60px;
+            height: 100px;
             margin-bottom: 24px;
             object-fit: contain;
         }
 
-        .login-card h2 { font-size: 1.2rem; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
-        .login-card p { font-size: 0.85rem; color: #64748b; margin-bottom: 28px; }
+        <div class="login-card">
+    <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
+    <p>Ingresa tus credenciales para acceder</p>
+    
+    <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" placeholder="Ej: admin" autocomplete="off">
+    </div>
+    ...
+</div>
 
         .form-group { text-align: left; margin-bottom: 18px; position: relative; }
         .form-group label {
