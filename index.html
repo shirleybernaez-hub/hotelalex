@@ -71,7 +71,7 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 12px; /* ¡MÁS ESPACIO ENTRE ITEMS AQUÍ! */
             width: 100%;
         }
         .sidebar-menu button {
@@ -80,9 +80,9 @@
             border: none;
             display: flex;
             align-items: center;
-            gap: 16px; /* Ajuste de espacio al quitar el contenedor */
+            gap: 16px;
             padding: 12px 14px;
-            color: #78828c; /* Gris corporativo del Hotel Alex para ítems inactivos */
+            color: #78828c; /* Gris corporativo del Hotel Alex */
             font-size: 0.95rem;
             font-weight: 500;
             border-radius: 12px;
@@ -92,7 +92,7 @@
         }
         .sidebar-menu button.active {
             background-color: #f1f5f9;
-            color: #000000; /* Resalta en negro puro al estar activo */
+            color: #000000;
             font-weight: 600;
         }
         .sidebar-menu button:hover:not(.active) {
@@ -103,17 +103,17 @@
         .sidebar-footer { margin-top: auto; width: 100%; }
         .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
 
-        /* ICONOS PUROS Y DIRECTOS (Sin cuadros de empaque) */
+        /* ICONOS PUROS */
         .sidebar-icon {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            color: #78828c; /* Color gris de marca del Hotel Alex */
+            color: #78828c;
             transition: color 0.2s ease;
         }
         .sidebar-menu button.active .sidebar-icon {
-            color: #000000; /* Negro puro para el icono activo */
+            color: #000000;
         }
         .sidebar-menu button:hover:not(.active) .sidebar-icon {
             color: #0f172a;
@@ -248,6 +248,7 @@
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
+                <!-- Icono corregido a formato nativo compatible -->
                 <div class="sidebar-icon"><i data-lucide="instagram" stroke-width="1.8" size="20"></i></div>
                 <span>Instagram</span>
             </button>
@@ -412,7 +413,7 @@
     </main>
 
     <script>
-        // Inicializar iconos Lucide
+        // Inicializar iconos Lucide de forma segura
         lucide.createIcons();
 
         // Navegación SPA
