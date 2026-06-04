@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
-    <!-- Cargamos Lucide Icons para una iconografía vectorial ultra limpia -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CAMBIO CLAVE: CDN oficial completo y específico de Lucide para evitar fallos de carga -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.435.0/dist/umd/lucide.min.js"></script>
+    
     <style>
         /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
         * {
@@ -71,7 +73,7 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Espaciado premium y aireado entre botones */
+            gap: 12px; /* Espaciado de 12px entre items */
             width: 100%;
         }
         .sidebar-menu button {
@@ -82,7 +84,7 @@
             align-items: center;
             gap: 16px;
             padding: 12px 14px;
-            color: #78828c; /* Gris corporativo del Hotel Alex para items inactivos */
+            color: #78828c; /* Gris corporativo del Hotel Alex */
             font-size: 0.95rem;
             font-weight: 500;
             border-radius: 12px;
@@ -109,7 +111,7 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            color: #78828c; /* Gris de marca aplicado directo al trazo */
+            color: #78828c; /* Color de marca */
             transition: color 0.2s ease;
         }
         .sidebar-menu button.active .sidebar-icon {
@@ -248,7 +250,6 @@
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
-                <!-- Tag de instagram corregido en minúscula para compatibilidad nativa con Lucide -->
                 <div class="sidebar-icon"><i data-lucide="instagram" stroke-width="1.8" size="20"></i></div>
                 <span>Instagram</span>
             </button>
@@ -281,7 +282,6 @@
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
                 <div class="hub-card" onclick="navigateTo('instagram-section')">
-                    <!-- Icono corregido también en el Hub central -->
                     <div class="hub-icon-wrapper"><i data-lucide="instagram" stroke-width="1.5" size="32"></i></div>
                     <h3>Instagram: Diagnóstico</h3>
                     <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
@@ -414,8 +414,15 @@
     </main>
 
     <script>
-        // Inicializar los iconos de Lucide al cargar la página
-        lucide.createIcons();
+        // CAMBIO EN SCRIPT: Función de renderizado seguro con temporizador para dar tiempo al CDN
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.error("Lucide no se cargó correctamente a través del CDN. Reintentando...");
+                setTimeout(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); }, 1000);
+            }
+        });
 
         // Control de Navegación SPA
         const buttons = document.querySelectorAll('.menu-btn');
