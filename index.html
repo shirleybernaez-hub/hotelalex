@@ -51,7 +51,7 @@
         
         .brand-logo {
             width: auto;
-            height: 55px; 
+            height: 70px; /* CAMBIO: Ajustado de 55px a 70px para mayor presencia */
             object-fit: contain;
             margin-bottom: 12px;
         }
@@ -149,10 +149,14 @@
         /* HUB DE INICIO */
         .hub-title { text-align: center; font-size: 1.35rem; font-weight: 500; color: #0f172a; margin: 40px 0; }
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; width: 100%; }
+        
+        /* Modificado para que en Presupuesto use un layout controlado si se requiere */
+        .budget-grid-wrapper { max-width: 380px; width: 100%; } 
+
         .hub-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px 24px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: all 0.2s ease;
         }
-        .hub-card:hover { transform: translateY(-2px); border-color: #cbd5e1; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04); }
+        .hub-card:hover:not(.no-hover) { transform: translateY(-2px); border-color: #cbd5e1; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04); }
         .hub-icon-wrapper { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #78828c; }
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
@@ -248,7 +252,6 @@
                 <span>Inicio</span>
             </button>
             <button class="menu-btn" data-target="instagram-section">
-                <!-- INTEGRACIÓN OPCIÓN 1: SVG inline puro con clases y transiciones nativas -->
                 <div class="sidebar-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
@@ -287,7 +290,6 @@
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
                 <div class="hub-card" onclick="navigateTo('instagram-section')">
-                    <!-- INTEGRACIÓN OPCIÓN 1: SVG inline puro adaptado al Hub central -->
                     <div class="hub-icon-wrapper">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
@@ -308,17 +310,7 @@
                     <h3>Métricas de Rendimiento</h3>
                     <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
                 </div>
-                <div class="hub-card" style="cursor: default;">
-                    <div class="hub-icon-wrapper">
-                        <div class="chart-wrapper">
-                            <div class="glow-indicator"></div>
-                            <svg class="progress-circle-svg"><circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle><circle class="progress-circle-bar" cx="30" cy="30" r="25"></circle></svg>
-                            <div class="chart-center-text">100%</div>
-                        </div>
-                    </div>
-                    <h3>Inicio: 15 de Junio</h3>
-                    <p>Estatus actual del proyecto: Contrato Ejecutado bajo los términos de la agencia.</p>
-                </div>
+                <!-- CAMBIO: Se removió la tarjeta estática del 15 de Junio de este Hub -->
             </div>
         </section>
 
@@ -416,8 +408,25 @@
 
         <!-- SECCIÓN PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
-            <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
-            <div class="placeholder-box"><p>Tabla financiera.</p></div>
+            <div class="section-header">
+                <div class="header-info">
+                    <h2>Presupuesto</h2>
+                </div>
+            </div>
+            <!-- CAMBIO: Insertado el card de estatus con los estilos correspondientes aquí -->
+            <div class="budget-grid-wrapper">
+                <div class="hub-card no-hover" style="cursor: default;">
+                    <div class="hub-icon-wrapper">
+                        <div class="chart-wrapper">
+                            <div class="glow-indicator"></div>
+                            <svg class="progress-circle-svg"><circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle><circle class="progress-circle-bar" cx="30" cy="30" r="25"></circle></svg>
+                            <div class="chart-center-text">100%</div>
+                        </div>
+                    </div>
+                    <h3>Inicio: 15 de Junio</h3>
+                    <p>Estatus actual del proyecto: Contrato Ejecutado bajo los términos de la agencia.</p>
+                </div>
+            </div>
         </section>
 
         <footer>
