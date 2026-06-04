@@ -125,9 +125,9 @@
             border-color: rgba(15, 23, 42, 0.1);
         }
 
-        /* MEDIDOR DE CONTRATO Y PAGO (Estilo Allie Delgado Circular) */
+        /* MEDIDOR DE CONTRATO Y PAGO */
         .contract-progress-box {
-            margin-top: auto; /* Lo empuja al fondo del sidebar */
+            margin-top: auto;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
@@ -145,12 +145,11 @@
         .progress-circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 8; }
         .progress-circle-bar {
             fill: none;
-            stroke: #0f172a; /* Negro sólido minimalista */
+            stroke: #0f172a;
             stroke-width: 8;
             stroke-dasharray: 226;
-            stroke-dashoffset: 0; /* 100% de ejecución */
+            stroke-dashoffset: 0;
             stroke-linecap: round;
-            transition: stroke-dashoffset 1s ease;
         }
         .chart-center-text {
             position: absolute;
@@ -165,14 +164,15 @@
         .contract-details h5 { font-size: 0.8rem; font-weight: 600; color: #334155; }
         .contract-details p { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
 
-        /* AREA DE CONTENIDO PRINCIPAL */
+        /* AREA DE CONTENIDO PRINCIPAL (CORREGIDA) */
         .main-container {
-            margin-left: 280px;
+            margin-left: 280px; /* Aquí empujamos todo a la derecha de la barra lateral */
             flex-grow: 1;
             padding: 50px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            width: calc(100% - 280px); /* Evitamos desbordamientos */
         }
 
         /* Bienvenida Centralizada */
@@ -195,7 +195,7 @@
             font-size: 0.95rem;
         }
 
-        /* Sección "¿Qué tipo de consulta deseas realizar?" al estilo NetUno */
+        /* Sección "¿Qué tipo de consulta deseas realizar?" */
         .hub-title {
             text-align: center;
             font-size: 1.25rem;
@@ -204,10 +204,10 @@
             margin: 20px 0 30px 0;
         }
 
-        /* Módulos de Autogestión Centrales */
+        /* Módulos Centrales de Autogestión */
         .hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 24px;
             margin-bottom: 40px;
         }
@@ -240,7 +240,6 @@
             justify-content: center;
             font-size: 1.4rem;
             margin-bottom: 16px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
         }
         .hub-card h3 {
             font-size: 1.05rem;
@@ -305,8 +304,8 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
-    <main class="main-content">
+    <!-- Contenido Principal (Clase corregida para que respete el espacio de la barra) -->
+    <main class="main-container">
         
         <!-- Bloque de Bienvenida Integrado -->
         <div class="dashboard-welcome">
@@ -316,7 +315,7 @@
 
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <!-- Módulos Centrales de Autogestión (Estructura Limpia) -->
+        <!-- Módulos Centrales de Autogestión -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
