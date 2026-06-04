@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* BARRA LATERAL FIXED (Limpia y ligera) */
+        /* BARRA LATERAL FIXED (Estructura Pro y Organizada) */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -163,6 +163,14 @@
             color: #0f172a;
         }
 
+        /* LÍNEA DIVISORA PREMIUM */
+        .sidebar-divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 16px 14px;
+            border: none;
+        }
+
         /* ICONOS GLASSMORPHISM */
         .glass-icon {
             width: 36px;
@@ -194,7 +202,9 @@
         }
         
         .shape-home { width: 12px; height: 12px; border-width: 2px; }
-        .shape-ig { width: 14px; height: 14px; border-radius: 50%; border-width: 2px; }
+        .shape-analysis { width: 14px; height: 14px; border-radius: 2px; border-width: 2px; position: relative; }
+        .shape-analysis::after { content: ''; position: absolute; width: 4px; height: 4px; background: #64748b; left: 3px; top: 3px; }
+        .shape-metrics { width: 14px; height: 14px; border-width: 0 2px 2px 0; transform: rotate(45deg); margin-bottom: 2px; }
         .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
         .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
         .shape-payments { width: 14px; height: 10px; border-width: 2px; background: transparent; }
@@ -220,7 +230,7 @@
             letter-spacing: -0.3px;
         }
 
-        /* Módulos Centrales de Autogestión (Reconfigurados a cuadrícula de 2x2 o adaptativa) */
+        /* Módulos Centrales de Autogestión */
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -240,7 +250,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
         }
         .hub-card:hover {
             transform: translateY(-2px);
@@ -267,7 +276,7 @@
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
-        /* ESTILOS ESPECÍFICOS PARA LA NUEVA CARD DE MEDIDOR DE CONTRATO (Donut Chart) */
+        /* ESTILOS DEL MEDIDOR DE CONTRATO (Donut Chart) */
         .chart-wrapper {
             position: relative;
             display: flex;
@@ -325,7 +334,7 @@
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo Pro y Limpio -->
+    <!-- Panel Lateral Izquierdo Con Nueva Jerarquía -->
     <nav class="sidebar">
         <div class="user-profile-trigger" id="profileTrigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -342,10 +351,19 @@
             </div>
         </div>
         
+        <!-- Bloque Operativo Principal -->
         <ul class="sidebar-menu">
             <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
-            <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
+            <li><a href="instagram.html"><div class="glass-icon"><div class="icon-shape shape-analysis"></div></div><span>Instagram</span></a></li>
             <li><a href="cronograma.html"><div class="glass-icon"><div class="icon-shape shape-calendar"></div></div><span>Cronograma</span></a></li>
+            <li><a href="metricas.html"><div class="glass-icon"><div class="icon-shape shape-metrics"></div></div><span>Métricas</span></a></li>
+        </ul>
+
+        <!-- Línea Divisora Estricta -->
+        <hr class="sidebar-divider">
+
+        <!-- Bloque Financiero Aislado -->
+        <ul class="sidebar-menu">
             <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
         </ul>
     </nav>
@@ -357,16 +375,16 @@
 
         <div class="hub-grid">
             
-            <!-- Tarjeta 1 -->
-            <a href="recursos.html" class="hub-card">
+            <!-- Tarjeta 1: Instagram (Auditoría / Lo que se va a mejorar) -->
+            <a href="instagram.html" class="hub-card">
                 <div class="hub-icon-wrapper">
-                    <div class="icon-shape shape-ig" style="width:18px; height:18px;"></div>
+                    <div class="icon-shape shape-analysis" style="width:18px; height:18px;"></div>
                 </div>
-                <h3>Métricas e Instagram</h3>
-                <p>Monitoreo de comunidad, audiencias y desempeño analítico del ecosistema digital.</p>
+                <h3>Instagram: Diagnóstico</h3>
+                <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
             </a>
 
-            <!-- Tarjeta 2 -->
+            <!-- Tarjeta 2: Cronograma -->
             <a href="cronograma.html" class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="icon-shape shape-calendar" style="width:18px; height:12px;"></div>
@@ -375,16 +393,16 @@
                 <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
             </a>
 
-            <!-- Tarjeta 3 -->
-            <a href="presupuesto.html" class="hub-card">
+            <!-- Tarjeta 3: Métricas -->
+            <a href="metricas.html" class="hub-card">
                 <div class="hub-icon-wrapper">
-                    <div class="icon-shape shape-budget" style="width:16px; height:18px;"></div>
+                    <div class="icon-shape shape-metrics" style="width:14px; height:14px;"></div>
                 </div>
-                <h3>Presupuesto</h3>
-                <p>Revisión detallada de planes financieros, alcances de inversión y entregables estipulados.</p>
+                <h3>Métricas de Rendimiento</h3>
+                <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
             </a>
 
-            <!-- Tarjeta 4: El Medidor de Contrato integrado como una Card más del flujo -->
+            <!-- Tarjeta 4: Contrato -->
             <div class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="chart-wrapper">
