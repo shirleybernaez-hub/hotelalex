@@ -31,31 +31,33 @@
             top: 0;
             bottom: 0;
             left: 0;
-            padding: 30px 20px;
+            padding: 40px 24px;
             z-index: 100;
         }
 
-        /* Sección de Perfil/Avatar de Usuario Activo (Estilo NetUno) */
+        /* Perfil de Usuario Premium (Logo arriba, nombre abajo) */
         .user-profile {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding-bottom: 25px;
+            text-align: center;
+            padding-bottom: 30px;
             border-bottom: 1px solid #f1f5f9;
-            margin-bottom: 25px;
-            position: relative;
+            margin-bottom: 30px;
+            width: 100%;
         }
         .avatar-container {
-            width: 50px;
-            height: 50px;
+            width: 80px; /* Tamaño expandido y más visible */
+            height: 80px;
             border-radius: 50%;
             background-color: #ffffff;
-            border: 2px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 14px;
         }
         .avatar-container img {
             width: 85%;
@@ -63,25 +65,28 @@
             object-fit: contain;
         }
         .user-info h4 {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #0f172a;
+            margin-bottom: 2px;
         }
         .user-info p {
             font-size: 0.75rem;
             color: #64748b;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 4px;
         }
-        .switch-brand-arrow { font-size: 0.7rem; color: #94a3b8; }
+        .switch-brand-arrow { font-size: 0.65rem; color: #94a3b8; }
 
         /* Navegación Principal */
         .sidebar-menu {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            width: 100%;
         }
         .sidebar-menu a {
             display: flex;
@@ -92,7 +97,7 @@
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.2s ease;
         }
         .sidebar-menu a.active {
@@ -105,48 +110,71 @@
             color: #0f172a;
         }
 
-        /* Iconos Estilo Glassmorphism */
+        /* ICONOS GLASSMORPHISM REALES (CSS Puro, Cero Emojis) */
         .glass-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(248, 250, 252, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(226, 232, 240, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01), 0 2px 4px -1px rgba(0,0,0,0.01);
+            flex-shrink: 0;
         }
         .sidebar-menu a.active .glass-icon {
-            background: rgba(15, 23, 42, 0.05);
-            border-color: rgba(15, 23, 42, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(15, 23, 42, 0.15);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.03);
         }
+
+        /* Formas geométricas minimalistas internas para los iconos */
+        .icon-shape {
+            border: 2px solid #64748b;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+        .sidebar-menu a.active .icon-shape {
+            border-color: #0f172a;
+        }
+        
+        /* Icono Inicio: Cuadrados concéntricos */
+        .shape-home { width: 12px; height: 12px; border-width: 2px; }
+        /* Icono Instagram: Círculo e higiénico */
+        .shape-ig { width: 14px; height: 14px; border-radius: 50%; border-width: 2px; }
+        /* Icono Cronograma: Grilla/Líneas de calendario */
+        .shape-calendar { width: 14px; height: 10px; border-width: 2px 0 2px 0; border-style: double; }
+        /* Icono Presupuesto: Barra geométrica */
+        .shape-budget { width: 12px; height: 14px; border-width: 0 2px 2px 2px; }
+        /* Icono Pagos: Tarjeta minimalista */
+        .shape-payments { width: 15px; height: 10px; border-width: 2px; background: transparent; }
 
         /* MEDIDOR DE CONTRATO Y PAGO */
         .contract-progress-box {
             margin-top: auto;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 14px;
+            padding: 20px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            width: 100%;
         }
         .progress-circle-svg {
             width: 80px;
             height: 80px;
             transform: rotate(-90deg);
         }
-        .progress-circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 8; }
+        .progress-circle-bg { fill: none; stroke: #e2e8f0; stroke-width: 7; }
         .progress-circle-bar {
             fill: none;
             stroke: #0f172a;
-            stroke-width: 8;
+            stroke-width: 7;
             stroke-dasharray: 226;
             stroke-dashoffset: 0;
             stroke-linecap: round;
@@ -158,68 +186,48 @@
             color: #0f172a;
             margin-top: 28px;
         }
-        .contract-details {
-            margin-top: 12px;
-        }
+        .contract-details { margin-top: 14px; }
         .contract-details h5 { font-size: 0.8rem; font-weight: 600; color: #334155; }
-        .contract-details p { font-size: 0.7rem; color: #64748b; margin-top: 2px; }
+        .contract-details p { font-size: 0.7rem; color: #64748b; margin-top: 3px; }
 
-        /* AREA DE CONTENIDO PRINCIPAL (CORREGIDA) */
+        /* AREA DE CONTENIDO PRINCIPAL */
         .main-container {
-            margin-left: 280px; /* Aquí empujamos todo a la derecha de la barra lateral */
+            margin-left: 280px;
             flex-grow: 1;
-            padding: 50px;
+            padding: 60px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            width: calc(100% - 280px); /* Evitamos desbordamientos */
+            width: calc(100% - 280px);
         }
 
-        /* Bienvenida Centralizada */
-        .dashboard-welcome {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .dashboard-welcome h2 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #0f172a;
-            margin-bottom: 6px;
-        }
-        .dashboard-welcome p {
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-
-        /* Sección "¿Qué tipo de consulta deseas realizar?" */
+        /* Consulta Centralizada Estilo NetUno */
         .hub-title {
             text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.35rem;
+            font-weight: 500;
             color: #0f172a;
-            margin: 20px 0 30px 0;
+            margin: 40px 0 40px 0;
+            letter-spacing: -0.3px;
         }
 
         /* Módulos Centrales de Autogestión */
         .hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 24px;
             margin-bottom: 40px;
+            width: 100%;
         }
         .hub-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 30px 20px;
+            border-radius: 16px;
+            padding: 35px 24px;
             text-align: center;
             text-decoration: none;
             color: inherit;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -227,25 +235,31 @@
         .hub-card:hover {
             transform: translateY(-2px);
             border-color: #cbd5e1;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04);
         }
+        
+        /* Iconos Glassmorphism Grandes para el Hub Central */
         .hub-card .hub-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #f8fafc;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: #ffffff;
             border: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
+        .hub-card:hover .icon-shape {
+            border-color: #0f172a;
+        }
+        
         .hub-card h3 {
             font-size: 1.05rem;
             font-weight: 600;
             color: #0f172a;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .hub-card p {
             font-size: 0.85rem;
@@ -256,7 +270,7 @@
         /* FOOTER TOTALMENTE CENTRADO */
         footer {
             margin-top: auto;
-            padding-top: 40px;
+            padding-top: 60px;
             text-align: center;
             font-size: 0.8rem;
             color: #94a3b8;
@@ -268,7 +282,7 @@
 
     <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar">
-        <!-- Perfil de Usuario con Avatar Circular -->
+        <!-- Perfil de Usuario con Avatar Circular arriba del Nombre -->
         <div class="user-profile">
             <div class="avatar-container">
                 <img src="img/hotelalex_color.png" alt="Hotel Alex">
@@ -279,13 +293,13 @@
             </div>
         </div>
         
-        <!-- Menú Lateral Izquierdo -->
+        <!-- Menú Lateral Izquierdo con Iconos Glassmorphism -->
         <ul class="sidebar-menu">
-            <li><a href="index.html" class="active"><div class="glass-icon">🎛</div><span>Inicio</span></a></li>
-            <li><a href="recursos.html"><div class="glass-icon">📊</div><span>Instagram</span></a></li>
-            <li><a href="cronograma.html"><div class="glass-icon">🗓</div><span>Cronograma</span></a></li>
-            <li><a href="presupuesto.html"><div class="glass-icon">💼</div><span>Presupuesto</span></a></li>
-            <li><a href="pagos.html"><div class="glass-icon">💳</div><span>Coordenadas de Pago</span></a></li>
+            <li><a href="index.html" class="active"><div class="glass-icon"><div class="icon-shape shape-home"></div></div><span>Inicio</span></a></li>
+            <li><a href="recursos.html"><div class="glass-icon"><div class="icon-shape shape-ig"></div></div><span>Instagram</span></a></li>
+            <li><a href="cronograma.html"><div class="glass-icon"><div class="icon-shape shape-calendar"></div></div><span>Cronograma</span></a></li>
+            <li><a href="presupuesto.html"><div class="glass-icon"><div class="icon-shape shape-budget"></div></div><span>Presupuesto</span></a></li>
+            <li><a href="pagos.html"><div class="glass-icon"><div class="icon-shape shape-payments"></div></div><span>Coordenadas de Pago</span></a></li>
         </ul>
 
         <!-- Medidor Circular de Contrato e Inversión -->
@@ -304,47 +318,50 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal (Clase corregida para que respete el espacio de la barra) -->
+    <!-- Contenido Principal Higiénico -->
     <main class="main-container">
         
-        <!-- Bloque de Bienvenida Integrado -->
-        <div class="dashboard-welcome">
-            <h2>Bienvenido al Portal Onshift</h2>
-            <p>Control de mando unificado para la estrategia digital, finanzas y evolución de marca de Hotel Alex Caracas.</p>
-        </div>
-
+        <!-- Título centralizado directo estilo NetUno -->
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
-        <!-- Módulos Centrales de Autogestión -->
+        <!-- Módulos Centrales de Autogestión con Iconos Glassmorphism -->
         <div class="hub-grid">
             
             <a href="recursos.html" class="hub-card">
-                <div class="hub-icon-wrapper">📈</div>
+                <div class="hub-icon-wrapper">
+                    <div class="icon-shape shape-ig" style="width:18px; height:18px;"></div>
+                </div>
                 <h3>Métricas e Instagram</h3>
                 <p>Monitoreo de comunidad, audiencias y desempeño analítico del ecosistema digital.</p>
             </a>
 
             <a href="cronograma.html" class="hub-card">
-                <div class="hub-icon-wrapper">📅</div>
+                <div class="hub-icon-wrapper">
+                    <div class="icon-shape shape-calendar" style="width:18px; height:12px;"></div>
+                </div>
                 <h3>Cronograma</h3>
                 <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
             </a>
 
             <a href="presupuesto.html" class="hub-card">
-                <div class="hub-icon-wrapper">💰</div>
+                <div class="hub-icon-wrapper">
+                    <div class="icon-shape shape-budget" style="width:16px; height:18px;"></div>
+                </div>
                 <h3>Presupuesto</h3>
                 <p>Revisión detallada de planes financieros, alcances de inversión y entregables estipulados.</p>
             </a>
 
             <a href="pagos.html" class="hub-card">
-                <div class="hub-icon-wrapper">💳</div>
+                <div class="hub-icon-wrapper">
+                    <div class="icon-shape shape-payments" style="width:20px; height:14px;"></div>
+                </div>
                 <h3>Gestión de Pagos</h3>
                 <p>Consulta cuentas bancarias de la agencia, reporta transferencias y descarga soportes.</p>
             </a>
 
         </div>
 
-        <!-- Footer Centrado Abajo -->
+        <!-- Footer Completamente Centrado Abajo -->
         <footer>
             <p>&copy; 2026 ONSHIFT. Entorno privado de gestión de marca exclusivo para Hotel Alex Caracas.</p>
         </footer>
