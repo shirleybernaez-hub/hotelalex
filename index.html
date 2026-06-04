@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* BARRA LATERAL FIXED (Más limpia y ligera) */
+        /* BARRA LATERAL FIXED (Limpia y ligera) */
         .sidebar {
             width: 280px;
             background-color: #ffffff;
@@ -210,81 +210,17 @@
             width: calc(100% - 280px);
         }
 
-        /* NUEVA UBICACIÓN: MEDIDOR DE CONTRATO EN INICIO */
-        .contract-progress-box {
-            background: #ffffff; 
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            width: 100%;
-            max-width: 450px; /* Tamaño controlado para que no flote gigante */
-            margin: 0 auto 30px auto; /* Centrado en la cabecera */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-        .chart-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 70px;
-            height: 70px;
-            flex-shrink: 0;
-        }
-        .progress-circle-svg {
-            width: 70px;
-            height: 70px;
-            transform: rotate(-90deg);
-        }
-        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 8; }
-        .progress-circle-bar {
-            fill: none;
-            stroke: #0284c7; 
-            stroke-width: 8;
-            stroke-linecap: round; 
-            stroke-dasharray: 251.2; /* Ajustado visualmente */
-            stroke-dashoffset: 0; 
-        }
-        .glow-indicator {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            top: 0px; 
-            left: 31px;
-            box-shadow: 0 0 8px rgba(2, 132, 199, 0.8);
-            z-index: 10;
-        }
-        .chart-center-text {
-            position: absolute;
-            display: flex;
-            z-index: 5;
-        }
-        .chart-center-text .percentage {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-        .contract-details { 
-            text-align: left; 
-        }
-        .contract-details h5 { font-size: 0.95rem; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
-        .contract-details p { font-size: 0.8rem; color: #64748b; font-weight: 500; }
-
         /* Título del Hub */
         .hub-title {
             text-align: center;
             font-size: 1.35rem;
             font-weight: 500;
             color: #0f172a;
-            margin: 20px 0 40px 0;
+            margin: 40px 0 40px 0;
             letter-spacing: -0.3px;
         }
 
-        /* Módulos Centrales de Autogestión */
+        /* Módulos Centrales de Autogestión (Reconfigurados a cuadrícula de 2x2 o adaptativa) */
         .hub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -304,6 +240,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
         .hub-card:hover {
             transform: translateY(-2px);
@@ -330,6 +267,51 @@
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
+        /* ESTILOS ESPECÍFICOS PARA LA NUEVA CARD DE MEDIDOR DE CONTRATO (Donut Chart) */
+        .chart-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+        }
+        .progress-circle-svg {
+            width: 60px;
+            height: 60px;
+            transform: rotate(-90deg);
+        }
+        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 7; }
+        .progress-circle-bar {
+            fill: none;
+            stroke: #0284c7; 
+            stroke-width: 7;
+            stroke-linecap: round; 
+            stroke-dasharray: 188.4; 
+            stroke-dashoffset: 0; 
+        }
+        .glow-indicator {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            top: 0px; 
+            left: 26px;
+            box-shadow: 0 0 8px rgba(2, 132, 199, 0.8);
+            z-index: 10;
+        }
+        .chart-center-text {
+            position: absolute;
+            display: flex;
+            z-index: 5;
+        }
+        .chart-center-text .percentage {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
         /* FOOTER CENTRADO */
         footer {
             margin-top: auto;
@@ -343,7 +325,7 @@
 </head>
 <body>
 
-    <!-- Panel Lateral Izquierdo Limpio (Sin el bloque abajo) -->
+    <!-- Panel Lateral Izquierdo Pro y Limpio -->
     <nav class="sidebar">
         <div class="user-profile-trigger" id="profileTrigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -371,28 +353,11 @@
     <!-- Contenido Principal -->
     <main class="main-container">
         
-        <!-- Bloque de Estatus del Contrato reubicado horizontalmente en la cabecera de Inicio -->
-        <div class="contract-progress-box">
-            <div class="chart-wrapper">
-                <div class="glow-indicator"></div>
-                <svg class="progress-circle-svg">
-                    <circle class="progress-circle-bg" cx="35" cy="35" r="30"></circle>
-                    <circle class="progress-circle-bar" cx="35" cy="35" r="30"></circle>
-                </svg>
-                <div class="chart-center-text">
-                    <span class="percentage">100%</span>
-                </div>
-            </div>
-            <div class="contract-details">
-                <h5>Inicio: 15 de Junio</h5>
-                <p>Estatus: Contrato Ejecutado</p>
-            </div>
-        </div>
-        
         <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
 
         <div class="hub-grid">
             
+            <!-- Tarjeta 1 -->
             <a href="recursos.html" class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="icon-shape shape-ig" style="width:18px; height:18px;"></div>
@@ -401,6 +366,7 @@
                 <p>Monitoreo de comunidad, audiencias y desempeño analítico del ecosistema digital.</p>
             </a>
 
+            <!-- Tarjeta 2 -->
             <a href="cronograma.html" class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="icon-shape shape-calendar" style="width:18px; height:12px;"></div>
@@ -409,6 +375,7 @@
                 <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
             </a>
 
+            <!-- Tarjeta 3 -->
             <a href="presupuesto.html" class="hub-card">
                 <div class="hub-icon-wrapper">
                     <div class="icon-shape shape-budget" style="width:16px; height:18px;"></div>
@@ -416,6 +383,24 @@
                 <h3>Presupuesto</h3>
                 <p>Revisión detallada de planes financieros, alcances de inversión y entregables estipulados.</p>
             </a>
+
+            <!-- Tarjeta 4: El Medidor de Contrato integrado como una Card más del flujo -->
+            <div class="hub-card">
+                <div class="hub-icon-wrapper">
+                    <div class="chart-wrapper">
+                        <div class="glow-indicator"></div>
+                        <svg class="progress-circle-svg">
+                            <circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle>
+                            <circle class="progress-circle-bar" cx="30" cy="30" r="25"></circle>
+                        </svg>
+                        <div class="chart-center-text">
+                            <span class="percentage">100%</span>
+                        </div>
+                    </div>
+                </div>
+                <h3>Inicio: 15 de Junio</h3>
+                <p>Estatus actual del proyecto: Contrato Ejecutado bajo los términos de la agencia.</p>
+            </div>
 
         </div>
 
