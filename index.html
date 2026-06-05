@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
-    <!-- Cargamos Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial */
@@ -78,7 +77,7 @@
         .btn-login:hover { background-color: #1e293b; }
         .login-error { color: #ef4444; font-size: 0.8rem; margin-top: 12px; display: none; font-weight: 500; }
 
-        /* MODALES ESTRUCTURADOS */
+        /* MODALES */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px;
         }
@@ -235,7 +234,7 @@
 
         .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; flex-grow: 1; }
 
-        /* BLOQUES */
+        /* BLOQUES DE PUBLICACIONES */
         .post-item { 
             padding: 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; line-height: 1.2; word-break: break-word; text-align: left; display: flex; flex-direction: column; gap: 2px;
         }
@@ -267,7 +266,6 @@
 </head>
 <body>
 
-    <!-- ACCESO -->
     <div class="login-overlay" id="login-screen">
         <div class="login-card">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
@@ -289,7 +287,6 @@
         </div>
     </div>
 
-    <!-- HEADER MÓVIL -->
     <header class="mobile-header" id="app-mobile-header">
         <img src="img/hotelalex_color.png" alt="Hotel Alex" class="mobile-brand-logo">
         <button class="mobile-logout-btn" onclick="openLogoutModal()">
@@ -297,7 +294,6 @@
         </button>
     </header>
 
-    <!-- CONFIRMAR SALIDA -->
     <div class="modal-overlay" id="logout-modal">
         <div class="modal-card">
             <h3>¿Cerrar Sesión?</h3>
@@ -309,7 +305,6 @@
         </div>
     </div>
 
-    <!-- MODAL 1: ENFOQUE EN PAUTA Y FEEDBACK (PÚBLICO) -->
     <div class="modal-overlay" id="pauta-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
@@ -364,7 +359,6 @@
     </div>
 
 
-    <!-- MODAL 2: CONTROL DE CAMBIOS INTERNO Y COPYS (EXCLUSIVO AGENCIA) -->
     <div class="modal-overlay" id="internal-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
@@ -405,7 +399,6 @@
         </div>
     </div>
 
-    <!-- Barra Lateral Desktop -->
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -455,10 +448,8 @@
         </div>
     </nav>
 
-    <!-- Contenedor Principal -->
     <main class="main-container" id="app-content">
         
-        <!-- INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -486,13 +477,11 @@
             </div>
         </section>
 
-        <!-- INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
-        <!-- CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -527,18 +516,15 @@
                 </div>
                 
                 <div class="calendar-grid" id="calendar-grid">
-                    <!-- Dinámico -->
-                </div>
+                    </div>
             </div>
         </section>
 
-        <!-- METRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas en preparación.</p></div>
         </section>
 
-        <!-- PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
             <div class="budget-grid-wrapper">
@@ -568,7 +554,7 @@
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // EJEMPLOS DE CONTENIDOS RESTAURADOS (VERSIONES PREVIAS)
+        // EJEMPLOS DE CONTENIDOS RESTAURADOS
         const dummyJunePosts = {
             15: [
                 { type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR: Sonidos del Confort en Suite Premium' }
@@ -577,17 +563,17 @@
                 { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: '3 razones por las que el descanso influye en tu productividad' }
             ],
             17: [
-                { type: 'public', format: 'story', icon: '📸 story', text: 'Trivia interactiva: ¿Qué detalle no puede faltar en tu habitación?' }
+                { type: 'public', format: 'story', icon: '📸 story', text: 'Trivia interactiva: ¿Qué detalle no puede faltar?' }
             ],
             19: [
-                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Detrás de cámaras: Nuestro equipo de hospitalidad' },
+                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Detrás de cámaras: Equipo de hospitalidad' },
                 { type: 'internal', format: 'internal', icon: '⚙️ Ads Meta', text: 'Configurar píxel y públicos' }
             ],
             22: [
-                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'Recorrido express: Desde el lobby hasta el Rooftop Lounge' }
+                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'Recorrido express: Lobby hasta el Rooftop Lounge' }
             ],
             24: [
-                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'Menú Ejecutivo: Una experiencia gastronómica en Caracas' }
+                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'Menú Ejecutivo: Una experiencia gastronómica' }
             ],
             26: [
                 { type: 'public', format: 'story', icon: '📸 story', text: 'Viernes de desconexión completa en el Alex' },
@@ -595,49 +581,38 @@
             ]
         };
 
-        // BASE DE DATOS CENTRALIZADA
+        // BASE DE DATOS CENTRALIZADA CON DETECCION DE RESET AUTOMÁTICO
         let calendarDatabase = {};
-        const savedData = localStorage.getItem('hotelAlexCalendarData');
+        
+        // BORRAMOS SIEMPRE EL CACHÉ VIEJO PARA INTEGRAR LOS NUEVOS EJEMPLOS AUTOMÁTICAMENTE
+        localStorage.removeItem('hotelAlexCalendarData');
 
-        if (savedData) {
-            calendarDatabase = JSON.parse(savedData);
-        } else {
-            [5, 6, 7].forEach(m => {
-                let daysCount = (m === 5) ? 30 : 31;
-                for(let i = 1; i <= daysCount; i++) {
-                    const dbKey = `2026_${m}_${i}`;
-                    
-                    // Rellenamos datos simulados detallados para el 15 de Junio como guía maestra
-                    let isDia15 = (m === 5 && i === 15);
-                    
-                    calendarDatabase[dbKey] = {
-                        status: isDia15 ? 'in-progress' : 'not-started',
-                        requirement: isDia15 ? 'Mostrar el confort visual mediante planos detallados, sábanas premium y luz natural controlada.' : '',
-                        copy: isDia15 ? '¿El verdadero lujo? Apagar el ruido de Caracas y escuchar el silencio. 😴✨ Te esperamos en nuestras Suites Executive.' : '',
-                        controlCambios: isDia15 ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, modificado en los assets de Drive.' : '',
-                        pautaContenido: isDia15 ? 'Reel de impacto cinemático enfocado en descanso y experiencia premium.' : '',
-                        pautaRecursos: isDia15 ? 'Tomas en 4K de la Suite 402, transiciones lentas, pista de audio ASMR.' : '',
-                        pautaGuion1: isDia15 ? '0:01 - 0:03 Apertura con primer plano de almohadas esponjosas.' : '',
-                        pautaGuion2: isDia15 ? '0:04 - 0:07 Entrada de luz natural y vista panorámica limpia.' : '',
-                        pautaGuion3: isDia15 ? '0:08 - 0:15 Cierre con logotipo minimalista del hotel.' : '',
-                        driveUrl: isDia15 ? 'https://drive.google.com' : '',
-                        comentariosCliente: '',
-                        posts: (m === 5 && dummyJunePosts[i]) ? dummyJunePosts[i] : []
-                    };
-                }
-            });
-            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
-        }
+        [5, 6, 7].forEach(m => {
+            let daysCount = (m === 5) ? 30 : 31;
+            for(let i = 1; i <= daysCount; i++) {
+                const dbKey = `2026_${m}_${i}`;
+                let isDia15 = (m === 5 && i === 15);
+                
+                calendarDatabase[dbKey] = {
+                    status: isDia15 ? 'in-progress' : 'not-started',
+                    requirement: isDia15 ? 'Mostrar el confort visual mediante planos detallados, sábanas premium y luz natural controlada.' : '',
+                    copy: isDia15 ? '¿El verdadero lujo? Apagar el ruido de Caracas y escuchar el silencio. 😴✨ Te esperamos en nuestras Suites Executive.' : '',
+                    controlCambios: isDia15 ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, modificado en los assets de Drive.' : '',
+                    pautaContenido: isDia15 ? 'Reel de impacto cinemático enfocado en descanso y experiencia premium.' : '',
+                    pautaRecursos: isDia15 ? 'Tomas en 4K de la Suite 402, transiciones lentas, pista de audio ASMR.' : '',
+                    pautaGuion1: isDia15 ? '0:01 - 0:03 Apertura con primer plano de almohadas esponjosas.' : '',
+                    pautaGuion2: isDia15 ? '0:04 - 0:07 Entrada de luz natural y vista panorámica limpia.' : '',
+                    pautaGuion3: isDia15 ? '0:08 - 0:15 Cierre con logotipo minimalista del hotel.' : '',
+                    driveUrl: isDia15 ? 'https://drive.google.com' : '',
+                    comentariosCliente: '',
+                    posts: (m === 5 && dummyJunePosts[i]) ? dummyJunePosts[i] : []
+                };
+            }
+        });
+        localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
 
         function getCellData(month, day) {
             const dbKey = `2026_${month}_${day}`;
-            if (!calendarDatabase[dbKey]) {
-                calendarDatabase[dbKey] = {
-                    status: 'not-started', requirement: '', copy: '', controlCambios: '',
-                    pautaContenido: '', pautaRecursos: '', pautaGuion1: '', pautaGuion2: '', pautaGuion3: '',
-                    driveUrl: '', comentariosCliente: '', posts: []
-                };
-            }
             return calendarDatabase[dbKey];
         }
 
@@ -663,7 +638,7 @@
             for (let i = 1; i <= totalDays; i++) {
                 const cellData = getCellData(selectedMonth, i);
                 let postsHTML = '';
-                if (cellData.posts && Array.isArray(cellData.posts)) {
+                if (cellData && cellData.posts && Array.isArray(cellData.posts)) {
                     cellData.posts.forEach(post => {
                         const isInternal = post.type === 'internal';
                         const postClass = isInternal ? 'internal-task' : `post-item post-${post.format}`;
@@ -676,7 +651,7 @@
                     <div class="calendar-cell" onclick="handleCellClick(${i})">
                         <div class="cell-top-bar">
                             <span class="cell-number">${i}</span>
-                            <span class="clickup-badge status-${cellData.status}"></span>
+                            <span class="clickup-badge status-${cellData ? cellData.status : 'not-started'}"></span>
                         </div>
                         <div class="posts-container">${postsHTML}</div>
                     </div>`;
@@ -717,7 +692,7 @@
 
             if (role === 'master') {
                 controls.style.display = 'flex';
-                descText.textContent = "Acceso total a pautas. Haz clic en un día para editar contenidos públicos o gestionar cambios de agencia internos.";
+                descText.textContent = "Acceso total a pautas. Haz clic en un día para editar contenidos públicos o gestionar cambios internos.";
                 currentView = 'internal';
             } else {
                 controls.style.display = 'none';
@@ -737,6 +712,7 @@
         // MODAL 1: PAUTAS PÚBLICAS
         function openPautaModal(day, month) {
             const data = getCellData(month, day);
+            if (!data) return;
             
             document.getElementById('pm-contenido').value = data.pautaContenido || '';
             document.getElementById('pm-recursos').value = data.pautaRecursos || '';
@@ -800,6 +776,7 @@
         // MODAL 2: INTERNO AGENCIA (BITÁCORA Y COPYS)
         function openInternalModal(day, month) {
             const data = getCellData(month, day);
+            if (!data) return;
             
             document.getElementById('im-status-select').value = data.status || 'not-started';
             document.getElementById('im-req').value = data.requirement || '';
@@ -838,7 +815,7 @@
             openPautaModal(activeDaySelected, selectedMonth);
         }
 
-        // NAVEGACIÓN Y SPA GENERAL
+        // NAVEGACIÓN GENERAL
         function openLogoutModal() { document.getElementById('logout-modal').style.display = 'flex'; }
         function closeLogoutModal() { document.getElementById('logout-modal').style.display = 'none'; }
         function confirmLogout() {
