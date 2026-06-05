@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onshift // Portal de Autogestión - Hotel Alex</title>
+    <!-- Cargamos Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Reset y Estética de Minimalismo Sensorial */
@@ -266,6 +267,7 @@
 </head>
 <body>
 
+    <!-- ACCESO -->
     <div class="login-overlay" id="login-screen">
         <div class="login-card">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
@@ -287,6 +289,7 @@
         </div>
     </div>
 
+    <!-- HEADER MÓVIL -->
     <header class="mobile-header" id="app-mobile-header">
         <img src="img/hotelalex_color.png" alt="Hotel Alex" class="mobile-brand-logo">
         <button class="mobile-logout-btn" onclick="openLogoutModal()">
@@ -294,6 +297,7 @@
         </button>
     </header>
 
+    <!-- CONFIRMAR SALIDA -->
     <div class="modal-overlay" id="logout-modal">
         <div class="modal-card">
             <h3>¿Cerrar Sesión?</h3>
@@ -305,100 +309,131 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="pauta-modal">
+    <!-- MODAL CLIENTE: SÓLO COMENTARIOS -->
+    <div class="modal-overlay" id="client-comment-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3>Detalles de la Pauta</h3>
-                <button class="close-work-modal" onclick="closePautaModal()"><i data-lucide="x" size="20"></i></button>
-            </div>
-
-            <button id="btn-goto-internal" class="btn-agency-toggle" onclick="switchToInternalModal()">
-                <i data-lucide="lock" size="14"></i> Cambiar a Control de Cambios / Copys (Agencia)
-            </button>
-
-            <div class="form-group">
-                <label>Contenido de la Pauta</label>
-                <textarea id="pm-contenido" rows="3" placeholder="Detalles de la estrategia o enfoque..."></textarea>
+                <h3 id="cm-title">Dejar Comentario</h3>
+                <button class="close-work-modal" onclick="closeClientCommentModal()"><i data-lucide="x" size="20"></i></button>
             </div>
 
             <div class="form-group">
-                <label>Recursos que Necesitamos</label>
-                <textarea id="pm-recursos" rows="2" placeholder="Diseños, imágenes o videos requeridos..."></textarea>
+                <label>Pauta Planificada para el día</label>
+                <p id="cm-pauta-preview" style="font-size:0.9rem; color:#475569; background:#f8fafc; padding:12px; border-radius:8px; line-height:1.4; font-style:italic;">No hay pauta registrada para hoy.</p>
             </div>
 
-            <div class="form-group">
-                <label>Guiones de Contenido (1 a 3)</label>
-                <div class="guion-inputs-container">
-                    <input type="text" id="pm-guion1" placeholder="Guion u Objetivo 1">
-                    <input type="text" id="pm-guion2" placeholder="Guion u Objetivo 2">
-                    <input type="text" id="pm-guion3" placeholder="Guion u Objetivo 3">
-                </div>
-            </div>
-
-            <div class="form-group" id="pm-drive-group">
-                <label>Enlace a Carpeta de Google Drive</label>
-                <input type="url" id="pm-drive-url" placeholder="https://drive.google.com/...">
-            </div>
-
-            <div id="pm-drive-link-wrapper" style="display:none; margin-bottom: 15px;">
-                <a href="#" id="pm-drive-btn" target="_blank" class="btn-action-view-art">
-                    <i data-lucide="folder-open" size="18"></i> Abrir Contenido en Google Drive
+            <div class="form-group" id="cm-drive-link-wrapper" style="display:none; margin-top: 10px; margin-bottom: 15px;">
+                <a href="#" id="cm-drive-btn" target="_blank" class="btn-action-view-art">
+                    <i data-lucide="folder-open" size="18"></i> Ver Recursos en Google Drive
                 </a>
             </div>
 
-            <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #cbd5e1;">
-                <label style="color: #0284c7; font-weight: 700;">Comentarios sobre el Contenido (Espacio del Cliente)</label>
-                <textarea id="pm-comentarios-cliente" rows="3" placeholder="El cliente puede dejar aquí sus opiniones o solicitudes de ajuste..."></textarea>
+            <div class="form-group" style="margin-top: 20px;">
+                <label style="color: #0284c7; font-weight: 700;">Tus Comentarios o Correcciones</label>
+                <textarea id="cm-comentarios-textarea" rows="4" placeholder="Escribe aquí tus observaciones o aprobaciones..."></textarea>
             </div>
 
             <div class="modal-buttons" style="margin-top:24px;">
-                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="savePautaData()">Guardar Cambios</button>
-                <button class="btn-modal btn-modal-no" onclick="closePautaModal()">Cerrar</button>
+                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveClientComment()">Guardar Comentario</button>
+                <button class="btn-modal btn-modal-no" onclick="closeClientCommentModal()">Cerrar</button>
             </div>
         </div>
     </div>
 
-
-    <div class="modal-overlay" id="internal-modal">
+    <!-- MODAL AGENCIA INTERNA: REQUERIMIENTOS, COPYS Y PAUTAS -->
+    <div class="modal-overlay" id="internal-agency-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3>Control de Cambios y Copys (Interno Agencia)</h3>
+                <h3 id="iam-title">Gestión de Contenido (Agencia)</h3>
                 <div class="header-actions-right">
-                    <select id="im-status-select" class="status-select-top-right">
+                    <select id="iam-status-select" class="status-select-top-right">
                         <option value="not-started">🔴 No iniciado</option>
                         <option value="in-progress">🟡 En proceso</option>
                         <option value="ready">🟢 Listo</option>
                     </select>
-                    <button class="close-work-modal" onclick="closeInternalModal()"><i data-lucide="x" size="20"></i></button>
+                    <button class="close-work-modal" onclick="closeInternalAgencyModal()"><i data-lucide="x" size="20"></i></button>
                 </div>
             </div>
 
-            <button class="btn-agency-toggle" onclick="switchToPautaModal()">
-                <i data-lucide="eye" size="14"></i> Volver a Vista de Pauta
-            </button>
-
             <div class="form-group">
                 <label>Requerimientos Estratégicos Base</label>
-                <textarea id="im-req" rows="2" placeholder="Pautas u objetivos iniciales..."></textarea>
+                <textarea id="iam-req" rows="2" placeholder="Pautas u objetivos iniciales..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Enfoque de la Pauta Pública</label>
+                <textarea id="iam-pauta" rows="2" placeholder="Qué verá el cliente en su pantalla..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Copy / Texto de la Publicación</label>
-                <textarea id="im-copy" rows="4" placeholder="Redacta el copy definitivo aquí..."></textarea>
+                <textarea id="iam-copy" rows="3" placeholder="Redacta el copy definitivo aquí..."></textarea>
             </div>
 
-            <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
-                <label style="color: #475569; font-weight: 700;">Bitácora de Ajustes (Shirley // Vero)</label>
-                <textarea id="im-control-cambios" rows="4" placeholder="Ejemplo:&#10;Vero: Shir cambiar el color de texto a azul.&#10;Shir: Resuelto, ya se actualizó en Drive."></textarea>
+            <div class="form-group">
+                <label>Recursos y Enlace Drive</label>
+                <input type="url" id="iam-drive-url" placeholder="Enlace de Google Drive..." style="margin-bottom:8px;">
+                <textarea id="iam-recursos" rows="2" placeholder="Especificaciones de fotos o videos..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Guiones / Estructura</label>
+                <div class="guion-inputs-container">
+                    <input type="text" id="iam-guion1" placeholder="Gancho / Segundo 1-3">
+                    <input type="text" id="iam-guion2" placeholder="Desarrollo">
+                    <input type="text" id="iam-guion3" placeholder="Llamado a la acción (CTA)">
+                </div>
+            </div>
+
+            <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:10px; border:1px solid #bae6fd;">
+                <label style="color:#0369a1; font-weight:700; margin-bottom:4px;">Feedback del Cliente</label>
+                <p id="iam-feedback-preview" style="font-size:0.88rem; color:#0c4a6e; font-style:italic;">Sin comentarios del cliente todavía.</p>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label style="color: #475569; font-weight: 700;">Bitácora de Ajustes Internos (Shirley // Vero)</label>
+                <textarea id="iam-control-cambios" rows="3" placeholder="Anotaciones técnicas entre ustedes..."></textarea>
             </div>
 
             <div class="modal-buttons" style="margin-top:24px;">
-                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveInternalData()">Guardar Datos Internos</button>
-                <button class="btn-modal btn-modal-no" onclick="closeInternalModal()">Cerrar</button>
+                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveInternalAgencyData()">Guardar Todo</button>
+                <button class="btn-modal btn-modal-no" onclick="closeInternalAgencyModal()">Cancelar</button>
             </div>
         </div>
     </div>
 
+    <!-- MODAL SELECCIONAR FORMATO EN FECHA VACÍA (AGENCIA) -->
+    <div class="modal-overlay" id="create-event-modal">
+        <div class="modal-card" style="max-width:420px; text-align:left;">
+            <div class="work-modal-header" style="margin-bottom:18px; padding-bottom:8px;">
+                <h3>Planificar Formato</h3>
+                <button class="close-work-modal" onclick="closeCreateEventModal()"><i data-lucide="x" size="20"></i></button>
+            </div>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:16px;">Selecciona el tipo de publicación que deseas agendar para este día:</p>
+            
+            <div class="form-group">
+                <label>Tipo de Evento / Formato</label>
+                <select id="cem-format">
+                    <option value="reel">🎬 Reel</option>
+                    <option value="story">📸 Story Diaria</option>
+                    <option value="carrusel">🎠 Carrusel / Post Tradicional</option>
+                    <option value="internal">⚙️ Tarea / Bloque Interno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Título o Concepto Inicial</label>
+                <input type="text" id="cem-text" placeholder="Ej: Detrás de cámaras en cocina">
+            </div>
+
+            <div class="modal-buttons" style="margin-top:20px;">
+                <button class="btn-modal btn-modal-yes" style="background:#0284c7;" onclick="createNewEvent()">Agregar al Cronograma</button>
+                <button class="btn-modal btn-modal-no" onclick="closeCreateEventModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra Lateral Desktop -->
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -448,8 +483,10 @@
         </div>
     </nav>
 
+    <!-- Contenedor Principal -->
     <main class="main-container" id="app-content">
         
+        <!-- INICIO -->
         <section id="inicio-section" class="app-section active-section">
             <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
@@ -477,11 +514,13 @@
             </div>
         </section>
 
+        <!-- INSTAGRAM -->
         <section id="instagram-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
             <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
         </section>
 
+        <!-- CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
@@ -516,15 +555,18 @@
                 </div>
                 
                 <div class="calendar-grid" id="calendar-grid">
-                    </div>
+                    <!-- Dinámico -->
+                </div>
             </div>
         </section>
 
+        <!-- METRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
             <div class="placeholder-box"><p>Módulo de métricas en preparación.</p></div>
         </section>
 
+        <!-- PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
             <div class="budget-grid-wrapper">
@@ -554,7 +596,6 @@
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // EJEMPLOS DE CONTENIDOS RESTAURADOS
         const dummyJunePosts = {
             15: [
                 { type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR: Sonidos del Confort en Suite Premium' }
@@ -581,10 +622,7 @@
             ]
         };
 
-        // BASE DE DATOS CENTRALIZADA CON DETECCION DE RESET AUTOMÁTICO
         let calendarDatabase = {};
-        
-        // BORRAMOS SIEMPRE EL CACHÉ VIEJO PARA INTEGRAR LOS NUEVOS EJEMPLOS AUTOMÁTICAMENTE
         localStorage.removeItem('hotelAlexCalendarData');
 
         [5, 6, 7].forEach(m => {
@@ -616,7 +654,7 @@
             return calendarDatabase[dbKey];
         }
 
-        // RENDERIZADOR
+        // RENDERIZADOR GRILLA
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
             const monthSelector = document.getElementById('month-selector');
@@ -659,7 +697,7 @@
             lucide.createIcons();
         }
 
-        // CONTROL ACCESOS
+        // VALIDACIÓN SESIONES
         function validateAuth() {
             const userIn = document.getElementById('username').value.trim().toLowerCase();
             const passIn = document.getElementById('password').value.trim();
@@ -696,126 +734,152 @@
                 currentView = 'internal';
             } else {
                 controls.style.display = 'none';
-                descText.textContent = "Revisa las propuestas de pautas y deja tus anotaciones en el módulo de comentarios.";
+                descText.textContent = "Acceso Total a pautas. Haz clic en un dia para dejar un comentario.";
                 currentView = 'client'; 
             }
             renderCalendar();
             navigateTo('inicio-section');
         }
 
+        // CLIC EN UNA FECHA
         function handleCellClick(day) {
             const selectedMonth = parseInt(document.getElementById('month-selector').value);
             activeDaySelected = day;
-            openPautaModal(day, selectedMonth);
-        }
+            const data = getCellData(selectedMonth, day);
 
-        // MODAL 1: PAUTAS PÚBLICAS
-        function openPautaModal(day, month) {
-            const data = getCellData(month, day);
-            if (!data) return;
-            
-            document.getElementById('pm-contenido').value = data.pautaContenido || '';
-            document.getElementById('pm-recursos').value = data.pautaRecursos || '';
-            document.getElementById('pm-guion1').value = data.pautaGuion1 || '';
-            document.getElementById('pm-guion2').value = data.pautaGuion2 || '';
-            document.getElementById('pm-guion3').value = data.pautaGuion3 || '';
-            document.getElementById('pm-drive-url').value = data.driveUrl || '';
-            document.getElementById('pm-comentarios-cliente').value = data.comentariosCliente || '';
-
-            const toggleBtn = document.getElementById('btn-goto-internal');
             if (currentUserRole === 'master') {
-                toggleBtn.style.display = 'inline-flex';
-                document.getElementById('pm-contenido').disabled = false;
-                document.getElementById('pm-recursos').disabled = false;
-                document.getElementById('pm-guion1').disabled = false;
-                document.getElementById('pm-guion2').disabled = false;
-                document.getElementById('pm-guion3').disabled = false;
-                document.getElementById('pm-drive-url').disabled = false;
+                // Si la agencia toca un día vacío, abre creador rápido
+                if (!data || !data.posts || data.posts.length === 0) {
+                    openCreateEventModal(day);
+                } else {
+                    openInternalAgencyModal(day, selectedMonth);
+                }
             } else {
-                toggleBtn.style.display = 'none';
-                document.getElementById('pm-contenido').disabled = true;
-                document.getElementById('pm-recursos').disabled = true;
-                document.getElementById('pm-guion1').disabled = true;
-                document.getElementById('pm-guion2').disabled = true;
-                document.getElementById('pm-guion3').disabled = true;
-                document.getElementById('pm-drive-url').disabled = true;
+                // Cliente siempre va a su modal de comentarios
+                openClientCommentModal(day, selectedMonth);
             }
-
-            const wrapper = document.getElementById('pm-drive-link-wrapper');
-            if(data.driveUrl && data.driveUrl.trim() !== "") {
-                wrapper.style.display = "block";
-                document.getElementById('pm-drive-btn').href = data.driveUrl;
-            } else {
-                wrapper.style.display = "none";
-            }
-
-            document.getElementById('pauta-modal').style.display = 'flex';
         }
 
-        function closePautaModal() { document.getElementById('pauta-modal').style.display = 'none'; }
+        // MODAL CLIENTE
+        function openClientCommentModal(day, month) {
+            const data = getCellData(month, day);
+            document.getElementById('cm-title').textContent = `Día ${day} - Revisión de Pauta`;
+            
+            if (data && data.pautaContenido && data.pautaContenido.trim() !== '') {
+                document.getElementById('cm-pauta-preview').textContent = data.pautaContenido;
+            } else {
+                document.getElementById('cm-pauta-preview').textContent = "No hay pautas públicas detalladas cargadas para este día de momento.";
+            }
 
-        function savePautaData() {
+            const driveWrapper = document.getElementById('cm-drive-link-wrapper');
+            if (data && data.driveUrl && data.driveUrl.trim() !== "") {
+                driveWrapper.style.display = "block";
+                document.getElementById('cm-drive-btn').href = data.driveUrl;
+            } else {
+                driveWrapper.style.display = "none";
+            }
+
+            document.getElementById('cm-comentarios-textarea').value = (data && data.comentariosCliente) ? data.comentariosCliente : '';
+            document.getElementById('client-comment-modal').style.display = 'flex';
+        }
+
+        function closeClientCommentModal() { document.getElementById('client-comment-modal').style.display = 'none'; }
+
+        function saveClientComment() {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
+            calendarDatabase[dbKey].comentariosCliente = document.getElementById('cm-comentarios-textarea').value;
+            
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
+            closeClientCommentModal();
+        }
+
+        // MODAL AGENCIA INTERNA
+        function openInternalAgencyModal(day, month) {
+            const data = getCellData(month, day);
+            document.getElementById('iam-title').textContent = `Día ${day} - Control de Cambios y Estructura`;
+            
+            document.getElementById('iam-status-select').value = data.status || 'not-started';
+            document.getElementById('iam-req').value = data.requirement || '';
+            document.getElementById('iam-pauta').value = data.pautaContenido || '';
+            document.getElementById('iam-copy').value = data.copy || '';
+            document.getElementById('iam-drive-url').value = data.driveUrl || '';
+            document.getElementById('iam-recursos').value = data.pautaRecursos || '';
+            document.getElementById('iam-guion1').value = data.pautaGuion1 || '';
+            document.getElementById('iam-guion2').value = data.pautaGuion2 || '';
+            document.getElementById('iam-guion3').value = data.pautaGuion3 || '';
+            
+            if (data.comentariosCliente && data.comentariosCliente.trim() !== '') {
+                document.getElementById('iam-feedback-preview').textContent = data.comentariosCliente;
+            } else {
+                document.getElementById('iam-feedback-preview').textContent = "Sin comentarios del cliente todavía.";
+            }
+            
+            document.getElementById('iam-control-cambios').value = data.controlCambios || '';
+            document.getElementById('internal-agency-modal').style.display = 'flex';
+        }
+
+        function closeInternalAgencyModal() { document.getElementById('internal-agency-modal').style.display = 'none'; }
+
+        function saveInternalAgencyData() {
             const selectedMonth = parseInt(document.getElementById('month-selector').value);
             const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
             
-            if (currentUserRole === 'master') {
-                calendarDatabase[dbKey].pautaContenido = document.getElementById('pm-contenido').value;
-                calendarDatabase[dbKey].pautaRecursos = document.getElementById('pm-recursos').value;
-                calendarDatabase[dbKey].pautaGuion1 = document.getElementById('pm-guion1').value;
-                calendarDatabase[dbKey].pautaGuion2 = document.getElementById('pm-guion2').value;
-                calendarDatabase[dbKey].pautaGuion3 = document.getElementById('pm-guion3').value;
-                calendarDatabase[dbKey].driveUrl = document.getElementById('pm-drive-url').value;
-            }
-            
-            calendarDatabase[dbKey].comentariosCliente = document.getElementById('pm-comentarios-cliente').value;
+            calendarDatabase[dbKey].status = document.getElementById('iam-status-select').value;
+            calendarDatabase[dbKey].requirement = document.getElementById('iam-req').value;
+            calendarDatabase[dbKey].pautaContenido = document.getElementById('iam-pauta').value;
+            calendarDatabase[dbKey].copy = document.getElementById('iam-copy').value;
+            calendarDatabase[dbKey].driveUrl = document.getElementById('iam-drive-url').value;
+            calendarDatabase[dbKey].pautaRecursos = document.getElementById('iam-recursos').value;
+            calendarDatabase[dbKey].pautaGuion1 = document.getElementById('iam-guion1').value;
+            calendarDatabase[dbKey].pautaGuion2 = document.getElementById('iam-guion2').value;
+            calendarDatabase[dbKey].pautaGuion3 = document.getElementById('iam-guion3').value;
+            calendarDatabase[dbKey].controlCambios = document.getElementById('iam-control-cambios').value;
+
             localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
             renderCalendar();
-            closePautaModal();
+            closeInternalAgencyModal();
         }
 
-        // MODAL 2: INTERNO AGENCIA (BITÁCORA Y COPYS)
-        function openInternalModal(day, month) {
-            const data = getCellData(month, day);
-            if (!data) return;
-            
-            document.getElementById('im-status-select').value = data.status || 'not-started';
-            document.getElementById('im-req').value = data.requirement || '';
-            document.getElementById('im-copy').value = data.copy || '';
-            document.getElementById('im-control-cambios').value = data.controlCambios || '';
-
-            document.getElementById('internal-modal').style.display = 'flex';
+        // MODAL CREAR EVENTOS RÁPIDOS
+        function openCreateEventModal(day) {
+            document.getElementById('cem-text').value = '';
+            document.getElementById('create-event-modal').style.display = 'flex';
         }
 
-        function closeInternalModal() { document.getElementById('internal-modal').style.display = 'none'; }
+        function closeCreateEventModal() { document.getElementById('create-event-modal').style.display = 'none'; }
 
-        function saveInternalData() {
+        function createNewEvent() {
             const selectedMonth = parseInt(document.getElementById('month-selector').value);
             const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
             
-            calendarDatabase[dbKey].status = document.getElementById('im-status-select').value;
-            calendarDatabase[dbKey].requirement = document.getElementById('im-req').value;
-            calendarDatabase[dbKey].copy = document.getElementById('im-copy').value;
-            calendarDatabase[dbKey].controlCambios = document.getElementById('im-control-cambios').value;
+            const formatType = document.getElementById('cem-format').value;
+            const textValue = document.getElementById('cem-text').value.trim() || 'Nueva publicación';
+
+            let formatIcon = '🎬 reel';
+            if (formatType === 'story') formatIcon = '📸 story';
+            if (formatType === 'carrusel') formatIcon = '🎠 post';
+            if (formatType === 'internal') formatIcon = '⚙️ Tarea';
+
+            const newPost = {
+                type: formatType === 'internal' ? 'internal' : 'public',
+                format: formatType,
+                icon: formatIcon,
+                text: textValue
+            };
+
+            calendarDatabase[dbKey].posts.push(newPost);
+            calendarDatabase[dbKey].status = 'in-progress';
 
             localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
             renderCalendar();
-            closeInternalModal();
+            closeCreateEventModal();
+            
+            // Abre de inmediato el editor completo por si quieren seguir rellenándolo
+            openInternalAgencyModal(activeDaySelected, selectedMonth);
         }
 
-        // INTERRUPTORES
-        function switchToInternalModal() {
-            closePautaModal();
-            const selectedMonth = parseInt(document.getElementById('month-selector').value);
-            openInternalModal(activeDaySelected, selectedMonth);
-        }
-
-        function switchToPautaModal() {
-            closeInternalModal();
-            const selectedMonth = parseInt(document.getElementById('month-selector').value);
-            openPautaModal(activeDaySelected, selectedMonth);
-        }
-
-        // NAVEGACIÓN GENERAL
+        // NAVEGACIÓN Y LOGOUT
         function openLogoutModal() { document.getElementById('logout-modal').style.display = 'flex'; }
         function closeLogoutModal() { document.getElementById('logout-modal').style.display = 'none'; }
         function confirmLogout() {
