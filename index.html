@@ -112,7 +112,6 @@
 
         .guion-inputs-container { display: flex; flex-direction: column; gap: 8px; }
 
-        /* Botón alternativo para saltar entre modales */
         .btn-agency-toggle {
             background-color: #f1f5f9; color: #0284c7; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 4px;
         }
@@ -193,7 +192,7 @@
         }
         .switch-btn.active { background: #ffffff; color: #0f172a; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
-        /* LEYENDA ESTILO REFERENCIA FORMATOS */
+        /* LEYENDA */
         .calendar-legend-bar {
             display: flex; gap: 16px; padding: 0 24px 16px 24px; background: #ffffff; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap;
         }
@@ -310,7 +309,7 @@
         </div>
     </div>
 
-    <!-- MODAL 1: ENFOQUE EN PAUTA Y FEEDBACK (PÚBLICO / VISIBLE POR EL CLIENTE) -->
+    <!-- MODAL 1: ENFOQUE EN PAUTA Y FEEDBACK (PÚBLICO) -->
     <div class="modal-overlay" id="pauta-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
@@ -318,7 +317,6 @@
                 <button class="close-work-modal" onclick="closePautaModal()"><i data-lucide="x" size="20"></i></button>
             </div>
 
-            <!-- Botón interno para que la agencia salte rápido a su modal privado -->
             <button id="btn-goto-internal" class="btn-agency-toggle" onclick="switchToInternalModal()">
                 <i data-lucide="lock" size="14"></i> Cambiar a Control de Cambios / Copys (Agencia)
             </button>
@@ -366,7 +364,7 @@
     </div>
 
 
-    <!-- MODAL 2: CONTROL DE CAMBIOS INTERNO Y COPYS (EXCLUSIVO AGENCIA SHIR / VERO) -->
+    <!-- MODAL 2: CONTROL DE CAMBIOS INTERNO Y COPYS (EXCLUSIVO AGENCIA) -->
     <div class="modal-overlay" id="internal-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
@@ -395,7 +393,6 @@
                 <textarea id="im-copy" rows="4" placeholder="Redacta el copy definitivo aquí..."></textarea>
             </div>
 
-            <!-- CHAT DE CONTROL DE CAMBIOS INTERNO ENTRE SHIR Y VERO -->
             <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
                 <label style="color: #475569; font-weight: 700;">Bitácora de Ajustes (Shirley // Vero)</label>
                 <textarea id="im-control-cambios" rows="4" placeholder="Ejemplo:&#10;Vero: Shir cambiar el color de texto a azul.&#10;Shir: Resuelto, ya se actualizó en Drive."></textarea>
@@ -571,16 +568,31 @@
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // EJEMPLOS GUÍA ANTERIORES PARA JUNIO
+        // EJEMPLOS DE CONTENIDOS RESTAURADOS (VERSIONES PREVIAS)
         const dummyJunePosts = {
-            15: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR Sonidos de las Habitaciones' }],
-            16: [{ type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'El confort no es solo una cama' }],
-            17: [{ type: 'public', format: 'story', icon: '📸 story', text: 'Stories de Huéspedes' }],
-            19: [
-                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Conoce al equipo del Alex' },
-                { type: 'internal', format: 'internal', icon: '⚙️ Pautar Ads Meta', text: '' }
+            15: [
+                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR: Sonidos del Confort en Suite Premium' }
             ],
-            22: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'Un día conmigo en el Rooftop' }]
+            16: [
+                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: '3 razones por las que el descanso influye en tu productividad' }
+            ],
+            17: [
+                { type: 'public', format: 'story', icon: '📸 story', text: 'Trivia interactiva: ¿Qué detalle no puede faltar en tu habitación?' }
+            ],
+            19: [
+                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Detrás de cámaras: Nuestro equipo de hospitalidad' },
+                { type: 'internal', format: 'internal', icon: '⚙️ Ads Meta', text: 'Configurar píxel y públicos' }
+            ],
+            22: [
+                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'Recorrido express: Desde el lobby hasta el Rooftop Lounge' }
+            ],
+            24: [
+                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'Menú Ejecutivo: Una experiencia gastronómica en Caracas' }
+            ],
+            26: [
+                { type: 'public', format: 'story', icon: '📸 story', text: 'Viernes de desconexión completa en el Alex' },
+                { type: 'internal', format: 'internal', icon: '⚙️ Monitoreo', text: 'Revisión intermedia KPIS con Vero' }
+            ]
         };
 
         // BASE DE DATOS CENTRALIZADA
@@ -594,15 +606,21 @@
                 let daysCount = (m === 5) ? 30 : 31;
                 for(let i = 1; i <= daysCount; i++) {
                     const dbKey = `2026_${m}_${i}`;
+                    
+                    // Rellenamos datos simulados detallados para el 15 de Junio como guía maestra
+                    let isDia15 = (m === 5 && i === 15);
+                    
                     calendarDatabase[dbKey] = {
-                        status: 'not-started',
-                        requirement: (m === 5 && i === 15) ? 'Necesito un Reel cinematográfico de alto impacto que muestre la experiencia premium del hotel.' : '',
-                        copy: (m === 5 && i === 15) ? '¡Bienvenidos al Hotel Alex! 🏨✨ Redefiniendo el confort en Caracas...' : '',
-                        controlCambios: (m === 5 && i === 15) ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, ya se actualizó en Drive.' : '',
-                        pautaContenido: (m === 5 && i === 15) ? 'Reel de impacto cinemático de descanso premium.' : '',
-                        pautaRecursos: '',
-                        pautaGuion1: '', pautaGuion2: '', pautaGuion3: '',
-                        driveUrl: (m === 5 && i === 15) ? 'https://drive.google.com' : '',
+                        status: isDia15 ? 'in-progress' : 'not-started',
+                        requirement: isDia15 ? 'Mostrar el confort visual mediante planos detallados, sábanas premium y luz natural controlada.' : '',
+                        copy: isDia15 ? '¿El verdadero lujo? Apagar el ruido de Caracas y escuchar el silencio. 😴✨ Te esperamos en nuestras Suites Executive.' : '',
+                        controlCambios: isDia15 ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, modificado en los assets de Drive.' : '',
+                        pautaContenido: isDia15 ? 'Reel de impacto cinemático enfocado en descanso y experiencia premium.' : '',
+                        pautaRecursos: isDia15 ? 'Tomas en 4K de la Suite 402, transiciones lentas, pista de audio ASMR.' : '',
+                        pautaGuion1: isDia15 ? '0:01 - 0:03 Apertura con primer plano de almohadas esponjosas.' : '',
+                        pautaGuion2: isDia15 ? '0:04 - 0:07 Entrada de luz natural y vista panorámica limpia.' : '',
+                        pautaGuion3: isDia15 ? '0:08 - 0:15 Cierre con logotipo minimalista del hotel.' : '',
+                        driveUrl: isDia15 ? 'https://drive.google.com' : '',
                         comentariosCliente: '',
                         posts: (m === 5 && dummyJunePosts[i]) ? dummyJunePosts[i] : []
                     };
@@ -666,7 +684,7 @@
             lucide.createIcons();
         }
 
-        // CONTROL ACCESOS SÉGÚN NUEVO FLUJO
+        // CONTROL ACCESOS
         function validateAuth() {
             const userIn = document.getElementById('username').value.trim().toLowerCase();
             const passIn = document.getElementById('password').value.trim();
@@ -699,7 +717,7 @@
 
             if (role === 'master') {
                 controls.style.display = 'flex';
-                descText.textContent = "Acceso total a cronogramas y pautas. Haz clic en un día para editar la pauta pública o gestionar cambios de agencia internos.";
+                descText.textContent = "Acceso total a pautas. Haz clic en un día para editar contenidos públicos o gestionar cambios de agencia internos.";
                 currentView = 'internal';
             } else {
                 controls.style.display = 'none';
@@ -713,17 +731,10 @@
         function handleCellClick(day) {
             const selectedMonth = parseInt(document.getElementById('month-selector').value);
             activeDaySelected = day;
-            
-            if (currentUserRole === 'master') {
-                // La agencia salta de manera predeterminada al modal de pautas, pero tiene habilitado el botón para ir a su bitácora interna
-                openPautaModal(day, selectedMonth);
-            } else {
-                // El cliente solo puede abrir y interactuar con el modal de pautas
-                openPautaModal(day, selectedMonth);
-            }
+            openPautaModal(day, selectedMonth);
         }
 
-        // OPERACIONES MODAL 1: PAUTAS PÚBLICAS
+        // MODAL 1: PAUTAS PÚBLICAS
         function openPautaModal(day, month) {
             const data = getCellData(month, day);
             
@@ -786,7 +797,7 @@
             closePautaModal();
         }
 
-        // OPERACIONES MODAL 2: INTERNO AGENCIA (BITÁCORA Y COPYS)
+        // MODAL 2: INTERNO AGENCIA (BITÁCORA Y COPYS)
         function openInternalModal(day, month) {
             const data = getCellData(month, day);
             
@@ -814,7 +825,7 @@
             closeInternalModal();
         }
 
-        // INTERRUPTORES ENTRE MODALES
+        // INTERRUPTORES
         function switchToInternalModal() {
             closePautaModal();
             const selectedMonth = parseInt(document.getElementById('month-selector').value);
@@ -827,7 +838,7 @@
             openPautaModal(activeDaySelected, selectedMonth);
         }
 
-        // SESIÓN Y SPA GENERAL
+        // NAVEGACIÓN Y SPA GENERAL
         function openLogoutModal() { document.getElementById('logout-modal').style.display = 'flex'; }
         function closeLogoutModal() { document.getElementById('logout-modal').style.display = 'none'; }
         function confirmLogout() {
