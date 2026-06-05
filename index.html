@@ -7,7 +7,7 @@
     <!-- Cargamos Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Reset y Estética de Minimalismo Sensorial en Modo Claro */
+        /* Reset y Estética de Minimalismo Sensorial */
         * {
             margin: 0;
             padding: 0;
@@ -67,7 +67,6 @@
             display: block; font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        /* Mini-selector ClickUp superior derecho */
         .status-select-top-right {
             position: absolute;
             top: 0;
@@ -87,6 +86,7 @@
             width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; color: #0f172a; background-color: #f8fafc; outline: none; transition: border-color 0.2s, background-color 0.2s;
         }
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #0284c7; background-color: #ffffff; }
+        .form-group input:disabled, .form-group textarea:disabled { background-color: #f1f5f9; color: #64748b; cursor: not-allowed; }
 
         .btn-login {
             width: 100%; padding: 14px; background-color: #0f172a; color: #ffffff; border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; margin-top: 10px;
@@ -112,7 +112,7 @@
         .btn-modal-no { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
         .btn-modal-no:hover { background-color: #e2e8f0; }
 
-        /* MODAL DE TRABAJO OPTIMIZADO */
+        /* MODAL DE ENFOQUE EN PAUTA */
         .work-modal-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; width: 100%; max-width: 600px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); animation: fadeInContent 0.25s ease; max-height: 90vh; overflow-y: auto; text-align: left;
         }
@@ -123,11 +123,12 @@
         .close-work-modal { background: none; border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center; }
         .close-work-modal:hover { color: #475569; }
 
-        /* Botón de visualización abajo */
         .btn-action-view-art {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #10b981; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #4285F4; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
         }
-        .btn-action-view-art:hover { background-color: #059669; }
+        .btn-action-view-art:hover { background-color: #357ae8; }
+
+        .guion-inputs-container { display: flex; flex-direction: column; gap: 8px; }
 
         /* HEADER MÓVIL */
         .mobile-header {
@@ -216,8 +217,27 @@
 
         /* CALENDARIO */
         .calendar-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; width: 100%; overflow-x: auto; }
+        
+        /* Selector de mes limpio */
+        .month-dropdown-selector {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+            padding: 6px 12px;
+            border-radius: 8px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .month-dropdown-selector:hover {
+            border-color: #cbd5e1;
+            background-color: #ffffff;
+        }
+
         .calendar-month-title {
-            padding: 20px 24px; font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;
         }
         .calendar-days-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: center; }
         .calendar-day-label { padding: 14px 4px; font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -245,7 +265,7 @@
 
         .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; flex-grow: 1; }
 
-        /* BLOQUES DE COLOR SÓLIDO (INSPIRADOS EN IMAGEN DE REFERENCIA) */
+        /* BLOQUES DE PUBLICACIONES */
         .post-item { 
             padding: 8px; 
             border-radius: 8px; 
@@ -265,10 +285,9 @@
             opacity: 0.8;
         }
 
-        /* Paleta alegórica Hotel Alex */
-        .post-reel { background-color: #2563eb; color: #ffffff; } /* Azul Eléctrico */
-        .post-story { background-color: #06b6d4; color: #ffffff; } /* Cyan / Celeste */
-        .post-carrusel { background-color: #0f172a; color: #ffffff; } /* Azul Marino Profundo */
+        .post-reel { background-color: #2563eb; color: #ffffff; } 
+        .post-story { background-color: #06b6d4; color: #ffffff; } 
+        .post-carrusel { background-color: #0f172a; color: #ffffff; } 
         .post-general { background-color: #64748b; color: #ffffff; }
         
         .internal-task { background-color: #f1f5f9; color: #475569; border-left: 3px solid #cbd5e1; font-style: italic; font-weight: 500; }
@@ -303,7 +322,7 @@
 
         @media (max-width: 480px) {
             .login-card { padding: 24px 16px; border-radius: 16px; }
-            .calendar-month-title { flex-direction: column; gap: 8px; align-items: flex-start; padding: 16px; }
+            .calendar-month-title { flex-direction: column; gap: 12px; align-items: flex-start; padding: 16px; }
             .post-item { font-size: 0.68rem; padding: 6px; }
             .work-modal-card { padding: 20px; }
         }
@@ -320,7 +339,7 @@
             
             <div class="form-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" placeholder="Ej: admin" autocomplete="off">
+                <input type="text" id="username" placeholder="Ej: shir" autocomplete="off">
             </div>
             
             <div class="form-group">
@@ -353,13 +372,12 @@
         </div>
     </div>
 
-    <!-- MODAL DE FLUJO DE TRABAJO (OPTIMIZADO Y LIMPIO) -->
+    <!-- MODAL DE ENFOQUE EN PAUTA Y FEEDBACK -->
     <div class="modal-overlay" id="work-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3 id="wm-title">Día de Planificación</h3>
+                <h3 id="wm-title">Gestión de Pauta</h3>
                 <div class="header-actions-right">
-                    <!-- Selector ClickUp sutil a la derecha -->
                     <select id="wm-status-select" class="status-select-top-right">
                         <option value="not-started">🔴 No iniciado</option>
                         <option value="in-progress">🟡 En proceso</option>
@@ -370,25 +388,45 @@
             </div>
 
             <div class="form-group">
-                <label>Comentarios de Contenido / Requerimientos</label>
-                <textarea id="wm-req" rows="3" placeholder="Pautas, objetivos o enfoque del post de hoy..."></textarea>
+                <label>Fecha de la Pauta</label>
+                <input type="text" id="wm-pauta-fecha" readonly style="font-weight: 600;">
+            </div>
+
+            <!-- BLOQUE DE LA AGENCIA -->
+            <div class="form-group">
+                <label>Contenido de la Pauta</label>
+                <textarea id="wm-pauta-contenido" rows="3" placeholder="Detalles de la estrategia o enfoque de la publicación..."></textarea>
             </div>
 
             <div class="form-group">
-                <label>Copy / Texto de la Publicación</label>
-                <textarea id="wm-copy" rows="4" placeholder="Escribe el copy definitivo aquí..."></textarea>
+                <label>Recursos que Necesitamos</label>
+                <textarea id="wm-pauta-recursos" rows="2" placeholder="Ej: Diseños, banco de imágenes, videos específicos..."></textarea>
             </div>
 
-            <div class="form-group" id="wm-link-group">
-                <label>Enlace de Entrega de Artes (Link de Diseños Creados)</label>
-                <input type="url" id="wm-art-url" placeholder="Ej: https://figma.com/... o enlace de imágenes">
+            <div class="form-group">
+                <label>Guiones Disponibles (1 a 3)</label>
+                <div class="guion-inputs-container">
+                    <input type="text" id="wm-pauta-guion1" placeholder="Guion u Objetivo principal (Opción 1)">
+                    <input type="text" id="wm-pauta-guion2" placeholder="Guion alternativo / Enfoque secundario (Opción 2)">
+                    <input type="text" id="wm-pauta-guion3" placeholder="Llamado a la acción extendido (Opción 3)">
+                </div>
             </div>
 
-            <!-- Botón de visualización estratégica reubicado al fondo -->
-            <div id="wm-art-link-wrapper" style="display:none; margin-top: 15px; margin-bottom: 15px;">
-                <a href="#" id="wm-art-btn" target="_blank" class="btn-action-view-art">
-                    <i data-lucide="image" size="18"></i> 👁️ Ver Diseños Creados
+            <div class="form-group" id="wm-drive-group">
+                <label>Enlace de Carpeta en Google Drive</label>
+                <input type="url" id="wm-drive-url" placeholder="Ej: https://drive.google.com/drive/...">
+            </div>
+
+            <div id="wm-drive-link-wrapper" style="display:none; margin-top: 12px; margin-bottom: 12px;">
+                <a href="#" id="wm-drive-btn" target="_blank" class="btn-action-view-art">
+                    <i data-lucide="external-link" size="18"></i> Abrir Contenido en Google Drive
                 </a>
+            </div>
+
+            <!-- BLOQUE EXCLUSIVO DE RETROALIMENTACIÓN DEL CLIENTE -->
+            <div class="form-group" style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed #cbd5e1;">
+                <label style="color: #0284c7; font-weight: 700;">Comentarios sobre el Contenido (Espacio del Cliente)</label>
+                <textarea id="wm-comentarios-cliente" rows="3" placeholder="Espacio para que el cliente redacte sus observaciones o solicitudes de ajuste..."></textarea>
             </div>
 
             <div class="modal-buttons" style="margin-top:24px;">
@@ -398,7 +436,7 @@
         </div>
     </div>
 
-    <!-- Panel Lateral Izquierdo / Barra Inferior -->
+    <!-- Panel Lateral Izquierdo -->
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
@@ -505,11 +543,14 @@
             
             <div class="calendar-container">
                 <div class="calendar-month-title">
-                    <span>Junio 2026</span>
-                    <span id="interactive-badge" style="font-size:0.85rem; color:#0284c7; font-weight:600;"><i data-lucide="sparkles" stroke-width="2" size="14" style="display:inline; vertical-align:middle; margin-right:4px;"></i> Sistema de Control de Producción Activo</span>
+                    <!-- Selector Dinámico de Meses -->
+                    <select id="month-selector" class="month-dropdown-selector" onchange="handleMonthChange()">
+                        <option value="5">Junio 2026</option>
+                        <option value="6">Julio 2026</option>
+                        <option value="7">Agosto 2026</option>
+                    </select>
                 </div>
 
-                <!-- Barra de formatos basada en la imagen de referencia -->
                 <div class="calendar-legend-bar">
                     <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div>reel</div>
                     <div class="legend-item"><div class="legend-color" style="background:#06b6d4;"></div>stories diarios</div>
@@ -520,9 +561,8 @@
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
                 
-                <!-- NUEVO CONTENEDOR DINÁMICO -->
                 <div class="calendar-grid" id="calendar-grid">
-                    <!-- Los días y sus bloques de color se dibujan automáticamente desde JavaScript -->
+                    <!-- Las celdas se inyectan automáticamente -->
                 </div>
             </div>
         </section>
@@ -530,7 +570,7 @@
         <!-- SECCIÓN MÉTRICAS -->
         <section id="metricas-section" class="app-section">
             <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
-            <div class="placeholder-box"><p>Módulo de métricas.</p></div>
+            <div class="placeholder-box"><p>Módulo de métricas en preparación.</p></div>
         </section>
 
         <!-- SECCIÓN PRESUPUESTO -->
@@ -546,7 +586,7 @@
                         </div>
                     </div>
                     <h3>Inicio: 15 de Junio</h3>
-                    <p>Estatus actual del proyecto: Contrato Ejecutado bajo los términos de la agencia.</p>
+                    <p>Estatus actual del proyecto: Contrato Executed bajo términos de agencia.</p>
                 </div>
             </div>
         </section>
@@ -559,12 +599,12 @@
     <script>
         lucide.createIcons();
 
-        let currentUserRole = '';
+        let currentUserRole = ''; 
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // Formatos por defecto para los días clave de Junio
-        const defaultPostsData = {
+        // Maqueta de contenido guía de Junio 2026
+        const dummyJunePosts = {
             15: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR Sonidos de las Habitaciones' }],
             16: [{ type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'El confort no es solo una cama' }],
             17: [{ type: 'public', format: 'story', icon: '📸 story', text: 'Stories de Huéspedes' }],
@@ -575,37 +615,65 @@
             22: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'Un día conmigo en el Rooftop' }]
         };
 
-        // SISTEMA DE ALMACENAMIENTO: Intenta cargar datos previos, si no existen crea la base inicial
+        // BASE DE DATOS LOCALSTORAGE CENTRALIZADA POR MESES
         let calendarDatabase = {};
         const savedData = localStorage.getItem('hotelAlexCalendarData');
 
         if (savedData) {
             calendarDatabase = JSON.parse(savedData);
         } else {
-            for(let i = 1; i <= 30; i++) {
-                calendarDatabase[i] = {
-                    status: 'not-started',
-                    requirement: i === 15 ? 'Necesito un Reel cinematográfico de alto impacto que muestre la experiencia premium del hotel.' : '',
-                    copy: i === 15 ? '¡Bienvenidos al Hotel Alex! 🏨✨ Redefiniendo el confort en Caracas...' : '',
-                    artUrl: i === 15 ? 'https://google.com' : '',
-                    posts: defaultPostsData[i] || []
-                };
-            }
+            // Inicialización estructurada para Junio(5), Julio(6) y Agosto(7)
+            [5, 6, 7].forEach(m => {
+                let daysCount = (m === 5) ? 30 : 31;
+                for(let i = 1; i <= daysCount; i++) {
+                    const dbKey = `2026_${m}_${i}`;
+                    calendarDatabase[dbKey] = {
+                        status: 'not-started',
+                        pautaContenido: (m === 5 && i === 15) ? 'Reel de impacto cinemático mostrando la experiencia de descanso premium en el hotel.' : '',
+                        pautaRecursos: '',
+                        pautaGuion1: '',
+                        pautaGuion2: '',
+                        pautaGuion3: '',
+                        driveUrl: (m === 5 && i === 15) ? 'https://drive.google.com' : '',
+                        comentariosCliente: '',
+                        posts: (m === 5 && dummyJunePosts[i]) ? dummyJunePosts[i] : []
+                    };
+                }
+            });
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
         }
 
-        // FUNCIÓN MAESTRA: Dibuja dinámicamente todo el calendario
-        function renderCalendar(year, month) {
+        // Recuperador seguro de datos por celda
+        function getCellData(month, day) {
+            const dbKey = `2026_${month}_${day}`;
+            if (!calendarDatabase[dbKey]) {
+                calendarDatabase[dbKey] = {
+                    status: 'not-started', pautaContenido: '', pautaRecursos: '',
+                    pautaGuion1: '', pautaGuion2: '', pautaGuion3: '',
+                    driveUrl: '', comentariosCliente: '', posts: []
+                };
+            }
+            return calendarDatabase[dbKey];
+        }
+
+        // RENDERIZADOR DINÁMICO DE CALENDARIO
+        function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
-            if (!grid) return;
-            grid.innerHTML = ''; // Limpiar celdas viejas
+            const monthSelector = document.getElementById('month-selector');
+            if (!grid || !monthSelector) return;
+            
+            const selectedMonth = parseInt(monthSelector.value);
+            grid.innerHTML = '';
 
-            // Calcular días previos de relleno
-            const firstDayIndex = new Date(year, month, 1).getDay();
-            const totalDays = new Date(year, month + 1, 0).getDate();
-            let startDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+            const firstDayIndex = new Date(2026, selectedMonth, 1).getDay();
+            const totalDays = new Date(2026, selectedMonth + 1, 0).getDate();
+            
+            // Ajuste de inicio lunes
+            let startDayPadding = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
 
-            const prevMonthTotalDays = new Date(year, month, 0).getDate();
-            for (let i = startDay; i > 0; i--) {
+            // Relleno de mes anterior
+            const prevMonthTotalDays = new Date(2026, selectedMonth, 0).getDate();
+            for (let i = startDayPadding; i > 0; i--) {
                 const dayNum = prevMonthTotalDays - i + 1;
                 grid.innerHTML += `
                     <div class="calendar-cell muted">
@@ -613,16 +681,15 @@
                     </div>`;
             }
 
-            // Dibujar días de Junio interactivos
+            // Inyección de celdas del mes seleccionado
             for (let i = 1; i <= totalDays; i++) {
-                const dayData = calendarDatabase[i];
+                const cellData = getCellData(selectedMonth, i);
                 
                 let postsHTML = '';
-                if (dayData.posts && Array.isArray(dayData.posts)) {
-                    dayData.posts.forEach(post => {
+                if (cellData.posts && Array.isArray(cellData.posts)) {
+                    cellData.posts.forEach(post => {
                         const isInternal = post.type === 'internal';
                         const postClass = isInternal ? 'internal-task' : `post-item post-${post.format}`;
-                        // Ocultar o mostrar de acuerdo a la vista seleccionada (Cliente o Interna)
                         const displayStyle = (isInternal && currentView === 'client') ? 'style="display:none;"' : '';
                         
                         postsHTML += `
@@ -636,23 +703,30 @@
                     <div class="calendar-cell" id="day-cell-${i}" onclick="handleCellClick(${i})">
                         <div class="cell-top-bar">
                             <span class="cell-number">${i}</span>
-                            <span class="clickup-badge status-${dayData.status}" id="status-badge-${i}"></span>
+                            <span class="clickup-badge status-${cellData.status}"></span>
                         </div>
-                        <div class="posts-container" id="posts-container-${i}">${postsHTML}</div>
+                        <div class="posts-container">${postsHTML}</div>
                     </div>`;
             }
             lucide.createIcons();
         }
 
+        // CONTROL DE CAMBIO DE MES
+        function handleMonthChange() {
+            renderCalendar();
+        }
+
+        // VALIDACIÓN DE ROLES OPTIMIZADA (SHIR, VERO Y ADMIN)
         function validateAuth() {
-            const userIn = document.getElementById('username').value.trim();
+            const userIn = document.getElementById('username').value.trim().toLowerCase();
             const passIn = document.getElementById('password').value.trim();
             const errorMsg = document.getElementById('login-error-msg');
 
             if (userIn === 'admin' && passIn === '1234') {
                 setupSession('admin', 'Cliente Activo');
-            } else if (userIn === 'master' && passIn === '4321') {
-                setupSession('master', 'Agencia (Master)');
+            } else if ((userIn === 'shir' || userIn === 'vero') && passIn === '4321') {
+                const formattedName = userIn === 'shir' ? 'Shirley (Agencia)' : 'Vero (Agencia)';
+                setupSession('master', formattedName);
             } else {
                 errorMsg.style.display = 'block';
             }
@@ -677,61 +751,77 @@
 
             if (role === 'master') {
                 controls.style.display = 'flex';
-                descText.textContent = "Haz clic en cualquier día para gestionar requerimientos de contenido, copys y entrega de diseños.";
+                descText.textContent = "Gestión integral de pautas, recursos técnicos, guiones de contenido y enlaces compartidos.";
                 currentView = 'internal';
             } else {
                 controls.style.display = 'none';
-                descText.textContent = "Planificación de publicaciones aprobadas y estatus de diseño en tiempo real.";
+                descText.textContent = "Revisión de planificaciones aprobadas. Deja tus observaciones en el bloque de comentarios de cada día.";
                 currentView = 'client'; 
             }
             
-            // Renderizamos Junio 2026 de forma limpia
-            renderCalendar(2026, 5);
+            renderCalendar();
             navigateTo('inicio-section');
         }
 
         function handleCellClick(day) {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
             if (currentUserRole === 'master') {
-                openWorkModal(day);
+                openWorkModal(day, selectedMonth);
             } else {
-                const data = calendarDatabase[day];
-                if(data.requirement || data.copy || data.artUrl) {
-                    openWorkModal(day);
-                }
+                // El cliente siempre puede ingresar a dejar feedback o ver la pauta
+                openWorkModal(day, selectedMonth);
             }
         }
 
-        function openWorkModal(day) {
+        // MANEJO ESTRUCTURADO DEL MODAL SEGÚN PERMISOS
+        function openWorkModal(day, month) {
             activeDaySelected = day;
-            const data = calendarDatabase[day];
+            const data = getCellData(month, day);
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
             
-            document.getElementById('wm-title').textContent = `Gestión de Contenido - Junio ${day}`;
+            document.getElementById('wm-pauta-fecha').value = `${day} de ${monthNames[month]} de 2026`;
             document.getElementById('wm-status-select').value = data.status;
-            document.getElementById('wm-req').value = data.requirement;
-            document.getElementById('wm-copy').value = data.copy;
-            document.getElementById('wm-art-url').value = data.artUrl;
+            
+            // Asignación de campos de pauta
+            document.getElementById('wm-pauta-contenido').value = data.pautaContenido || '';
+            document.getElementById('wm-pauta-recursos').value = data.pautaRecursos || '';
+            document.getElementById('wm-pauta-guion1').value = data.pautaGuion1 || '';
+            document.getElementById('wm-pauta-guion2').value = data.pautaGuion2 || '';
+            document.getElementById('wm-pauta-guion3').value = data.pautaGuion3 || '';
+            document.getElementById('wm-drive-url').value = data.driveUrl || '';
+            document.getElementById('wm-comentarios-cliente').value = data.comentariosCliente || '';
 
-            const wrapper = document.getElementById('wm-art-link-wrapper');
-            const btn = document.getElementById('wm-art-btn');
-            if(data.artUrl && data.artUrl.trim() !== "") {
+            // Render de botón de Drive externo
+            const wrapper = document.getElementById('wm-drive-link-wrapper');
+            const btn = document.getElementById('wm-drive-btn');
+            if(data.driveUrl && data.driveUrl.trim() !== "") {
                 wrapper.style.display = "block";
-                btn.href = data.artUrl;
+                btn.href = data.driveUrl;
             } else {
                 wrapper.style.display = "none";
             }
 
-            if (currentUserRole !== 'master') {
-                document.getElementById('wm-status-select').disabled = true;
-                document.getElementById('wm-req').disabled = true;
-                document.getElementById('wm-copy').disabled = true;
-                document.getElementById('wm-art-url').disabled = true;
-                document.getElementById('wm-link-group').style.display = "none";
-            } else {
+            // Lógica de Bloqueo de Inputs (Seguridad de Roles)
+            if (currentUserRole === 'master') {
                 document.getElementById('wm-status-select').disabled = false;
-                document.getElementById('wm-req').disabled = false;
-                document.getElementById('wm-copy').disabled = false;
-                document.getElementById('wm-art-url').disabled = false;
-                document.getElementById('wm-link-group').style.display = "block";
+                document.getElementById('wm-pauta-contenido').disabled = false;
+                document.getElementById('wm-pauta-recursos').disabled = false;
+                document.getElementById('wm-pauta-guion1').disabled = false;
+                document.getElementById('wm-pauta-guion2').disabled = false;
+                document.getElementById('wm-pauta-guion3').disabled = false;
+                document.getElementById('wm-drive-url').disabled = false;
+                document.getElementById('wm-comentarios-cliente').disabled = false; // La agencia también puede ver/editar comentarios
+            } else {
+                // Bloqueo total para el Cliente excepto su caja de comentarios
+                document.getElementById('wm-status-select').disabled = true;
+                document.getElementById('wm-pauta-contenido').disabled = true;
+                document.getElementById('wm-pauta-recursos').disabled = true;
+                document.getElementById('wm-pauta-guion1').disabled = true;
+                document.getElementById('wm-pauta-guion2').disabled = true;
+                document.getElementById('wm-pauta-guion3').disabled = true;
+                document.getElementById('wm-drive-url').disabled = true;
+                
+                document.getElementById('wm-comentarios-cliente').disabled = false; // Permitido escribir al Cliente
             }
 
             document.getElementById('work-modal').style.display = 'flex';
@@ -741,22 +831,34 @@
             document.getElementById('work-modal').style.display = 'none';
         }
 
+        // GUARDADO DE DATOS CONSOLIDADO
         function saveWorkDayData() {
-            if (currentUserRole !== 'master') return;
-            
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
             const day = activeDaySelected;
-            const statusValue = document.getElementById('wm-status-select').value;
+            const dbKey = `2026_${selectedMonth}_${day}`;
             
-            calendarDatabase[day].status = statusValue;
-            calendarDatabase[day].requirement = document.getElementById('wm-req').value;
-            calendarDatabase[day].copy = document.getElementById('wm-copy').value;
-            calendarDatabase[day].artUrl = document.getElementById('wm-art-url').value;
+            if (!calendarDatabase[dbKey]) {
+                calendarDatabase[dbKey] = {};
+            }
 
-            // Guardar permanentemente en LocalStorage
+            // Si es agencia actualiza toda la pauta estratégica
+            if (currentUserRole === 'master') {
+                calendarDatabase[dbKey].status = document.getElementById('wm-status-select').value;
+                calendarDatabase[dbKey].pautaContenido = document.getElementById('wm-pauta-contenido').value;
+                calendarDatabase[dbKey].pautaRecursos = document.getElementById('wm-pauta-recursos').value;
+                calendarDatabase[dbKey].pautaGuion1 = document.getElementById('wm-pauta-guion1').value;
+                calendarDatabase[dbKey].pautaGuion2 = document.getElementById('wm-pauta-guion2').value;
+                calendarDatabase[dbKey].pautaGuion3 = document.getElementById('wm-pauta-guion3').value;
+                calendarDatabase[dbKey].driveUrl = document.getElementById('wm-drive-url').value;
+            }
+            
+            // Los comentarios del cliente se guardan siempre que se presione el botón de guardado
+            calendarDatabase[dbKey].comentariosCliente = document.getElementById('wm-comentarios-cliente').value;
+
+            // Almacenamiento persistente
             localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
 
-            // Volver a dibujar para refrescar colores y textos al instante
-            renderCalendar(2026, 5);
+            renderCalendar();
             closeWorkModal();
         }
 
@@ -775,7 +877,7 @@
             setTimeout(() => { loginScreen.style.opacity = '1'; }, 50);
         }
 
-        // SPA Control
+        // Control de secciones (SPA)
         const buttons = document.querySelectorAll('.menu-btn');
         const sections = document.querySelectorAll('.app-section');
 
@@ -804,8 +906,7 @@
                 if (internalBtn) internalBtn.classList.add('active');
             }
             
-            // Re-renderizar para ocultar o mostrar las pautas de pauta publicitaria (internal)
-            renderCalendar(2026, 5);
+            renderCalendar();
         }
     </script>
 </body>
