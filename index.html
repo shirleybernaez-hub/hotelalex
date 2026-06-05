@@ -737,24 +737,33 @@
         }
 
         function saveWorkDayData() {
-            if (currentUserRole !== 'master') return;
-            
-            const day = activeDaySelected;
-            const statusValue = document.getElementById('wm-status-select').value;
-            
-            calendarDatabase[day] = {
-                status: statusValue,
-                requirement: document.getElementById('wm-req').value,
-                copy: document.getElementById('wm-copy').value,
-                artUrl: document.getElementById('wm-art-url').value
-            };
+    if (typeof currentUserRole !== 'undefined' && currentUserRole !== 'master') return;
+    
+    const day = activeDaySelected;
+    const statusValue = document.getElementById('wm-status-select').value;
+    
+    // Mapeo de valores a texto legible
+    const statusLabels = {
+        'not-started': 'No iniciado',
+        'in-progress': 'En proceso',
+        'ready': 'Listo'
+    };
 
-            // Actualizar el color del estatus en el calendario principal
-            const badge = document.getElementById(`status-badge-${day}`);
-            badge.className = `clickup-badge status-${statusValue}`;
+    // Actualizar base de datos local
+    calendarDatabase[day].status = statusValue;
+    calendarDatabase[day].requirement = document.getElementById('wm-req').value;
+    calendarDatabase[day].copy = document.getElementById('wm-copy').value;
+    calendarDatabase[day].artUrl = document.getElementById('wm-art-url').value;
 
-            closeWorkModal();
-        }
+    // ACTUALIZACIÓN DEL DOM (Esto pone el texto en el calendario)
+    const badge = document.getElementById(`status-badge-${day}`);
+    const textLabel = document.getElementById(`status-text-${day}`);
+    
+    if (badge) badge.className = `clickup-badge status-${statusValue}`;
+    if (textLabel) textLabel.textContent = statusLabels[statusValue];
+
+    closeWorkModal();
+}
 
         function refreshAllStatusBadges() {
             for(let i = 1; i <= 30; i++) {
