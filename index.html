@@ -27,11 +27,32 @@
 
         /* PANTALLA DE LOGIN */
         .login-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f4f6f8; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.3s ease, transform 0.3s ease; padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            padding: 20px;
         }
+
         .login-card {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05); text-align: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.05);
+            text-align: center;
+            animation: fadeInContent 0.4s ease;
         }
+
         .login-logo { height: 60px; margin-bottom: 24px; object-fit: contain; }
         .login-card h2 { font-size: 1.2rem; font-weight: 600; color: #0f172a; margin-bottom: 6px; }
         .login-card p { font-size: 0.85rem; color: #64748b; margin-bottom: 28px; }
@@ -40,10 +61,16 @@
         .form-group label {
             display: block; font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
         }
+
+        .status-select-top-right {
+            position: absolute; top: 0; right: 0; width: auto; padding: 2px 8px; font-size: 0.75rem; font-weight: 600; border-radius: 6px; border: 1px solid #cbd5e1; background-color: #f8fafc; outline: none; cursor: pointer;
+        }
+
         .form-group input, .form-group textarea, .form-group select {
             width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; color: #0f172a; background-color: #f8fafc; outline: none; transition: border-color 0.2s, background-color 0.2s;
         }
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #0284c7; background-color: #ffffff; }
+        .form-group input:disabled, .form-group textarea:disabled { background-color: #f1f5f9; color: #64748b; cursor: not-allowed; }
 
         .btn-login {
             width: 100%; padding: 14px; background-color: #0f172a; color: #ffffff; border: none; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; margin-top: 10px;
@@ -55,352 +82,506 @@
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 10000; padding: 20px;
         }
+
         .modal-card {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: fadeInContent 0.25s ease;
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; width: 100%; max-width: 360px; text-align: center; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: fadeInContent 0.25s ease;
         }
+        .modal-card h3 { font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+        .modal-card p { font-size: 0.9rem; color: #64748b; margin-bottom: 24px; }
+        .modal-buttons { display: flex; gap: 12px; justify-content: center; }
+
+        .btn-modal { padding: 12px 24px; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; border: none; flex: 1; }
+        .btn-modal-yes { background-color: #ef4444; color: #ffffff; }
+        .btn-modal-yes:hover { background-color: #dc2626; }
+        .btn-modal-no { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        .btn-modal-no:hover { background-color: #e2e8f0; }
+
         .work-modal-card {
-            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; width: 100%; max-width: 550px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); animation: fadeInContent 0.25s ease; max-height: 90vh; overflow-y: auto;
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; width: 100%; max-width: 600px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); animation: fadeInContent 0.25s ease; max-height: 90vh; overflow-y: auto; text-align: left;
         }
-        .work-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; }
-        .work-modal-header h3 { font-size: 1.15rem; font-weight: 700; color: #0f172a; text-transform: capitalize; }
+        .work-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; position: relative; }
+        .work-modal-header h3 { font-size: 1.2rem; font-weight: 700; color: #0f172a; }
+        
         .close-work-modal { background: none; border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center; }
         .close-work-modal:hover { color: #475569; }
 
         .btn-action-view-art {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #000000; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; width: 100%; text-align: center; margin-top: 5px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #4285F4; color: #ffffff; padding: 12px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
         }
-        .btn-action-view-art:hover { background-color: #1e293b; }
-
-        .modal-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
-        .btn-modal { padding: 12px 24px; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; border: none; flex: 1; }
-        .btn-modal-yes { background-color: #0f172a; color: #ffffff; }
-        .btn-modal-no { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        .btn-action-view-art:hover { background-color: #357ae8; }
 
         .guion-inputs-container { display: flex; flex-direction: column; gap: 8px; }
+
+        .btn-agency-toggle {
+            background-color: #f1f5f9; color: #0284c7; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 4px;
+        }
+        .btn-agency-toggle:hover { background-color: #e2e8f0; }
 
         /* HEADER MÓVIL */
         .mobile-header {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 60px; background-color: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 0 20px; align-items: center; justify-content: space-between; z-index: 90;
         }
         .mobile-brand-logo { height: 35px; object-fit: contain; }
-        .mobile-logout-btn { background: none; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center; }
+        .mobile-logout-btn { background: none; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 8px; }
 
         /* BARRA LATERAL DESKTOP */
         .sidebar {
             width: 280px; background-color: #ffffff; border-right: 1px solid #e2e8f0; display: none; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; padding: 40px 24px; z-index: 100;
         }
+
         .user-profile-trigger {
             display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: 25px; border-bottom: 1px solid #f1f5f9; margin-bottom: 30px; width: 100%;
         }
-        .brand-logo { height: 70px; object-fit: contain; margin-bottom: 12px; }
-        .user-info h4 { font-size: 1rem; font-weight: 600; color: #0f172a; }
+        .brand-logo { width: auto; height: 70px; object-fit: contain; margin-bottom: 12px; }
+        .user-info h4 { font-size: 1rem; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
         .user-info p { font-size: 0.75rem; color: #64748b; }
 
         .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 12px; width: 100%; }
         .sidebar-menu button {
-            width: 100%; background: none; border: none; display: flex; align-items: center; gap: 16px; padding: 12px 14px; color: #78828c; font-size: 0.95rem; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all 0.2s ease;
+            width: 100%; background: none; border: none; display: flex; align-items: center; gap: 16px; padding: 12px 14px; color: #78828c; font-size: 0.95rem; font-weight: 500; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; text-align: left;
         }
         .sidebar-menu button.active { background-color: #f1f5f9; color: #000000; font-weight: 600; }
         .sidebar-menu button:hover:not(.active) { background-color: #f8fafc; color: #0f172a; }
-        .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 20px 14px; border: none; }
+        .sidebar-menu button.btn-logout-sidebar { color: #94a3b8; }
+        .sidebar-menu button.btn-logout-sidebar:hover { background-color: #fef2f2; color: #ef4444; }
+
+        .sidebar-footer { margin-top: auto; width: 100%; }
+        .sidebar-divider { height: 1px; background-color: #e2e8f0; margin: 0 14px 16px 14px; border: none; }
+        .sidebar-icon { display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #78828c; transition: color 0.2s ease; }
+        .sidebar-menu button.active .sidebar-icon { color: #000000; }
 
         /* CONTENEDOR PRINCIPAL */
         .main-container { margin-left: 280px; flex-grow: 1; padding: 60px; display: none; flex-direction: column; min-height: 100vh; width: calc(100% - 280px); }
-        .app-section { display: none; width: 100%; animation: fadeInContent 0.35s ease; }
+        .app-section { display: none; width: 100%; animation: fadeInContent 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
         .app-section.active-section { display: flex; flex-direction: column; flex-grow: 1; }
 
-        @keyframes fadeInContent { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* HUB INICIO */
+        /* HUB DE INICIO */
         .hub-title { text-align: center; font-size: 1.35rem; font-weight: 500; color: #0f172a; margin: 40px 0; }
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; width: 100%; }
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; width: 100%; }
+        .budget-grid-wrapper { max-width: 380px; width: 100%; } 
+
         .hub-card {
             background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 35px 24px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: all 0.2s ease;
         }
-        .hub-card:hover { transform: translateY(-2px); border-color: #cbd5e1; }
+        .hub-card:hover:not(.no-hover) { transform: translateY(-2px); border-color: #cbd5e1; box-shadow: 0 12px 30px -10px rgba(0,0,0,0.04); }
         .hub-icon-wrapper { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: #78828c; }
         .hub-card h3 { font-size: 1.05rem; font-weight: 600; color: #0f172a; margin-bottom: 8px; }
         .hub-card p { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
 
-        /* CONFIG CRONOGRAMA */
+        .chart-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 60px; height: 60px; }
+        .progress-circle-svg { width: 60px; height: 60px; transform: rotate(-90deg); }
+        .progress-circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 7; }
+        .progress-circle-bar { fill: none; stroke: #0284c7; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 188.4; stroke-dashoffset: 0; }
+        .glow-indicator { position: absolute; width: 8px; height: 8px; background-color: #ffffff; border-radius: 50%; top: 0px; left: 26px; box-shadow: 0 0 8px rgba(2, 132, 199, 0.8); }
+        .chart-center-text { position: absolute; display: flex; font-size: 1rem; font-weight: 700; color: #0f172a; }
+
+        /* SECCIONES Y CRONOGRAMA */
         .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; gap: 16px; }
         .header-info h2 { font-size: 1.5rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
         .header-info p { font-size: 0.9rem; color: #64748b; }
 
-        .calendar-controls { display: none; gap: 16px; align-items: center; }
+        .calendar-controls { display: none; gap: 16px; align-items: center; flex-wrap: wrap; }
         .view-switch { background: #e2e8f0; padding: 4px; border-radius: 10px; display: flex; gap: 4px; }
-        .switch-btn { padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; background: transparent; color: #64748b; }
+        .switch-btn {
+            padding: 6px 12px; font-size: 0.8rem; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; background: transparent; color: #64748b; transition: all 0.15s ease; white-space: nowrap;
+        }
         .switch-btn.active { background: #ffffff; color: #0f172a; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
-        .btn-pauta-trigger {
-            background-color: #0f172a; color: #ffffff; padding: 8px 16px; border: none; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+        /* LEYENDA */
+        .calendar-legend-bar {
+            display: flex; gap: 16px; padding: 0 24px 16px 24px; background: #ffffff; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap;
         }
-        .btn-pauta-trigger:hover { background-color: #1e293b; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #64748b; }
+        .legend-color { width: 24px; height: 8px; border-radius: 4px; }
 
+        /* CALENDARIO */
         .calendar-container { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; width: 100%; overflow-x: auto; }
-        .calendar-month-title { padding: 20px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-        .month-dropdown-selector { font-size: 1.1rem; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0; background-color: #f8fafc; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
         
+        .month-dropdown-selector {
+            font-size: 1.1rem; font-weight: 700; color: #0f172a; border: 1px solid #e2e8f0; background-color: #f8fafc; padding: 6px 12px; border-radius: 8px; outline: none; cursor: pointer; transition: all 0.2s;
+        }
+        .month-dropdown-selector:hover { border-color: #cbd5e1; background-color: #ffffff; }
+
+        .calendar-month-title {
+            padding: 20px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;
+        }
         .calendar-days-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: center; }
-        .calendar-day-label { padding: 14px 4px; font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; }
+        .calendar-day-label { padding: 14px 4px; font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
         
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); grid-auto-rows: minmax(130px, auto); }
-        .calendar-cell { border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px; display: flex; flex-direction: column; gap: 6px; background: #ffffff; cursor: pointer; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(110px, 1fr)); grid-auto-rows: minmax(140px, auto); }
+        
+        .calendar-cell {
+            border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 8px; display: flex; flex-direction: column; gap: 6px; background: #ffffff; transition: background 0.15s ease; cursor: pointer; position: relative;
+        }
         .calendar-cell:hover { background: #f8fafc; }
         .calendar-cell:nth-child(7n) { border-right: none; }
-        .calendar-cell.muted { background: #fcfdfe; cursor: default; color: #cbd5e1; }
+        
+        .calendar-cell.muted { background: #fcfdfe; cursor: default; }
+        .calendar-cell.muted .cell-number { color: #cbd5e1; }
 
-        .cell-top-bar { display: flex; justify-content: space-between; align-items: center; }
+        .cell-top-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 2px; }
         .cell-number { font-size: 0.8rem; font-weight: 700; color: #64748b; }
-        .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; }
 
-        /* BADGES FORMATOS */
-        .post-item { padding: 6px 8px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; line-height: 1.2; text-align: left; }
+        /* BADGES */
+        .clickup-badge { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+        .status-not-started { background-color: #ef4444; }
+        .status-in-progress { background-color: #eab308; }
+        .status-ready { background-color: #22c55e; }
+
+        .posts-container { display: flex; flex-direction: column; gap: 4px; width: 100%; flex-grow: 1; }
+
+        /* BLOQUES DE PUBLICACIONES */
+        .post-item { 
+            padding: 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; line-height: 1.2; word-break: break-word; text-align: left; display: flex; flex-direction: column; gap: 2px;
+        }
+        .post-item span.format-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.8; }
+
         .post-reel { background-color: #2563eb; color: #ffffff; } 
         .post-story { background-color: #06b6d4; color: #ffffff; } 
         .post-carrusel { background-color: #0f172a; color: #ffffff; } 
+        
+        .internal-task { background-color: #f1f5f9; color: #475569; border-left: 3px solid #cbd5e1; font-style: italic; font-weight: 500; }
 
-        .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 166px; padding: 40px 20px; text-align: center; color: #64748b; width: 100%; }
-        footer { margin-top: auto; padding-top: 40px; text-align: center; font-size: 0.8rem; color: #94a3b8; }
+        .placeholder-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 40px 20px; text-align: center; color: #64748b; }
+        footer { margin-top: auto; padding-top: 40px; text-align: center; font-size: 0.8rem; color: #94a3b8; width: 100%; }
 
         @media (max-width: 991px) {
             body { flex-direction: column; }
             .mobile-header { display: flex; }
-            .sidebar { position: fixed; top: auto; bottom: 0; left: 0; width: 100%; height: 65px; flex-direction: row; padding: 0; border-right: none; border-top: 1px solid #e2e8f0; justify-content: space-around; }
-            .user-profile-trigger, .sidebar-divider { display: none !important; }
-            .sidebar-menu { flex-direction: row; justify-content: space-around; }
-            .sidebar-menu button { flex-direction: column; gap: 4px; font-size: 0.65rem; padding: 8px; }
+            .sidebar { position: fixed; top: auto; bottom: 0; left: 0; width: 100%; height: 65px; flex-direction: row; padding: 0 10px; border-right: none; border-top: 1px solid #e2e8f0; box-shadow: 0 -4px 20px rgba(0,0,0,0.03); justify-content: space-around; align-items: center; }
+            .user-profile-trigger, .sidebar-divider, .sidebar-footer .sidebar-menu button.btn-logout-sidebar { display: none !important; }
+            .sidebar-menu { flex-direction: row; justify-content: space-around; gap: 0; height: 100%; align-items: center; width: 100%; }
+            .sidebar-footer { margin-top: 0; width: auto; height: 100%; display: flex; align-items: center; }
+            .sidebar-menu button { flex-direction: column; align-items: center; gap: 4px; padding: 6px 12px; font-size: 0.68rem; border-radius: 8px; text-align: center; width: auto; }
             .main-container { margin-left: 0; width: 100%; padding: 85px 16px 90px 16px; }
-            .section-header { flex-direction: column; align-items: flex-start; }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+            .calendar-controls { width: 100%; justify-content: space-between; }
+            .hub-grid { grid-template-columns: 1fr; gap: 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- PANTALLA DE ACCESO -->
+    <!-- ACCESO -->
     <div class="login-overlay" id="login-screen">
         <div class="login-card">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="login-logo">
             <h2>Portal de Autogestión</h2>
-            <p>Ingresa tus credenciales de acceso</p>
-            <div class="form-group"><label>Usuario</label><input type="text" id="username" placeholder="Ej: shir" autocomplete="off"></div>
-            <div class="form-group"><label>Contraseña</label><input type="password" id="password" placeholder="••••"></div>
-            <button class="btn-login" onclick="validateAuth()">Ingresar</button>
-            <div class="login-error" id="login-error-msg">Credenciales incorrectas.</div>
+            <p>Ingresa tus credenciales para acceder</p>
+            
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" placeholder="Ej: shir" autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="••••">
+            </div>
+            
+            <button class="btn-login" onclick="validateAuth()">Ingresar al Sistema</button>
+            <div class="login-error" id="login-error-msg">Usuario o contraseña incorrectos.</div>
         </div>
     </div>
 
-    <!-- HEADER MOVIL -->
+    <!-- HEADER MÓVIL -->
     <header class="mobile-header" id="app-mobile-header">
         <img src="img/hotelalex_color.png" alt="Hotel Alex" class="mobile-brand-logo">
-        <button class="mobile-logout-btn" onclick="openLogoutModal()"><i data-lucide="log-out" size="20"></i></button>
+        <button class="mobile-logout-btn" onclick="openLogoutModal()">
+            <i data-lucide="log-out" stroke-width="2" size="22"></i>
+        </button>
     </header>
 
-    <!-- MODAL LOGOUT -->
+    <!-- CONFIRMAR SALIDA -->
     <div class="modal-overlay" id="logout-modal">
         <div class="modal-card">
             <h3>¿Cerrar Sesión?</h3>
-            <p style="margin-bottom:20px; font-size:0.9rem; color:#64748b;">¿Seguro que deseas salir?</p>
+            <p>¿Está seguro que desea salir del dashboard?</p>
             <div class="modal-buttons">
-                <button class="btn-modal btn-modal-yes" onclick="confirmLogout()">Salir</button>
-                <button class="btn-modal btn-modal-no" onclick="closeLogoutModal()">Cancelar</button>
+                <button class="btn-modal btn-modal-yes" onclick="confirmLogout()">Sí, salir</button>
+                <button class="btn-modal btn-modal-no" onclick="closeLogoutModal()">No</button>
             </div>
         </div>
     </div>
 
-    <!-- 1. MODAL CLIENTE (ULTRA SENCILLO) -->
-    <div class="modal-overlay" id="client-view-modal">
+    <!-- MODAL CLIENTE: SÓLO COMENTARIOS -->
+    <div class="modal-overlay" id="client-comment-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3 id="cvm-title">Día X - Formato - Concepto</h3>
-                <button class="close-work-modal" onclick="closeClientModal()"><i data-lucide="x" size="20"></i></button>
+                <h3 id="cm-title">Dejar Comentario</h3>
+                <button class="close-work-modal" onclick="closeClientCommentModal()"><i data-lucide="x" size="20"></i></button>
             </div>
-            <div class="form-group" id="cvm-drive-wrapper" style="display:none; margin-bottom:20px;">
-                <a href="#" id="cvm-drive-link" target="_blank" class="btn-action-view-art">
-                    <i data-lucide="folder-open" size="18"></i> Ver Recursos y Diseños
+
+            <div class="form-group">
+                <label>Pauta Planificada para el día</label>
+                <p id="cm-pauta-preview" style="font-size:0.9rem; color:#475569; background:#f8fafc; padding:12px; border-radius:8px; line-height:1.4; font-style:italic;">No hay pauta registrada para hoy.</p>
+            </div>
+
+            <div class="form-group" id="cm-drive-link-wrapper" style="display:none; margin-top: 10px; margin-bottom: 15px;">
+                <a href="#" id="cm-drive-btn" target="_blank" class="btn-action-view-art">
+                    <i data-lucide="folder-open" size="18"></i> Ver Recursos en Google Drive
                 </a>
             </div>
-            <div class="form-group">
-                <label style="color:#0284c7; font-weight:700;">Tus Comentarios o Correcciones</label>
-                <textarea id="cvm-comments" rows="4" placeholder="Escribe aquí tus observaciones o aprobaciones..."></textarea>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label style="color: #0284c7; font-weight: 700;">Tus Comentarios o Correcciones</label>
+                <textarea id="cm-comentarios-textarea" rows="4" placeholder="Escribe aquí tus observaciones o aprobaciones..."></textarea>
             </div>
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-yes" onclick="saveClientComment()">Guardar Comentario</button>
-                <button class="btn-modal btn-modal-no" onclick="closeClientModal()">Cerrar</button>
+
+            <div class="modal-buttons" style="margin-top:24px;">
+                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveClientComment()">Guardar Comentario</button>
+                <button class="btn-modal btn-modal-no" onclick="closeClientCommentModal()">Cerrar</button>
             </div>
         </div>
     </div>
 
-    <!-- 2. MODAL INTERNO AGENCIA (DÍA OCUPADO) -->
-    <div class="modal-overlay" id="internal-occupied-modal">
+    <!-- MODAL AGENCIA INTERNA: REQUERIMIENTOS, COPYS Y PAUTAS -->
+    <div class="modal-overlay" id="internal-agency-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3 id="iom-title">Día X - Gestión de Contenido</h3>
-                <button class="close-work-modal" onclick="closeInternalOccupiedModal()"><i data-lucide="x" size="20"></i></button>
-            </div>
-            <div class="form-group">
-                <label>Requerimientos Estratégicos Base</label>
-                <textarea id="iom-req" rows="3" placeholder="Objetivos y pautas iniciales..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Copy / Texto de la Publicación</label>
-                <textarea id="iom-copy" rows="4" placeholder="Escribe el copy de la publicación aquí..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>Link de los Diseños (Drive)</label>
-                <input type="url" id="iom-drive" placeholder="Pegar el enlace de la carpeta o recurso de Drive">
-            </div>
-            <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:10px; margin-top:15px;">
-                <label style="color:#0369a1; font-weight:700; font-size:0.75rem;">Feedback del Cliente</label>
-                <p id="iom-client-feedback" style="font-size:0.85rem; font-style:italic; color:#0c4a6e; margin-top:4px;">Sin comentarios todavía.</p>
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-yes" onclick="saveInternalOccupiedData()">Guardar Cambios</button>
-                <button class="btn-modal btn-modal-no" onclick="closeInternalOccupiedModal()">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. MODAL INTERNO AGENCIA (DÍA VACÍO - SELECTOR DE FORMATO) -->
-    <div class="modal-overlay" id="internal-empty-modal">
-        <div class="modal-card">
-            <div class="work-modal-header">
-                <h3>Planificar Contenido</h3>
-                <button class="close-work-modal" onclick="closeInternalEmptyModal()"><i data-lucide="x" size="20"></i></button>
-            </div>
-            <div class="form-group">
-                <label>Seleccionar Formato</label>
-                <select id="iem-format">
-                    <option value="story">📸 Historia</option>
-                    <option value="reel">🎬 Reel</option>
-                    <option value="carrusel">🎠 Post / Carrusel</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Título o Concepto de la Publicación</label>
-                <input type="text" id="iem-title-input" placeholder="Ej: Trivia interactiva de suites">
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-yes" onclick="createNewPost()">Crear y Configurar</button>
-                <button class="btn-modal btn-modal-no" onclick="closeInternalEmptyModal()">Cerrar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. MODAL INDEPENDIENTE: PLANIFICADOR DE PAUTAS -->
-    <div class="modal-overlay" id="pauta-planner-modal">
-        <div class="work-modal-card">
-            <div class="work-modal-header">
-                <h3>Planificador de Pauta Estratégica</h3>
-                <button class="close-work-modal" onclick="closePautaModal()"><i data-lucide="x" size="20"></i></button>
-            </div>
-            <div class="form-group">
-                <label>Título de la Pauta</label>
-                <input type="text" id="ppm-title" placeholder="Ej: Campaña Tráfico Restaurante">
-            </div>
-            <div class="form-group">
-                <label>Tipo de Pauta</label>
-                <select id="ppm-type">
-                    <option value="Meta Ads">Meta Ads (Instagram/Facebook)</option>
-                    <option value="Google Ads">Google Ads / Search</option>
-                    <option value="Inbound">Estrategia Orgánica Impulsada</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Ingresar Fecha de Pauta (Cuándo Corre)</label>
-                <input type="date" id="ppm-date">
-            </div>
-            <div class="form-group">
-                <label>Locación / Ubicación</label>
-                <input type="text" id="ppm-location" placeholder="Ej: Terraza del Hotel / Caracas">
-            </div>
-            <div class="form-group">
-                <label>Recursos que Necesita</label>
-                <textarea id="ppm-resources" rows="2" placeholder="Ej: 3 videos cortos del chef, 1 foto limpia del plato estrella"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Estructura y Guiones de Campaña</label>
-                <div class="guion-inputs-container">
-                    <input type="text" id="ppm-hook" placeholder="Gancho (Segundos 1-3)">
-                    <input type="text" id="ppm-body" placeholder="Desarrollo del Mensaje Core">
-                    <input type="text" id="ppm-cta" placeholder="Llamado a la Acción / Cierre">
+                <h3 id="iam-title">Gestión de Contenido (Agencia)</h3>
+                <div class="header-actions-right">
+                    <select id="iam-status-select" class="status-select-top-right">
+                        <option value="not-started">🔴 No iniciado</option>
+                        <option value="in-progress">🟡 En proceso</option>
+                        <option value="ready">🟢 Listo</option>
+                    </select>
+                    <button class="close-work-modal" onclick="closeInternalAgencyModal()"><i data-lucide="x" size="20"></i></button>
                 </div>
             </div>
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-yes" onclick="savePautaPlan()">Guardar Pauta</button>
-                <button class="btn-modal btn-modal-no" onclick="closePautaModal()">Cerrar</button>
+
+            <div class="form-group">
+                <label>Requerimientos Estratégicos Base</label>
+                <textarea id="iam-req" rows="2" placeholder="Pautas u objetivos iniciales..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Enfoque de la Pauta Pública</label>
+                <textarea id="iam-pauta" rows="2" placeholder="Qué verá el cliente en su pantalla..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Copy / Texto de la Publicación</label>
+                <textarea id="iam-copy" rows="3" placeholder="Redacta el copy definitivo aquí..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Recursos y Enlace Drive</label>
+                <input type="url" id="iam-drive-url" placeholder="Enlace de Google Drive..." style="margin-bottom:8px;">
+                <textarea id="iam-recursos" rows="2" placeholder="Especificaciones de fotos o videos..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Guiones / Estructura</label>
+                <div class="guion-inputs-container">
+                    <input type="text" id="iam-guion1" placeholder="Gancho / Segundo 1-3">
+                    <input type="text" id="iam-guion2" placeholder="Desarrollo">
+                    <input type="text" id="iam-guion3" placeholder="Llamado a la acción (CTA)">
+                </div>
+            </div>
+
+            <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:10px; border:1px solid #bae6fd;">
+                <label style="color:#0369a1; font-weight:700; margin-bottom:4px;">Feedback del Cliente</label>
+                <p id="iam-feedback-preview" style="font-size:0.88rem; color:#0c4a6e; font-style:italic;">Sin comentarios del cliente todavía.</p>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label style="color: #475569; font-weight: 700;">Bitácora de Ajustes Internos (Shirley // Vero)</label>
+                <textarea id="iam-control-cambios" rows="3" placeholder="Anotaciones técnicas entre ustedes..."></textarea>
+            </div>
+
+            <div class="modal-buttons" style="margin-top:24px;">
+                <button class="btn-modal btn-modal-no" style="background:#0f172a; color:#fff;" onclick="saveInternalAgencyData()">Guardar Todo</button>
+                <button class="btn-modal btn-modal-no" onclick="closeInternalAgencyModal()">Cancelar</button>
             </div>
         </div>
     </div>
 
-    <!-- SIDEBAR DESKTOP -->
+    <!-- MODAL SELECCIONAR FORMATO EN FECHA VACÍA (AGENCIA) -->
+    <div class="modal-overlay" id="create-event-modal">
+        <div class="modal-card" style="max-width:420px; text-align:left;">
+            <div class="work-modal-header" style="margin-bottom:18px; padding-bottom:8px;">
+                <h3>Planificar Formato</h3>
+                <button class="close-work-modal" onclick="closeCreateEventModal()"><i data-lucide="x" size="20"></i></button>
+            </div>
+            <p style="font-size:0.85rem; color:#64748b; margin-bottom:16px;">Selecciona el tipo de publicación que deseas agendar para este día:</p>
+            
+            <div class="form-group">
+                <label>Tipo de Evento / Formato</label>
+                <select id="cem-format">
+                    <option value="reel">🎬 Reel</option>
+                    <option value="story">📸 Story Diaria</option>
+                    <option value="carrusel">🎠 Carrusel / Post Tradicional</option>
+                    <option value="internal">⚙️ Tarea / Bloque Interno</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Título o Concepto Inicial</label>
+                <input type="text" id="cem-text" placeholder="Ej: Detrás de cámaras en cocina">
+            </div>
+
+            <div class="modal-buttons" style="margin-top:20px;">
+                <button class="btn-modal btn-modal-yes" style="background:#0284c7;" onclick="createNewEvent()">Agregar al Cronograma</button>
+                <button class="btn-modal btn-modal-no" onclick="closeCreateEventModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra Lateral Desktop -->
     <nav class="sidebar" id="app-sidebar">
         <div class="user-profile-trigger">
             <img src="img/hotelalex_color.png" alt="Hotel Alex" class="brand-logo">
-            <div class="user-info"><h4>Hotel Alex</h4><p id="user-role-badge">Cliente Activo</p></div>
+            <div class="user-info">
+                <h4>Hotel Alex</h4>
+                <p id="user-role-badge">Cliente Activo</p>
+            </div>
         </div>
+        
         <div class="sidebar-menu">
-            <button class="menu-btn active" data-target="inicio-section"><i data-lucide="layout-dashboard"></i><span>Inicio</span></button>
-            <button class="menu-btn" data-target="cronograma-section"><i data-lucide="calendar"></i><span>Cronograma</span></button>
-            <button class="menu-btn" data-target="presupuesto-section"><i data-lucide="wallet"></i><span>Presupuesto</span></button>
+            <button class="menu-btn active" data-target="inicio-section">
+                <div class="sidebar-icon"><i data-lucide="layout-dashboard" stroke-width="1.8"></i></div>
+                <span>Inicio</span>
+            </button>
+            <button class="menu-btn" data-target="instagram-section">
+                <div class="sidebar-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                </div>
+                <span>Instagram</span>
+            </button>
+            <button class="menu-btn" data-target="cronograma-section">
+                <div class="sidebar-icon"><i data-lucide="calendar" stroke-width="1.8"></i></div>
+                <span>Cronograma</span>
+            </button>
+            <button class="menu-btn" data-target="metricas-section">
+                <div class="sidebar-icon"><i data-lucide="bar-chart-3" stroke-width="1.8"></i></div>
+                <span>Métricas</span>
+            </button>
+        </div>
+
+        <div class="sidebar-footer">
             <hr class="sidebar-divider">
-            <button onclick="openLogoutModal()"><i data-lucide="log-out"></i><span>Salir</span></button>
+            <div class="sidebar-menu">
+                <button class="menu-btn" data-target="presupuesto-section">
+                    <div class="sidebar-icon"><i data-lucide="wallet" stroke-width="1.8"></i></div>
+                    <span>Presupuesto</span>
+                </button>
+                <button class="btn-logout-sidebar" onclick="openLogoutModal()">
+                    <div class="sidebar-icon"><i data-lucide="log-out" stroke-width="1.8"></i></div>
+                    <span>Salir</span>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <!-- CONTAINER -->
+    <!-- Contenedor Principal -->
     <main class="main-container" id="app-content">
+        
         <!-- INICIO -->
         <section id="inicio-section" class="app-section active-section">
-            <h3 class="hub-title">Módulos de Gestión Activos</h3>
+            <h3 class="hub-title">¿Qué tipo de consulta deseas realizar?</h3>
             <div class="hub-grid">
-                <div class="hub-card" onclick="navigateTo('cronograma-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="calendar" size="32"></i></div>
-                    <h3>Cronograma de Contenidos</h3>
-                    <p>Grilla interactiva mensual y aprobaciones de pautas.</p>
+                <div class="hub-card" onclick="navigateTo('instagram-section')">
+                    <div class="hub-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                        </svg>
+                    </div>
+                    <h3>Instagram: Diagnóstico</h3>
+                    <p>Análisis en profundidad de la cuenta actual, pilares estéticos y plan estratégico de mejoras de marca.</p>
                 </div>
-                <div class="hub-card" onclick="navigateTo('presupuesto-section')">
-                    <div class="hub-icon-wrapper"><i data-lucide="wallet" size="32"></i></div>
-                    <h3>Estatus del Proyecto</h3>
-                    <p>Contrato, fechas clave e inicio formal del plan de marca.</p>
+                <div class="hub-card" onclick="navigateTo('cronograma-section')">
+                    <div class="hub-icon-wrapper"><i data-lucide="calendar" stroke-width="1.5" size="32"></i></div>
+                    <h3>Cronograma</h3>
+                    <p>Grilla mensual de contenidos, revisión de copys y aprobación de artes/reels en conjunto.</p>
+                </div>
+                <div class="hub-card" onclick="navigateTo('metricas-section')">
+                    <div class="hub-icon-wrapper"><i data-lucide="bar-chart-3" stroke-width="1.5" size="32"></i></div>
+                    <h3>Métricas de Rendimiento</h3>
+                    <p>Monitoreo de comunidad, audiencias y desempeño analítico real del ecosistema digital.</p>
                 </div>
             </div>
         </section>
 
-        <!-- CRONOGRAMA -->
+        <!-- INSTAGRAM -->
+        <section id="instagram-section" class="app-section">
+            <div class="section-header"><div class="header-info"><h2>Instagram: Diagnóstico</h2><p>Auditoría de línea de comunicación.</p></div></div>
+            <div class="placeholder-box"><p>Análisis estético en desarrollo.</p></div>
+        </section>
+
+        <!-- CRONOGRAMA INTERACTIVO -->
         <section id="cronograma-section" class="app-section">
             <div class="section-header">
                 <div class="header-info">
-                    <h2>Cronograma Operativo</h2>
-                    <p id="cronograma-desc-text">Cargando...</p>
+                    <h2>Cronograma de Contenidos</h2>
+                    <p id="cronograma-desc-text">Planificación de publicaciones.</p>
                 </div>
                 <div class="calendar-controls" id="admin-calendar-controls">
-                    <button class="btn-pauta-trigger" onclick="openPautaModal()"><i data-lucide="plus-circle"></i> Crear Nueva Pauta</button>
                     <div class="view-switch">
-                        <button class="switch-btn active" id="btn-view-client" onclick="setCalendarView('client')">Cliente</button>
-                        <button class="switch-btn" id="btn-view-internal" onclick="setCalendarView('internal')">Agencia</button>
+                        <button class="switch-btn active" id="btn-view-client" onclick="setCalendarView('client')">Vista Cliente</button>
+                        <button class="switch-btn" onclick="setCalendarView('internal')">Vista Interna</button>
                     </div>
                 </div>
             </div>
-
+            
             <div class="calendar-container">
                 <div class="calendar-month-title">
                     <select id="month-selector" class="month-dropdown-selector" onchange="renderCalendar()">
                         <option value="5">Junio 2026</option>
                         <option value="6">Julio 2026</option>
+                        <option value="7">Agosto 2026</option>
                     </select>
                 </div>
-                <div class="calendar-days-grid">
-                    <div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+
+                <div class="calendar-legend-bar">
+                    <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div>reel</div>
+                    <div class="legend-item"><div class="legend-color" style="background:#06b6d4;"></div>stories diarios</div>
+                    <div class="legend-item"><div class="legend-color" style="background:#0f172a;"></div>carrusel / post</div>
                 </div>
-                <div class="calendar-grid" id="calendar-grid"></div>
+
+                <div class="calendar-days-grid">
+                    <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
+                </div>
+                
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Dinámico -->
+                </div>
             </div>
+        </section>
+
+        <!-- METRICAS -->
+        <section id="metricas-section" class="app-section">
+            <div class="section-header"><div class="header-info"><h2>Métricas</h2></div></div>
+            <div class="placeholder-box"><p>Módulo de métricas en preparación.</p></div>
         </section>
 
         <!-- PRESUPUESTO -->
         <section id="presupuesto-section" class="app-section">
-            <div class="section-header"><div class="header-info"><h2>Estatus de Proyecto</h2></div></div>
-            <div class="placeholder-box"><p>Proyecto Ejecutado de manera exitosa. Fecha de arranque formal fijada en sistema.</p></div>
+            <div class="section-header"><div class="header-info"><h2>Presupuesto</h2></div></div>
+            <div class="budget-grid-wrapper">
+                <div class="hub-card no-hover" style="cursor: default;">
+                    <div class="hub-icon-wrapper">
+                        <div class="chart-wrapper">
+                            <div class="glow-indicator"></div>
+                            <svg class="progress-circle-svg"><circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle><circle class="progress-circle-bar" cx="30" cy="30" r="25"></circle></svg>
+                            <div class="chart-center-text">100%</div>
+                        </div>
+                    </div>
+                    <h3>Inicio: 15 de Junio</h3>
+                    <p>Estatus actual del proyecto: Contrato Ejecutado.</p>
+                </div>
+            </div>
         </section>
 
         <footer>
@@ -414,223 +595,329 @@
         let currentUserRole = ''; 
         let currentView = 'client';
         let activeDaySelected = null;
-        let calendarDatabase = {};
 
-        // Datos iniciales de demostración organizados
-        const dummyPosts = {
-            15: { format: 'reel', title: 'Sonidos del Confort en Suite Premium', req: 'Establecer el pilar de lujo silencioso.', copy: '¿El verdadero lujo? Apagar el ruido urbano. 😴 Suites Executive.', drive: 'https://drive.google.com' },
-            16: { format: 'carrusel', title: '3 razones para descansar bien', req: 'Pilar de valor y educación.', copy: 'Tu productividad empieza la noche anterior. 🛌', drive: '' },
-            17: { format: 'story', title: 'Trivia interactiva de Hotel', req: 'Interacción con comunidad.', copy: 'Trivia interactiva en historias.', drive: '' }
+        const dummyJunePosts = {
+            15: [
+                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR: Sonidos del Confort en Suite Premium' }
+            ],
+            16: [
+                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: '3 razones por las que el descanso influye en tu productividad' }
+            ],
+            17: [
+                { type: 'public', format: 'story', icon: '📸 story', text: 'Trivia interactiva: ¿Qué detalle no puede faltar?' }
+            ],
+            19: [
+                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Detrás de cámaras: Equipo de hospitalidad' },
+                { type: 'internal', format: 'internal', icon: '⚙️ Ads Meta', text: 'Configurar píxel y públicos' }
+            ],
+            22: [
+                { type: 'public', format: 'reel', icon: '🎬 reel', text: 'Recorrido express: Lobby hasta el Rooftop Lounge' }
+            ],
+            24: [
+                { type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'Menú Ejecutivo: Una experiencia gastronómica' }
+            ],
+            26: [
+                { type: 'public', format: 'story', icon: '📸 story', text: 'Viernes de desconexión completa en el Alex' },
+                { type: 'internal', format: 'internal', icon: '⚙️ Monitoreo', text: 'Revisión intermedia KPIS con Vero' }
+            ]
         };
 
-        // Construcción limpia de la base de datos local
-        [5, 6].forEach(m => {
-            for(let i = 1; i <= 31; i++) {
+        let calendarDatabase = {};
+        localStorage.removeItem('hotelAlexCalendarData');
+
+        [5, 6, 7].forEach(m => {
+            let daysCount = (m === 5) ? 30 : 31;
+            for(let i = 1; i <= daysCount; i++) {
                 const dbKey = `2026_${m}_${i}`;
-                const hasDummy = (m === 5 && dummyPosts[i]);
+                let isDia15 = (m === 5 && i === 15);
+                
                 calendarDatabase[dbKey] = {
-                    format: hasDummy ? dummyPosts[i].format : '',
-                    title: hasDummy ? dummyPosts[i].title : '',
-                    requirement: hasDummy ? dummyPosts[i].req : '',
-                    copy: hasDummy ? dummyPosts[i].copy : '',
-                    driveUrl: hasDummy ? dummyPosts[i].drive : '',
-                    comentariosCliente: ''
+                    status: isDia15 ? 'in-progress' : 'not-started',
+                    requirement: isDia15 ? 'Mostrar el confort visual mediante planos detallados, sábanas premium y luz natural controlada.' : '',
+                    copy: isDia15 ? '¿El verdadero lujo? Apagar el ruido de Caracas y escuchar el silencio. 😴✨ Te esperamos en nuestras Suites Executive.' : '',
+                    controlCambios: isDia15 ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, modificado en los assets de Drive.' : '',
+                    pautaContenido: isDia15 ? 'Reel de impacto cinemático enfocado en descanso y experiencia premium.' : '',
+                    pautaRecursos: isDia15 ? 'Tomas en 4K de la Suite 402, transiciones lentas, pista de audio ASMR.' : '',
+                    pautaGuion1: isDia15 ? '0:01 - 0:03 Apertura con primer plano de almohadas esponjosas.' : '',
+                    pautaGuion2: isDia15 ? '0:04 - 0:07 Entrada de luz natural y vista panorámica limpia.' : '',
+                    pautaGuion3: isDia15 ? '0:08 - 0:15 Cierre con logotipo minimalista del hotel.' : '',
+                    driveUrl: isDia15 ? 'https://drive.google.com' : '',
+                    comentariosCliente: '',
+                    posts: (m === 5 && dummyJunePosts[i]) ? dummyJunePosts[i] : []
                 };
             }
         });
+        localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
 
+        function getCellData(month, day) {
+            const dbKey = `2026_${month}_${day}`;
+            return calendarDatabase[dbKey];
+        }
+
+        // RENDERIZADOR GRILLA
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
-            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            const monthSelector = document.getElementById('month-selector');
+            if (!grid || !monthSelector) return;
+            
+            const selectedMonth = parseInt(monthSelector.value);
             grid.innerHTML = '';
 
             const firstDayIndex = new Date(2026, selectedMonth, 1).getDay();
             const totalDays = new Date(2026, selectedMonth + 1, 0).getDate();
-            let padding = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+            let startDayPadding = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
 
-            for (let p = 0; p < padding; p++) {
-                grid.innerHTML += `<div class="calendar-cell muted"></div>`;
+            const prevMonthTotalDays = new Date(2026, selectedMonth, 0).getDate();
+            for (let i = startDayPadding; i > 0; i--) {
+                const dayNum = prevMonthTotalDays - i + 1;
+                grid.innerHTML += `<div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">${dayNum}</span></div></div>`;
             }
 
             for (let i = 1; i <= totalDays; i++) {
-                const dbKey = `2026_${selectedMonth}_${i}`;
-                const data = calendarDatabase[dbKey];
-                let postHTML = '';
-
-                if(data && data.format) {
-                    let displayFormatName = data.format === 'carrusel' ? 'post' : data.format;
-                    postHTML = `<div class="post-item post-${data.format}"><strong>${displayFormatName}:</strong> ${data.title}</div>`;
+                const cellData = getCellData(selectedMonth, i);
+                let postsHTML = '';
+                if (cellData && cellData.posts && Array.isArray(cellData.posts)) {
+                    cellData.posts.forEach(post => {
+                        const isInternal = post.type === 'internal';
+                        const postClass = isInternal ? 'internal-task' : `post-item post-${post.format}`;
+                        const displayStyle = (isInternal && currentView === 'client') ? 'style="display:none;"' : '';
+                        postsHTML += `<div class="${postClass}" ${displayStyle}><span class="format-label">${post.icon}</span> ${post.text}</div>`;
+                    });
                 }
 
                 grid.innerHTML += `
                     <div class="calendar-cell" onclick="handleCellClick(${i})">
-                        <div class="cell-top-bar"><span class="cell-number">${i}</span></div>
-                        <div class="posts-container">${postHTML}</div>
+                        <div class="cell-top-bar">
+                            <span class="cell-number">${i}</span>
+                            <span class="clickup-badge status-${cellData ? cellData.status : 'not-started'}"></span>
+                        </div>
+                        <div class="posts-container">${postsHTML}</div>
                     </div>`;
             }
             lucide.createIcons();
         }
 
+        // VALIDACIÓN SESIONES
         function validateAuth() {
-            const user = document.getElementById('username').value.trim().toLowerCase();
-            const pass = document.getElementById('password').value.trim();
-            if (user === 'admin' && pass === '1234') {
-                setupSession('client', 'Cliente Activo');
-            } else if ((user === 'shir' || user === 'vero') && pass === '4321') {
-                setupSession('agency', user === 'shir' ? 'Shirley (Agencia)' : 'Vero (Agencia)');
+            const userIn = document.getElementById('username').value.trim().toLowerCase();
+            const passIn = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('login-error-msg');
+
+            if (userIn === 'admin' && passIn === '1234') {
+                setupSession('admin', 'Cliente Activo');
+            } else if ((userIn === 'shir' || userIn === 'vero') && passIn === '4321') {
+                setupSession('master', userIn === 'shir' ? 'Shirley (Agencia)' : 'Vero (Agencia)');
             } else {
-                document.getElementById('login-error-msg').style.display = 'block';
+                errorMsg.style.display = 'block';
             }
         }
 
-        function setupSession(role, label) {
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') validateAuth();
+        });
+
+        function setupSession(role, badgeText) {
             currentUserRole = role;
-            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('login-screen').style.opacity = '0';
+            setTimeout(() => { document.getElementById('login-screen').style.display = 'none'; }, 300);
+
             document.getElementById('app-sidebar').style.display = 'flex';
             document.getElementById('app-content').style.display = 'flex';
-            document.getElementById('user-role-badge').textContent = label;
+            document.getElementById('user-role-badge').textContent = badgeText;
 
             const controls = document.getElementById('admin-calendar-controls');
-            const desc = document.getElementById('cronograma-desc-text');
+            const descText = document.getElementById('cronograma-desc-text');
 
-            if (role === 'agency') {
+            if (role === 'master') {
                 controls.style.display = 'flex';
-                desc.textContent = "Acceso de Agencia. Haz clic en un día con pauta para editar o en uno vacío para crear formatos.";
+                descText.textContent = "Acceso total a pautas. Haz clic en un día para editar contenidos públicos o gestionar cambios internos.";
                 currentView = 'internal';
-                setCalendarView('internal');
             } else {
                 controls.style.display = 'none';
-                desc.textContent = "Acceso Total a pautas. Haz clic en un día para dejar un comentario.";
-                currentView = 'client';
-                setCalendarView('client');
+                descText.textContent = "Acceso Total a pautas. Haz clic en un dia para dejar un comentario.";
+                currentView = 'client'; 
             }
-        }
-
-        function handleCellClick(day) {
-            activeDaySelected = day;
-            const month = parseInt(document.getElementById('month-selector').value);
-            const data = calendarDatabase[`2026_${month}_${day}`];
-
-            if (currentView === 'client') {
-                if (data && data.format) {
-                    openClientModal(data, day);
-                }
-            } else {
-                // Modo Agencia
-                if (data && data.format) {
-                    openInternalOccupiedModal(data, day);
-                } else {
-                    openInternalEmptyModal();
-                }
-            }
-        }
-
-        // CONTROL MODAL CLIENTE
-        function openClientModal(data, day) {
-            let formatTag = data.format === 'carrusel' ? 'Post' : data.format;
-            document.getElementById('cvm-title').textContent = `Día ${day} - ${formatTag} - ${data.title}`;
-            
-            const driveWrapper = document.getElementById('cvm-drive-wrapper');
-            if (data.driveUrl && data.driveUrl.trim() !== '') {
-                driveWrapper.style.display = 'block';
-                document.getElementById('cvm-drive-link').href = data.driveUrl;
-            } else {
-                driveWrapper.style.display = 'none';
-            }
-            
-            document.getElementById('cvm-comments').value = data.comentariosCliente || '';
-            document.getElementById('client-view-modal').style.display = 'flex';
-        }
-        function closeClientModal() { document.getElementById('client-view-modal').style.display = 'none'; }
-        function saveClientComment() {
-            const month = parseInt(document.getElementById('month-selector').value);
-            calendarDatabase[`2026_${month}_${activeDaySelected}`].comentariosCliente = document.getElementById('cvm-comments').value;
-            closeClientModal();
-        }
-
-        // CONTROL MODAL INTERNO (DÍA OCUPADO)
-        function openInternalOccupiedModal(data, day) {
-            let formatTag = data.format === 'carrusel' ? 'Post' : data.format;
-            document.getElementById('iom-title').textContent = `Día ${day} - ${formatTag} - ${data.title}`;
-            document.getElementById('iom-req').value = data.requirement || '';
-            document.getElementById('iom-copy').value = data.copy || '';
-            document.getElementById('iom-drive').value = data.driveUrl || '';
-            document.getElementById('iom-client-feedback').textContent = data.comentariosCliente || 'Sin comentarios todavía.';
-            document.getElementById('internal-occupied-modal').style.display = 'flex';
-        }
-        function closeInternalOccupiedModal() { document.getElementById('internal-occupied-modal').style.display = 'none'; }
-        function saveInternalOccupiedData() {
-            const month = parseInt(document.getElementById('month-selector').value);
-            const target = calendarDatabase[`2026_${month}_${activeDaySelected}`];
-            target.requirement = document.getElementById('iom-req').value;
-            target.copy = document.getElementById('iom-copy').value;
-            target.driveUrl = document.getElementById('iom-drive').value;
             renderCalendar();
-            closeInternalOccupiedModal();
+            navigateTo('inicio-section');
         }
 
-        // CONTROL MODAL INTERNO (DÍA VACÍO)
-        function openInternalEmptyModal() {
-            document.getElementById('iem-title-input').value = '';
-            document.getElementById('internal-empty-modal').style.display = 'flex';
-        }
-        function closeInternalEmptyModal() { document.getElementById('internal-empty-modal').style.display = 'none'; }
-        function createNewPost() {
-            const month = parseInt(document.getElementById('month-selector').value);
-            const format = document.getElementById('iem-format').value;
-            const title = document.getElementById('iem-title-input').value.trim() || 'Nueva Publicación';
+        // CLIC EN UNA FECHA
+        function handleCellClick(day) {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            activeDaySelected = day;
+            const data = getCellData(selectedMonth, day);
 
-            const dbKey = `2026_${month}_${activeDaySelected}`;
-            calendarDatabase[dbKey] = {
-                format: format,
-                title: title,
-                requirement: '',
-                copy: '',
-                driveUrl: '',
-                comentariosCliente: ''
+            if (currentUserRole === 'master') {
+                // Si la agencia toca un día vacío, abre creador rápido
+                if (!data || !data.posts || data.posts.length === 0) {
+                    openCreateEventModal(day);
+                } else {
+                    openInternalAgencyModal(day, selectedMonth);
+                }
+            } else {
+                // Cliente siempre va a su modal de comentarios
+                openClientCommentModal(day, selectedMonth);
+            }
+        }
+
+        // MODAL CLIENTE
+        function openClientCommentModal(day, month) {
+            const data = getCellData(month, day);
+            document.getElementById('cm-title').textContent = `Día ${day} - Revisión de Pauta`;
+            
+            if (data && data.pautaContenido && data.pautaContenido.trim() !== '') {
+                document.getElementById('cm-pauta-preview').textContent = data.pautaContenido;
+            } else {
+                document.getElementById('cm-pauta-preview').textContent = "No hay pautas públicas detalladas cargadas para este día de momento.";
+            }
+
+            const driveWrapper = document.getElementById('cm-drive-link-wrapper');
+            if (data && data.driveUrl && data.driveUrl.trim() !== "") {
+                driveWrapper.style.display = "block";
+                document.getElementById('cm-drive-btn').href = data.driveUrl;
+            } else {
+                driveWrapper.style.display = "none";
+            }
+
+            document.getElementById('cm-comentarios-textarea').value = (data && data.comentariosCliente) ? data.comentariosCliente : '';
+            document.getElementById('client-comment-modal').style.display = 'flex';
+        }
+
+        function closeClientCommentModal() { document.getElementById('client-comment-modal').style.display = 'none'; }
+
+        function saveClientComment() {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
+            calendarDatabase[dbKey].comentariosCliente = document.getElementById('cm-comentarios-textarea').value;
+            
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
+            closeClientCommentModal();
+        }
+
+        // MODAL AGENCIA INTERNA
+        function openInternalAgencyModal(day, month) {
+            const data = getCellData(month, day);
+            document.getElementById('iam-title').textContent = `Día ${day} - Control de Cambios y Estructura`;
+            
+            document.getElementById('iam-status-select').value = data.status || 'not-started';
+            document.getElementById('iam-req').value = data.requirement || '';
+            document.getElementById('iam-pauta').value = data.pautaContenido || '';
+            document.getElementById('iam-copy').value = data.copy || '';
+            document.getElementById('iam-drive-url').value = data.driveUrl || '';
+            document.getElementById('iam-recursos').value = data.pautaRecursos || '';
+            document.getElementById('iam-guion1').value = data.pautaGuion1 || '';
+            document.getElementById('iam-guion2').value = data.pautaGuion2 || '';
+            document.getElementById('iam-guion3').value = data.pautaGuion3 || '';
+            
+            if (data.comentariosCliente && data.comentariosCliente.trim() !== '') {
+                document.getElementById('iam-feedback-preview').textContent = data.comentariosCliente;
+            } else {
+                document.getElementById('iam-feedback-preview').textContent = "Sin comentarios del cliente todavía.";
+            }
+            
+            document.getElementById('iam-control-cambios').value = data.controlCambios || '';
+            document.getElementById('internal-agency-modal').style.display = 'flex';
+        }
+
+        function closeInternalAgencyModal() { document.getElementById('internal-agency-modal').style.display = 'none'; }
+
+        function saveInternalAgencyData() {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
+            
+            calendarDatabase[dbKey].status = document.getElementById('iam-status-select').value;
+            calendarDatabase[dbKey].requirement = document.getElementById('iam-req').value;
+            calendarDatabase[dbKey].pautaContenido = document.getElementById('iam-pauta').value;
+            calendarDatabase[dbKey].copy = document.getElementById('iam-copy').value;
+            calendarDatabase[dbKey].driveUrl = document.getElementById('iam-drive-url').value;
+            calendarDatabase[dbKey].pautaRecursos = document.getElementById('iam-recursos').value;
+            calendarDatabase[dbKey].pautaGuion1 = document.getElementById('iam-guion1').value;
+            calendarDatabase[dbKey].pautaGuion2 = document.getElementById('iam-guion2').value;
+            calendarDatabase[dbKey].pautaGuion3 = document.getElementById('iam-guion3').value;
+            calendarDatabase[dbKey].controlCambios = document.getElementById('iam-control-cambios').value;
+
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
+            renderCalendar();
+            closeInternalAgencyModal();
+        }
+
+        // MODAL CREAR EVENTOS RÁPIDOS
+        function openCreateEventModal(day) {
+            document.getElementById('cem-text').value = '';
+            document.getElementById('create-event-modal').style.display = 'flex';
+        }
+
+        function closeCreateEventModal() { document.getElementById('create-event-modal').style.display = 'none'; }
+
+        function createNewEvent() {
+            const selectedMonth = parseInt(document.getElementById('month-selector').value);
+            const dbKey = `2026_${selectedMonth}_${activeDaySelected}`;
+            
+            const formatType = document.getElementById('cem-format').value;
+            const textValue = document.getElementById('cem-text').value.trim() || 'Nueva publicación';
+
+            let formatIcon = '🎬 reel';
+            if (formatType === 'story') formatIcon = '📸 story';
+            if (formatType === 'carrusel') formatIcon = '🎠 post';
+            if (formatType === 'internal') formatIcon = '⚙️ Tarea';
+
+            const newPost = {
+                type: formatType === 'internal' ? 'internal' : 'public',
+                format: formatType,
+                icon: formatIcon,
+                text: textValue
             };
 
+            calendarDatabase[dbKey].posts.push(newPost);
+            calendarDatabase[dbKey].status = 'in-progress';
+
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
             renderCalendar();
-            closeInternalEmptyModal();
-            // Salta directo a rellenar detalles del contenido recién creado
-            openInternalOccupiedModal(calendarDatabase[dbKey], activeDaySelected);
+            closeCreateEventModal();
+            
+            // Abre de inmediato el editor completo por si quieren seguir rellenándolo
+            openInternalAgencyModal(activeDaySelected, selectedMonth);
         }
 
-        // CONTROL MODAL DE PAUTAS INDEPENDIENTES
-        function openPautaModal() {
-            document.getElementById('ppm-title').value = '';
-            document.getElementById('ppm-resources').value = '';
-            document.getElementById('ppm-location').value = '';
-            document.getElementById('ppm-hook').value = '';
-            document.getElementById('ppm-body').value = '';
-            document.getElementById('ppm-cta').value = '';
-            document.getElementById('pauta-planner-modal').style.display = 'flex';
-        }
-        function closePautaModal() { document.getElementById('pauta-planner-modal').style.display = 'none'; }
-        function savePautaPlan() {
-            // Aquí puedes conectar el guardado a tu backend o log de campañas. Por ahora cierra de forma limpia.
-            closePautaModal();
-            alert('Pauta estratégica agendada correctamente.');
-        }
-
-        function setCalendarView(view) {
-            currentView = view;
-            document.getElementById('btn-view-client').classList.toggle('active', view === 'client');
-            document.getElementById('btn-view-internal').classList.toggle('active', view === 'internal');
-            renderCalendar();
-        }
-
-        function navigateTo(id) {
-            document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active-section'));
-            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active-section');
-            const targetBtn = document.querySelector(`.menu-btn[data-target="${id}"]`);
-            if(targetBtn) targetBtn.classList.add('active');
-        }
-
+        // NAVEGACIÓN Y LOGOUT
         function openLogoutModal() { document.getElementById('logout-modal').style.display = 'flex'; }
         function closeLogoutModal() { document.getElementById('logout-modal').style.display = 'none'; }
-        function confirmLogout() { location.reload(); }
+        function confirmLogout() {
+            closeLogoutModal();
+            currentUserRole = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('app-sidebar').style.display = 'none';
+            document.getElementById('app-content').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+            setTimeout(() => { document.getElementById('login-screen').style.opacity = '1'; }, 50);
+        }
+
+        const buttons = document.querySelectorAll('.menu-btn');
+        const sections = document.querySelectorAll('.app-section');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => { navigateTo(button.getAttribute('data-target')); });
+        });
+
+        function navigateTo(sectionId) {
+            sections.forEach(section => section.classList.remove('active-section'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active-section');
+            document.querySelectorAll(`.menu-btn[data-target="${sectionId}"]`).forEach(btn => btn.classList.add('active'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setCalendarView(viewType) {
+            currentView = viewType;
+            document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
+            if (viewType === 'client') {
+                document.getElementById('btn-view-client').classList.add('active');
+            } else {
+                const internalBtn = document.querySelector('.switch-btn:not(#btn-view-client)');
+                if (internalBtn) internalBtn.classList.add('active');
+            }
+            renderCalendar();
+        }
     </script>
 </body>
 </html>
