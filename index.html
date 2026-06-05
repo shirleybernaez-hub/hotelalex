@@ -566,16 +566,22 @@
                             if (i === 22) {
                                 defaultPosts = `<div class="post-item post-reel" data-type="public"><span class="format-label">🎬 reel</span>Un día conmigo en el Rooftop</div>`;
                             }
-                            
-                            document.write(`
-                                <div class="${cellClass}" id="day-cell-${i}" onclick="handleCellClick(${i})">
-                                    <div class="cell-top-bar">
-                                        <span class="cell-number">${i}</span>
-                                        <span class="clickup-badge status-not-started" id="status-badge-${i}"></span>
-                                    </div>
-                                    <div class="posts-container" id="posts-container-${i}">${defaultPosts}</div>
-                                </div>
-                            `);
+                            for(let i=1; i<=30; i++) {
+    let cellClass = "calendar-cell";
+    
+    document.write(`
+        <div class="${cellClass}" id="day-cell-${i}" onclick="handleCellClick(${i})">
+            <div class="cell-top-bar">
+                <span class="cell-number">${i}</span>
+                <span id="status-container-${i}" style="display:flex; align-items:center; gap:4px; margin-left:10px;">
+                    <span class="clickup-badge status-not-started" id="status-badge-${i}"></span>
+                    <span class="status-text" id="status-text-${i}">No iniciado</span>
+                </span>
+            </div>
+            <div class="posts-container" id="posts-container-${i}"></div>
+        </div>
+    `);
+}
                         }
                     </script>
                 </div>
