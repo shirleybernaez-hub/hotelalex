@@ -308,7 +308,7 @@
     <div class="modal-overlay" id="client-comment-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3 id="cm-title">Dejar Comentario</h3>
+                <h3 id="cm-title">Programación del Día</h3>
                 <button class="close-work-modal" onclick="closeClientCommentModal()"><i data-lucide="x" size="20"></i></button>
             </div>
 
@@ -338,7 +338,7 @@
     <div class="modal-overlay" id="internal-agency-modal">
         <div class="work-modal-card">
             <div class="work-modal-header">
-                <h3 id="iam-title">Gestión de Contenido (Agencia)</h3>
+                <h3 id="iam-title">Programación del Día</h3>
                 <div class="header-actions-right">
                     <select id="iam-status-select" class="status-select-top-right">
                         <option value="not-started">🔴 No iniciado</option>
@@ -379,14 +379,9 @@
                 </div>
             </div>
 
-            <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:10px; border:1px solid #bae6fd;">
+            <div class="form-group" style="background:#f0f9ff; padding:12px; border-radius:10px; border:1px solid #bae6fd; margin-top: 20px;">
                 <label style="color:#0369a1; font-weight:700; margin-bottom:4px;">Feedback del Cliente</label>
                 <p id="iam-feedback-preview" style="font-size:0.88rem; color:#0c4a6e; font-style:italic;">Sin comentarios del cliente todavía.</p>
-            </div>
-
-            <div class="form-group" style="margin-top: 15px;">
-                <label style="color: #475569; font-weight: 700;">Bitácora de Ajustes Internos (Shirley // Vero)</label>
-                <textarea id="iam-control-cambios" rows="3" placeholder="Anotaciones técnicas entre ustedes..."></textarea>
             </div>
 
             <div class="modal-buttons" style="margin-top:24px;">
@@ -587,7 +582,6 @@
 
         let calendarDatabase = {};
 
-        // SÓLO inicializamos si no hay datos guardados previamente. Así NO borramos los comentarios del cliente.
         if (localStorage.getItem('hotelAlexCalendarData')) {
             calendarDatabase = JSON.parse(localStorage.getItem('hotelAlexCalendarData'));
         } else {
@@ -601,7 +595,7 @@
                         status: isDia15 ? 'in-progress' : 'not-started',
                         requirement: isDia15 ? 'Mostrar el confort visual mediante planos detallados, sábanas premium y luz natural controlada.' : '',
                         copy: isDia15 ? '¿El verdadero lujo? Apagar el ruido de Caracas y escuchar el silencio. 😴✨ Te esperamos en nuestras Suites Executive.' : '',
-                        controlCambios: isDia15 ? 'Vero: Shir cambiar el color de texto a azul.\nShir: Resuelto, modificado en los assets de Drive.' : '',
+                        controlCambios: '',
                         pautaContenido: isDia15 ? 'Reel de impacto cinemático enfocado en descanso y experiencia premium.' : '',
                         pautaRecursos: isDia15 ? 'Tomas en 4K de la Suite 402, transiciones lentas, pista de audio ASMR.' : '',
                         pautaGuion1: isDia15 ? '0:01 - 0:03 Apertura con primer plano de almohadas esponjosas.' : '',
@@ -618,11 +612,9 @@
 
         function getCellData(month, day) {
             const dbKey = `2026_${month}_${day}`;
-            // Evitamos errores si el objeto no está definido devolviendo un contenedor vacío seguro
             return calendarDatabase[dbKey] || { status: 'not-started', posts: [] };
         }
 
-        // RENDERIZADOR GRILLA
         function renderCalendar() {
             const grid = document.getElementById('calendar-grid');
             const monthSelector = document.getElementById('month-selector');
@@ -665,7 +657,6 @@
             lucide.createIcons();
         }
 
-        // VALIDACIÓN SESIONES
         function validateAuth() {
             const userIn = document.getElementById('username').value.trim().toLowerCase();
             const passIn = document.getElementById('password').value.trim();
@@ -698,11 +689,11 @@
 
             if (role === 'master') {
                 controls.style.display = 'flex';
-                descText.textContent = "Acceso total a pautas. Haz clic en un día para editar contenidos públicos o gestionar cambios internos.";
+                descText.textContent = "Acceso total a pautas. Haz clic en un día para revisar o agendar nuevos formatos de publicación.";
                 currentView = 'internal';
             } else {
                 controls.style.display = 'none';
-                descText.textContent = "Acceso Total a pautas. Haz clic en un día para dejar un comentario.";
+                descText.textContent = "Acceso Total a pautas. Haz clic en un día para revisar los detalles o dejar un comentario.";
                 currentView = 'client'; 
             }
             renderCalendar();
@@ -727,7 +718,7 @@
 
         function openClientCommentModal(day, month) {
             const data = getCellData(month, day);
-            document.getElementById('cm-title').textContent = `Día ${day} - Revisión de Pauta`;
+            document.getElementById('cm-title').textContent = `Programación del Día ${day}`;
             
             if (data && data.pautaContenido && data.pautaContenido.trim() !== '') {
                 document.getElementById('cm-pauta-preview').textContent = data.pautaContenido;
@@ -762,7 +753,7 @@
 
         function openInternalAgencyModal(day, month) {
             const data = getCellData(month, day);
-            document.getElementById('iam-title').textContent = `Día ${day} - Control de Cambios y Estructura`;
+            document.getElementById('iam-title').textContent = `Programación del Día ${day}`;
             
             document.getElementById('iam-status-select').value = data.status || 'not-started';
             document.getElementById('iam-req').value = data.requirement || '';
@@ -780,7 +771,6 @@
                 document.getElementById('iam-feedback-preview').textContent = "Sin comentarios del cliente todavía.";
             }
             
-            document.getElementById('iam-control-cambios').value = data.controlCambios || '';
             document.getElementById('internal-agency-modal').style.display = 'flex';
         }
 
@@ -801,7 +791,6 @@
             calendarDatabase[dbKey].pautaGuion1 = document.getElementById('iam-guion1').value;
             calendarDatabase[dbKey].pautaGuion2 = document.getElementById('iam-guion2').value;
             calendarDatabase[dbKey].pautaGuion3 = document.getElementById('iam-guion3').value;
-            calendarDatabase[dbKey].controlCambios = document.getElementById('iam-control-cambios').value;
 
             localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
             renderCalendar();
