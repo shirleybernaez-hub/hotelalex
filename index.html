@@ -519,52 +519,10 @@
                 <div class="calendar-days-grid">
                     <div class="calendar-day-label">Lun</div><div class="calendar-day-label">Mar</div><div class="calendar-day-label">Mié</div><div class="calendar-day-label">Jue</div><div class="calendar-day-label">Vie</div><div class="calendar-day-label">Sáb</div><div class="calendar-day-label">Dom</div>
                 </div>
-                <div class="calendar-grid">
-                    <!-- Mayo Muted -->
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">25</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">26</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">27</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">28</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">29</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">31</span></div></div>
-                    <div class="calendar-cell muted"><div class="cell-top-bar"><span class="cell-number">31</span></div></div>
-                    
-                    <!-- Junio Interactivo con bloques de color sólido estilo referencia -->
-                    <script>
-                        for(let i=1; i<=30; i++) {
-                            let cellClass = "calendar-cell";
-                            let defaultPosts = "";
-                            
-                            if (i === 15) {
-                                defaultPosts = `<div class="post-item post-reel" data-type="public"><span class="format-label">🎬 reel</span>ASMR Sonidos de las Habitaciones</div>`;
-                            }
-                            if (i === 16) {
-                                defaultPosts = `<div class="post-item post-carrusel" data-type="public"><span class="format-label">🎠 carrusel</span>El confort no es solo una cama</div>`;
-                            }
-                            if (i === 17) {
-                                defaultPosts = `<div class="post-item post-story" data-type="public"><span class="format-label">📸 story</span>Stories de Huéspedes</div>`;
-                            }
-                            if (i === 19) {
-                                defaultPosts = `
-                                    <div class="post-item post-carrusel" data-type="public"><span class="format-label">🎠 post</span>Conoce al equipo del Alex</div>
-                                    <div class="post-item internal-task" data-type="internal" style="display:none;">⚙️ Pautar Ads Meta</div>
-                                `;
-                            }
-                            if (i === 22) {
-                                defaultPosts = `<div class="post-item post-reel" data-type="public"><span class="format-label">🎬 reel</span>Un día conmigo en el Rooftop</div>`;
-                            }
-                            
-                            document.write(`
-                                <div class="${cellClass}" id="day-cell-${i}" onclick="handleCellClick(${i})">
-                                    <div class="cell-top-bar">
-                                        <span class="cell-number">${i}</span>
-                                        <span class="clickup-badge status-not-started" id="status-badge-${i}"></span>
-                                    </div>
-                                    <div class="posts-container" id="posts-container-${i}">${defaultPosts}</div>
-                                </div>
-                            `);
-                        }
-                    </script>
+                
+                <!-- NUEVO CONTENEDOR DINÁMICO -->
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Los días y sus bloques de color se dibujan automáticamente desde JavaScript -->
                 </div>
             </div>
         </section>
@@ -605,15 +563,85 @@
         let currentView = 'client';
         let activeDaySelected = null;
 
-        // Base de Datos en Memoria para almacenar requerimientos y enlaces de Shirley
-        const calendarDatabase = {};
-        for(let i = 1; i <= 30; i++) {
-            calendarDatabase[i] = {
-                status: 'not-started',
-                requirement: i === 15 ? 'Necesito un Reel cinematográfico de alto impacto que muestre la experiencia premium del hotel.' : '',
-                copy: i === 15 ? '¡Bienvenidos al Hotel Alex! 🏨✨ Redefiniendo el confort en Caracas...' : '',
-                artUrl: i === 15 ? 'https://google.com' : ''
-            };
+        // Formatos por defecto para los días clave de Junio
+        const defaultPostsData = {
+            15: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'ASMR Sonidos de las Habitaciones' }],
+            16: [{ type: 'public', format: 'carrusel', icon: '🎠 carrusel', text: 'El confort no es solo una cama' }],
+            17: [{ type: 'public', format: 'story', icon: '📸 story', text: 'Stories de Huéspedes' }],
+            19: [
+                { type: 'public', format: 'carrusel', icon: '🎠 post', text: 'Conoce al equipo del Alex' },
+                { type: 'internal', format: 'internal', icon: '⚙️ Pautar Ads Meta', text: '' }
+            ],
+            22: [{ type: 'public', format: 'reel', icon: '🎬 reel', text: 'Un día conmigo en el Rooftop' }]
+        };
+
+        // SISTEMA DE ALMACENAMIENTO: Intenta cargar datos previos, si no existen crea la base inicial
+        let calendarDatabase = {};
+        const savedData = localStorage.getItem('hotelAlexCalendarData');
+
+        if (savedData) {
+            calendarDatabase = JSON.parse(savedData);
+        } else {
+            for(let i = 1; i <= 30; i++) {
+                calendarDatabase[i] = {
+                    status: 'not-started',
+                    requirement: i === 15 ? 'Necesito un Reel cinematográfico de alto impacto que muestre la experiencia premium del hotel.' : '',
+                    copy: i === 15 ? '¡Bienvenidos al Hotel Alex! 🏨✨ Redefiniendo el confort en Caracas...' : '',
+                    artUrl: i === 15 ? 'https://google.com' : '',
+                    posts: defaultPostsData[i] || []
+                };
+            }
+        }
+
+        // FUNCIÓN MAESTRA: Dibuja dinámicamente todo el calendario
+        function renderCalendar(year, month) {
+            const grid = document.getElementById('calendar-grid');
+            if (!grid) return;
+            grid.innerHTML = ''; // Limpiar celdas viejas
+
+            // Calcular días previos de relleno
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const totalDays = new Date(year, month + 1, 0).getDate();
+            let startDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+            const prevMonthTotalDays = new Date(year, month, 0).getDate();
+            for (let i = startDay; i > 0; i--) {
+                const dayNum = prevMonthTotalDays - i + 1;
+                grid.innerHTML += `
+                    <div class="calendar-cell muted">
+                        <div class="cell-top-bar"><span class="cell-number">${dayNum}</span></div>
+                    </div>`;
+            }
+
+            // Dibujar días de Junio interactivos
+            for (let i = 1; i <= totalDays; i++) {
+                const dayData = calendarDatabase[i];
+                
+                let postsHTML = '';
+                if (dayData.posts && Array.isArray(dayData.posts)) {
+                    dayData.posts.forEach(post => {
+                        const isInternal = post.type === 'internal';
+                        const postClass = isInternal ? 'internal-task' : `post-item post-${post.format}`;
+                        // Ocultar o mostrar de acuerdo a la vista seleccionada (Cliente o Interna)
+                        const displayStyle = (isInternal && currentView === 'client') ? 'style="display:none;"' : '';
+                        
+                        postsHTML += `
+                            <div class="${postClass}" data-type="${post.type}" ${displayStyle}>
+                                <span class="format-label">${post.icon}</span> ${post.text}
+                            </div>`;
+                    });
+                }
+
+                grid.innerHTML += `
+                    <div class="calendar-cell" id="day-cell-${i}" onclick="handleCellClick(${i})">
+                        <div class="cell-top-bar">
+                            <span class="cell-number">${i}</span>
+                            <span class="clickup-badge status-${dayData.status}" id="status-badge-${i}"></span>
+                        </div>
+                        <div class="posts-container" id="posts-container-${i}">${postsHTML}</div>
+                    </div>`;
+            }
+            lucide.createIcons();
         }
 
         function validateAuth() {
@@ -650,23 +678,22 @@
             if (role === 'master') {
                 controls.style.display = 'flex';
                 descText.textContent = "Haz clic en cualquier día para gestionar requerimientos de contenido, copys y entrega de diseños.";
-                setCalendarView('internal');
+                currentView = 'internal';
             } else {
                 controls.style.display = 'none';
                 descText.textContent = "Planificación de publicaciones aprobadas y estatus de diseño en tiempo real.";
-                setCalendarView('client'); 
+                currentView = 'client'; 
             }
-            refreshAllStatusBadges();
+            
+            // Renderizamos Junio 2026 de forma limpia
+            renderCalendar(2026, 5);
             navigateTo('inicio-section');
         }
 
-        // CONTROL DE CLIC SEGÚN ROL
         function handleCellClick(day) {
-            // El despliegue y edición completa solo está permitido para el rol Master
             if (currentUserRole === 'master') {
                 openWorkModal(day);
             } else {
-                // Si es el cliente, solo ve los datos en modo lectura si ya tienen información relevante
                 const data = calendarDatabase[day];
                 if(data.requirement || data.copy || data.artUrl) {
                     openWorkModal(day);
@@ -674,7 +701,6 @@
             }
         }
 
-        // CONTROL DEL MODAL DE TRABAJO
         function openWorkModal(day) {
             activeDaySelected = day;
             const data = calendarDatabase[day];
@@ -685,7 +711,6 @@
             document.getElementById('wm-copy').value = data.copy;
             document.getElementById('wm-art-url').value = data.artUrl;
 
-            // Mostrar u ocultar botón de previsualización al final si existe link
             const wrapper = document.getElementById('wm-art-link-wrapper');
             const btn = document.getElementById('wm-art-btn');
             if(data.artUrl && data.artUrl.trim() !== "") {
@@ -695,7 +720,6 @@
                 wrapper.style.display = "none";
             }
 
-            // Restricciones de lectura si el usuario es el Cliente (Admin)
             if (currentUserRole !== 'master') {
                 document.getElementById('wm-status-select').disabled = true;
                 document.getElementById('wm-req').disabled = true;
@@ -723,27 +747,17 @@
             const day = activeDaySelected;
             const statusValue = document.getElementById('wm-status-select').value;
             
-            calendarDatabase[day] = {
-                status: statusValue,
-                requirement: document.getElementById('wm-req').value,
-                copy: document.getElementById('wm-copy').value,
-                artUrl: document.getElementById('wm-art-url').value
-            };
+            calendarDatabase[day].status = statusValue;
+            calendarDatabase[day].requirement = document.getElementById('wm-req').value;
+            calendarDatabase[day].copy = document.getElementById('wm-copy').value;
+            calendarDatabase[day].artUrl = document.getElementById('wm-art-url').value;
 
-            // Actualizar el color del estatus en el calendario principal
-            const badge = document.getElementById(`status-badge-${day}`);
-            badge.className = `clickup-badge status-${statusValue}`;
+            // Guardar permanentemente en LocalStorage
+            localStorage.setItem('hotelAlexCalendarData', JSON.stringify(calendarDatabase));
 
+            // Volver a dibujar para refrescar colores y textos al instante
+            renderCalendar(2026, 5);
             closeWorkModal();
-        }
-
-        function refreshAllStatusBadges() {
-            for(let i = 1; i <= 30; i++) {
-                const badge = document.getElementById(`status-badge-${i}`);
-                if (badge) {
-                    badge.className = `clickup-badge status-${calendarDatabase[i].status}`;
-                }
-            }
         }
 
         function openLogoutModal() { document.getElementById('logout-modal').style.display = 'flex'; }
@@ -781,21 +795,17 @@
         function setCalendarView(viewType) {
             currentView = viewType;
             const switchBtns = document.querySelectorAll('.switch-btn');
-            const internalTasks = document.querySelectorAll('.internal-task, [data-type="internal"]');
-            
             switchBtns.forEach(btn => btn.classList.remove('active'));
             
-            if(window.event && window.event.target && window.event.target.classList) {
-                window.event.target.classList.add('active');
-            } else {
+            if (viewType === 'client') {
                 document.getElementById('btn-view-client').classList.add('active');
+            } else {
+                const internalBtn = document.querySelector('.switch-btn:not(#btn-view-client)');
+                if (internalBtn) internalBtn.classList.add('active');
             }
             
-            if(viewType === 'client') {
-                internalTasks.forEach(task => task.style.display = 'none');
-            } else {
-                internalTasks.forEach(task => task.style.display = 'block');
-            }
+            // Re-renderizar para ocultar o mostrar las pautas de pauta publicitaria (internal)
+            renderCalendar(2026, 5);
         }
     </script>
 </body>
